@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.Contrib.Manifest", "DnnProjectSystem.Manifest\Dnn.Contrib.Manifest.csproj", "{B7876903-11D3-455A-A27C-3E860D0F01D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.Contrib.Manifest.Tests", "DnnProjectSystem.Manifest.Tests\Dnn.Contrib.Manifest.Tests.csproj", "{624DA476-1BE3-4DEC-B70D-AFA8531826DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7876903-11D3-455A-A27C-3E860D0F01D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7876903-11D3-455A-A27C-3E860D0F01D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7876903-11D3-455A-A27C-3E860D0F01D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7876903-11D3-455A-A27C-3E860D0F01D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624DA476-1BE3-4DEC-B70D-AFA8531826DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624DA476-1BE3-4DEC-B70D-AFA8531826DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624DA476-1BE3-4DEC-B70D-AFA8531826DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624DA476-1BE3-4DEC-B70D-AFA8531826DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

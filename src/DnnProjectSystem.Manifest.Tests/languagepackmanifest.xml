@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguagePack xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              version="3.0">
+  <Culture Code="" DisplayName=""/>
+  <Files>
+    <File FileName="SomeGlobal.resx" FileType="GlobalResource" ModuleName="" FilePath=""/>
+    <File FileName="SomeLocal.resx" FileType="LocalResource" ModuleName="SomeModule" FilePath=""/>
+    <File FileName="SomeAdminFile.resx" FileType="AdminResource" ModuleName="SomeAdminModule" FilePath=""/>
+    <File FileName="SomeControlFile.resx" FileType="ControlResource" ModuleName="" FilePath=""/>
+  </Files>
+
+</LanguagePack>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dotnetnuke version="3.0" type="Module">
+  <folders>
+    <folder>
+      <name>TestModule</name>
+      <friendlyname>TestModule</friendlyname>
+      <foldername>TestModule</foldername>
+      <modulename>TestModule</modulename>
+      <description>
+        This is a testmodule using a manifest format for dnn 4.
+      </description>
+      <version>03.00.00</version>
+      <compatibleversions>(04.0[7-9]{1}).[0-9]{2}</compatibleversions>
+      <resourcefile>Resources.zip</resourcefile>
+      <modules>
+        <module>
+          <friendlyname>TestModule</friendlyname>
+          <controls>
+            <control>
+              <title>TestModule</title>
+              <src>TestModule.ascx</src>
+              <type>View</type>
+              <helpurl>http://someurl/default.aspx</helpurl>
+            </control>
+            <control>
+              <key>Settings</key>
+              <title>TestModule Settings</title>
+              <src>Settings.ascx</src>
+              <type>Edit</type>
+              <helpurl>http://someurl/default.aspx</helpurl>
+            </control>
+            <control>
+              <key>About</key>
+              <title>About ...</title>
+              <src>About.ascx</src>
+              <iconfile></iconfile>
+              <type>View</type>
+              <helpurl>http://someurl/default.aspx</helpurl>
+            </control>
+          </controls>
+        </module>
+      </modules>
+      <files>
+        <file>
+          <path>bin</path>
+          <name>TestModule.dll</name>
+        </file>
+        <file>
+          <path>Providers\DataProviders\SqlDataProvider</path>
+          <name>01.00.00.SqlDataProvider</name>
+        </file>
+        <file>
+          <path>Providers\DataProviders\SqlDataProvider</path>
+          <name>02.00.00.SqlDataProvider</name>
+        </file>
+        <file>
+          <path>Providers\DataProviders\SqlDataProvider</path>
+          <name>Uninstall.SqlDataProvider</name>
+        </file>
+      </files>
+    </folder>
+  </folders>
+</dotnetnuke>
