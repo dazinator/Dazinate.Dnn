@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.Contrib.Manifest", "DnnProjectSystem.Manifest\Dnn.Contrib.Manifest.csproj", "{B7876903-11D3-455A-A27C-3E860D0F01D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.Contrib.Manifest", "Dnn.Contrib.Manifest\Dnn.Contrib.Manifest.csproj", "{B7876903-11D3-455A-A27C-3E860D0F01D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.Contrib.Manifest.Tests", "DnnProjectSystem.Manifest.Tests\Dnn.Contrib.Manifest.Tests.csproj", "{624DA476-1BE3-4DEC-B70D-AFA8531826DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.Contrib.Manifest.Tests", "Dnn.Contrib.Manifest.Tests\Dnn.Contrib.Manifest.Tests.csproj", "{624DA476-1BE3-4DEC-B70D-AFA8531826DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
