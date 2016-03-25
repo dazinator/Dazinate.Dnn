@@ -6,7 +6,7 @@ These libraries do not have any depedencies on any Dnn assemblies, so that they 
 
 ## Manifests
 
-This library, provides a domain model for working with Dnn manifest files. 
+This library, provides a domain model for working with Dnn manifest files, including validation. 
 
 You can load a manifest like so:
 
