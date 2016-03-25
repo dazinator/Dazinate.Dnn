@@ -41,6 +41,13 @@ If the state of the manifest is invalid, you can inspect the failed rules:
             
 ```
 
+There are 3 levels of validation rule:
+- Informational (object is still valid when these are broken)
+- Warning (object is still valid when these are broken)
+- Error (object is NOT valid if any of these are broken)
+
+There are pretty obvious API's to work with these rules, distinguish their type, etc etc.
+
 This will all be familiar to anyone that has worked with CSLA in the past.
 
 ## Currently WIP
