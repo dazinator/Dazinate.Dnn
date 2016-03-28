@@ -8,5 +8,9 @@ namespace Dazinate.Dnn.Manifest
         void Visit(IPackage package);
         void Visit(IPackagesList packagesList);
         void Visit(IReleaseNotes releaseNotes);
+        void Visit(IPackageDependenciesList dependenciesList);
+        void Visit(CoreVersionPackageDependency dependency);
+        void Visit(ManagedPackageDependency managedPackageDependency);
+        void Visit(PackageDependency packageDependency);
     }
 }

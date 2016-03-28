@@ -22,5 +22,10 @@ namespace Dazinate.Dnn.Manifest
             get { return GetProperty(PackageNameProperty); }
             set { SetProperty(PackageNameProperty, value); }
         }
+
+        public void Accept(IManifestXmlWriterVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

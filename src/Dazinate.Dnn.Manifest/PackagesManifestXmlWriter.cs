@@ -36,6 +36,31 @@ namespace Dazinate.Dnn.Manifest
             _writer.WriteEndElement();
         }
 
+        public void Visit(IPackageDependenciesList dependenciesList)
+        {
+            _writer.WriteStartElement("dependencies");
+            foreach (var dep in dependenciesList)
+            {
+                dep.Accept(this);
+            }
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(CoreVersionPackageDependency dependency)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Visit(ManagedPackageDependency managedPackageDependency)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Visit(PackageDependency packageDependency)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Visit(IPackage package)
         {
 

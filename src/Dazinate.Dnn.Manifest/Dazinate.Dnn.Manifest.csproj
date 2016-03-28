@@ -90,6 +90,8 @@
     <Compile Include="IOwner.cs" />
     <Compile Include="IPackage.cs" />
     <Compile Include="IPackageComponent.cs" />
+    <Compile Include="IPackageDependenciesList.cs" />
+    <Compile Include="IPackageDependency.cs" />
     <Compile Include="IPackagesDnnManifest.cs" />
     <Compile Include="IPackagesList.cs" />
     <Compile Include="IReleaseNotes.cs" />

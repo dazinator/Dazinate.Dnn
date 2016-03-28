@@ -17,5 +17,9 @@ namespace Dazinate.Dnn.Manifest
             set { SetProperty(VersionProperty, value); }
         }
 
+        public void Accept(IManifestXmlWriterVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
