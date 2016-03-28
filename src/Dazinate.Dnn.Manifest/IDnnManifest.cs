@@ -1,3 +1,4 @@
+using System.Xml;
 using Csla;
 
 namespace Dazinate.Dnn.Manifest
@@ -6,7 +7,6 @@ namespace Dazinate.Dnn.Manifest
     {
         ManifestType Type { get; set; }
         string Version { get; set; }
-
-        
+        object SaveToXml(XmlWriter writer);
     }
 }

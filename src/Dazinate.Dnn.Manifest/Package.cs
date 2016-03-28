@@ -195,7 +195,15 @@ namespace Dazinate.Dnn.Manifest
                 }
             }));
 
+     //       BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(PackagesDnnManifest.VersionProperty, IconFileProperty));
+      //      BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(IconFileProperty, PackagesDnnManifest.VersionProperty));
 
+
+        }
+
+        public void Accept(IManifestXmlWriterVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
     }

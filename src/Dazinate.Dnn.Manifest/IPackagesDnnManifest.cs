@@ -1,4 +1,6 @@
-﻿namespace Dazinate.Dnn.Manifest
+﻿using System.Xml;
+
+namespace Dazinate.Dnn.Manifest
 {
     public interface IPackagesDnnManifest : IDnnManifest
     {

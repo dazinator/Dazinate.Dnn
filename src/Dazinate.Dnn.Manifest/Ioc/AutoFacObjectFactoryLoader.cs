@@ -9,7 +9,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
 {
     public class AutoFacObjectFactoryLoader : IObjectFactoryLoader
     {
-       
+
         static AutoFacObjectFactoryLoader()
         {
             SerializationWorkaround();
@@ -18,6 +18,17 @@ namespace Dazinate.Dnn.Manifest.Ioc
         private readonly IComponentContext _container;
 
         private readonly ConcurrentDictionary<string, Type> _cachedTypes;
+
+        /// <summary>
+        /// Creates an object factory loader that uses autofac to resolve types. 
+        /// </summary>
+        public AutoFacObjectFactoryLoader()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
+            _container = builder.Build();
+            _cachedTypes = new ConcurrentDictionary<string, Type>();
+        }
 
         public AutoFacObjectFactoryLoader(IComponentContext container)
         {
@@ -94,13 +105,12 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     return asm;
 
             // if the assembly wasn't already in the appdomain, then try to load it.
-          //  return Assembly.Load(args.Name);
+            //  return Assembly.Load(args.Name);
             return null;
         }
 
         #endregion
 
-
-
+      
     }
 }

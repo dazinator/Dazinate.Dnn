@@ -3,17 +3,17 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using Autofac;
-using Dazinate.Dnn.Manifest;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
 using Xunit;
 
-namespace Dnn.Contrib.Manifest.Tests
+namespace Dazinate.Dnn.Manifest.Tests
 {
-    public class DnnManifestTests : IDisposable
+    [Collection("Csla")]
+    public class DnnManifestTests : BaseBusinessTest, IDisposable
     {
 
-        private IContainer _container;
+        // private IContainer _container;
 
         /// <summary>
         /// Constructor is executed prior to every individual test.
@@ -21,24 +21,28 @@ namespace Dnn.Contrib.Manifest.Tests
         public DnnManifestTests()
         {
             Console.Write("initialising");
-            var builder = new ContainerBuilder();
-            builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
+          //  var builder = new ContainerBuilder();
+           // builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
             // _containerBuilder = builder;
 
 
-            _container = builder.Build();
-            Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader(_container);
+          //  _container = builder.Build();
+           // Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader();
+        }
+
+        private string LoadManifestXml(string localFileName)
+        {
+            var dir = System.IO.Directory.GetCurrentDirectory();
+            var filePath = Path.Combine(dir, localFileName);
+            var xmlContents = File.ReadAllText(filePath);
+            return xmlContents;
         }
 
 
         [Fact]
-        public void Cannot_Fetch_From_Invalid_Xml()
+        public void Cannot_Load_From_Invalid_Xml()
         {
-            // Arrange.    
-            // Set up fake orgs data on mock db context.
-            // var testData = TestData.GetOrganisations().AsQueryable();
-            //var mockOrgsDbSet = MockUtils.CreateMockDbSet(testData);
-            // _mockDataContext.Setup(a => a.Organisations).Returns(mockOrgsDbSet.Object);
+
             var xmlContents = "notvalid xml";
 
             var factory = new PackagesDnnManifestFactory();
@@ -50,29 +54,18 @@ namespace Dnn.Contrib.Manifest.Tests
                 var dnnManifest = factory.Get(manifestXml);
             });
 
-
         }
 
         [Theory]
         [InlineData("manifest.xml")]
-        public void Can_Fetch_From_Valid_Xml(string manifestFile)
+        public void Can_Load_From_Valid_Xml(string manifestFile)
         {
-            // Arrange.    
-            // Set up fake orgs data on mock db context.
-            // var testData = TestData.GetOrganisations().AsQueryable();
-            //var mockOrgsDbSet = MockUtils.CreateMockDbSet(testData);
-            // _mockDataContext.Setup(a => a.Organisations).Returns(mockOrgsDbSet.Object);
 
-            var dir = System.IO.Directory.GetCurrentDirectory();
-            var filePath = Path.Combine(dir, manifestFile);
-            var xmlContents = File.ReadAllText(filePath);
-
-            var factory = _container.Resolve<IDnnManifestFactory<IPackagesDnnManifest>>();
-           
-            string manifestXml = xmlContents; //todo
+            var xmlContents = LoadManifestXml(manifestFile);
 
             // Act           
-            var dnnManifest = factory.Get(manifestXml);
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(xmlContents);
 
             // Assert.
             Assert.NotNull(dnnManifest);
@@ -85,6 +78,8 @@ namespace Dnn.Contrib.Manifest.Tests
             Assert.NotNull(dnnManifest.Packages);
             var packages = dnnManifest.Packages;
 
+            // todo: extend this test to validate object state against xml.
+
             Assert.False(dnnManifest.IsDirty);
 
             Assert.NotEmpty(packages);
@@ -92,59 +87,23 @@ namespace Dnn.Contrib.Manifest.Tests
 
         [Theory]
         [InlineData("manifest.xml")]
-        public void Can_Write_To_Xml(string manifestFile)
-        {
-            // Arrange.    
-            // Set up fake orgs data on mock db context.
-            // var testData = TestData.GetOrganisations().AsQueryable();
-            //var mockOrgsDbSet = MockUtils.CreateMockDbSet(testData);
-            // _mockDataContext.Setup(a => a.Organisations).Returns(mockOrgsDbSet.Object);
-
-            var dir = System.IO.Directory.GetCurrentDirectory();
-            var filePath = Path.Combine(dir, manifestFile);
-            var xmlContents = File.ReadAllText(filePath);
-
-            var factory = new PackagesDnnManifestFactory();
-            string manifestXml = xmlContents; //todo
-
-            // Act           
-            var dnnManifest = factory.Get(manifestXml);
-
-
-            var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
-            {
-               // var manifestWriter = new PackagesDnnManifestXmlWriter(xmlWriter);
-               // dnnManifest.Accept(manifestWriter);
-               // xmlWriter.Flush();
-              // Console.Write(xmlStringBuilder.ToString());
-
-                //serializer.Serialize(w, _model);
-            }
-
-        }
-
-        [Theory]
-        [InlineData("manifest.xml")]
         public void Can_Load_Edit_And_Save(string manifestFile)
         {
 
-            var dir = System.IO.Directory.GetCurrentDirectory();
-            var filePath = Path.Combine(dir, manifestFile);
-            string xmlContents = File.ReadAllText(filePath);
-
-            var factory = _container.Resolve<IDnnManifestFactory<IPackagesDnnManifest>>();
+            var xmlContents = LoadManifestXml(manifestFile);
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
 
             // Act           
             var dnnManifest = factory.Get(xmlContents);
             dnnManifest.Packages.RemoveAt(0);
             dnnManifest.Version = "7.0";
 
-           // var writer = dnnManifest.GetXmlWriter();
+            // var writer = dnnManifest.GetXmlWriter();
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
             {
-                dnnManifest = (PackagesDnnManifest)dnnManifest.Save();
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+                Console.Write(xmlStringBuilder.ToString());
             }
 
             Assert.False(dnnManifest.IsNew);
@@ -152,39 +111,277 @@ namespace Dnn.Contrib.Manifest.Tests
             Assert.False(dnnManifest.IsDirty);
         }
 
-
-        [Fact]
-        public void Can_Fetch_PackageTypeList()
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Manifest_Version_Required(string manifestFile)
         {
+            string manifestXml = LoadManifestXml(manifestFile);
 
-            var factory = _container.Resolve<IPackageTypeListFactory>();
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
 
-            // Act    
-            var packageTypes = factory.Get();
+            dnnManifest.Version = "";
 
-            // Assert.
-            Assert.NotNull(packageTypes);
 
-            foreach (PackageType item in Enum.GetValues(typeof(PackageType)))
-            {
-                //var listItem = new Csla.NameValueListBase<string, string>.NameValuePair(item.ToString(),
-                //    Enum.GetName(typeof(PackageType), item));
-                Assert.True(packageTypes.ContainsKey(item.ToString()));
-                Assert.Equal(packageTypes.GetItemByKey(item.ToString()).Value, Enum.GetName(typeof(PackageType), item));
-            }
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+
+
+            var brokenRules = dnnManifest.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(PackagesDnnManifest.VersionProperty);
+            Assert.NotNull(rule);
 
         }
 
-        /// <summary>
-        /// Dispose is called after each individual test.
-        /// </summary>
-        public void Dispose()
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Manifest_Version_Must_Be_Valid_Version_String(string manifestFile)
         {
-            _container.Dispose();
-            // _mockDataContext = null;
-            Csla.Server.FactoryDataPortal.FactoryLoader = null;
-            Console.Write("disposed");
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            var factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+          
+            dnnManifest.Version = "xy.z";
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+
+            var brokenRules = dnnManifest.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(PackagesDnnManifest.VersionProperty);
+            Assert.NotNull(rule);
+
+            dnnManifest.Version = "1.0.2";
+            rule = brokenRules.GetFirstBrokenRule(PackagesDnnManifest.VersionProperty);
+            Assert.Null(rule);
         }
+
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Icon_File_Only_Allowed_For_Manifests_Above_Version_5(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            // set the manifest version to 6. and add a package with an icon.
+            dnnManifest.Version = "6.0";
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Name = "somepackage";
+            package.FriendlyName = "somefriendly name";
+            package.Type = "Module";
+            package.Version = "1.0.0";
+            package.IconFile = "somefile.png";
+
+            // should be valid.
+            Assert.True(dnnManifest.IsValid);
+
+            // change the manifest version to below 5.
+            dnnManifest.Version = "4.0";
+
+            // Assert
+            // Should now be invalid.
+            package.CheckRules();
+            Assert.False(package.IsValid);
+            Assert.False(dnnManifest.IsValid);
+
+
+            var brokenRules = package.GetBrokenRules();
+            var iconRule = brokenRules.GetFirstBrokenRule(Package.IconFileProperty);
+            Assert.NotNull(iconRule);
+
+        }
+
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Name_Required(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Name = string.Empty;
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.NameProperty);
+            Assert.NotNull(rule);
+
+        }
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Type_Required(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            // set the manifest version to 6. and add a package with an icon.
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Type = string.Empty;
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.TypeProperty);
+            Assert.NotNull(rule);
+
+        }
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Version_Required(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Version = string.Empty;
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.VersionProperty);
+            Assert.NotNull(rule);
+
+        }
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Version_Must_Be_Valid_Version_String(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Version = "xy.z";
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.VersionProperty);
+            Assert.NotNull(rule);
+
+            package.Version = "1.0.2";
+            rule = brokenRules.GetFirstBrokenRule(Package.VersionProperty);
+            Assert.Null(rule);
+        }
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_FriendlyName_Required(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.FriendlyName = string.Empty;
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.FriendlyNameProperty);
+            Assert.NotNull(rule);
+
+        }
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_FriendlyName_Max_Length_250(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.FriendlyName = new string('a', 251);
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.FriendlyNameProperty);
+            Assert.NotNull(rule);
+
+            package.FriendlyName = "less than 250";
+            rule = brokenRules.GetFirstBrokenRule(Package.FriendlyNameProperty);
+            Assert.Null(rule);
+
+        }
+
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Description_Max_Length_2000(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Description = new string('a', 2001);
+
+            // Assert
+            // Should now be invalid.
+            Assert.False(dnnManifest.IsValid);
+            Assert.False(package.IsValid);
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.DescriptionProperty);
+            Assert.NotNull(rule);
+
+            package.Description = "less than 2000";
+            rule = brokenRules.GetFirstBrokenRule(Package.DescriptionProperty);
+            Assert.Null(rule);
+
+        }
+
+      
     }
 
 

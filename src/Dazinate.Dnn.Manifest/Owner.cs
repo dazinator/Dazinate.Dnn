@@ -88,9 +88,12 @@ namespace Dazinate.Dnn.Manifest
                 }
             }));
 
-
-
-
         }
+
+        public void Accept(IManifestXmlWriterVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
     }
 }

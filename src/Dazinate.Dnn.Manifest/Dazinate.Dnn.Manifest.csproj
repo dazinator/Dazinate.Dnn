@@ -114,6 +114,7 @@
     <Compile Include="Package.cs" />
     <Compile Include="PackagesDnnManifest.cs" />
     <Compile Include="PackagesList.cs" />
+    <Compile Include="PackagesManifestXmlWriter.cs" />
     <Compile Include="PackageType.cs" />
     <Compile Include="PackageTypeList.cs" />
     <Compile Include="ReleaseNotes.cs" />

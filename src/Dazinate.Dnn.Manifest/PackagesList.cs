@@ -27,8 +27,18 @@ namespace Dazinate.Dnn.Manifest
             var child = _factory.CreateNew();
             Add(child);
             return child;
-            
+
         }
-      
+
+        public void Accept(IManifestXmlWriterVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        public IPackage AddNewPackage()
+        {
+            var result = this.AddNew();
+            return (IPackage)result;
+        }
     }
 }

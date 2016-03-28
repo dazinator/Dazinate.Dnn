@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Xml;
 using Csla;
+using Csla.Properties;
+using Csla.Rules;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.ObjectFactory;
 
@@ -47,6 +51,12 @@ namespace Dazinate.Dnn.Manifest
                 {
                     c.AddErrorResult("Invalid version number.");
                 }
+                
+                foreach (var package in this.Packages)
+                {
+                    package.CheckRules();
+                }
+
             }));
 
             // should have atleaset 1 package
@@ -61,7 +71,7 @@ namespace Dazinate.Dnn.Manifest
             }));
 
 
-           
+
             //BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(VersionProperty, (c) =>
             //{
             //    PackagesDnnManifest target = (PackagesDnnManifest)c.Target;
@@ -75,11 +85,48 @@ namespace Dazinate.Dnn.Manifest
 
         public void Accept(IManifestXmlWriterVisitor visitor)
         {
-           visitor.Visit(this);
+            visitor.Visit(this);
         }
 
-      
+        public object SaveToXml(XmlWriter writer)
+        {
+            var result = Csla.DataPortal.Update(new SaveToXmlCommand(this));
+            writer.WriteRaw(result.Xml);
+            writer.Flush();
+            return result.PackagesDnnManifest;
+        }
+
+        protected override Task<PackagesDnnManifest> SaveAsync(bool forceUpdate, object userState, bool isSync)
+        {
+            throw new NotImplementedException("Please use SaveToXml instead.");
+        }
+
+        [ObjectFactory(typeof(IPackagesDnnManifestObjectFactory))]
+        [Serializable]
+        public class SaveToXmlCommand : Csla.CommandBase<SaveToXmlCommand>
+        {
+
+
+            public SaveToXmlCommand()
+            {
+                //_manifest = manifest;
+            }
+
+            public SaveToXmlCommand(PackagesDnnManifest manifest)
+            {
+                PackagesDnnManifest = manifest;
+            }
+
+            public IPackagesDnnManifest PackagesDnnManifest { get; set; }
+
+            public string Xml { get; set; }
+        }
+
     }
+
+
+
+
 
 
     //[Serializable()]
