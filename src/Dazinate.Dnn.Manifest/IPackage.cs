@@ -2,6 +2,11 @@ using Csla;
 
 namespace Dazinate.Dnn.Manifest
 {
+    public interface IPackageDependency
+    {
+
+
+    }
 
     public interface IPackage : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
     {

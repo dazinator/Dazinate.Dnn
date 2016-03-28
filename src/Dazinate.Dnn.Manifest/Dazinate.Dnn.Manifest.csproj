@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreVersionPackageDependency.cs" />
     <Compile Include="Factory\DnnManifestFactory.cs" />
     <Compile Include="Factory\IDnnManifestFactory.cs" />
     <Compile Include="Factory\IPackageFactory.cs" />
@@ -94,19 +95,25 @@
     <Compile Include="IReleaseNotes.cs" />
     <Compile Include="IVisitable.cs" />
     <Compile Include="License.cs" />
+    <Compile Include="ManagedPackageDependency.cs" />
     <Compile Include="ManifestType.cs" />
     <Compile Include="ObjectFactory\BaseObjectFactory.cs" />
+    <Compile Include="ObjectFactory\IPackageDependenciesListObjectFactory.cs" />
+    <Compile Include="ObjectFactory\IPackageDependencyObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackageObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackagesDnnManifestObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackagesListObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackageTypeListObjectFactory.cs" />
+    <Compile Include="ObjectFactory\PackageDependencyObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackageObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackagesDnnManifestObjectFactory.cs" />
+    <Compile Include="ObjectFactory\PackageDependenciesListObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackagesListObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackageTypeListObjectFactory.cs" />
     <Compile Include="ObjectFactory\RegexUtilities.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="Package.cs" />
+    <Compile Include="PackageDependency.cs" />
     <Compile Include="PackagesDnnManifest.cs" />
     <Compile Include="PackagesList.cs" />
     <Compile Include="PackagesManifestXmlWriter.cs" />

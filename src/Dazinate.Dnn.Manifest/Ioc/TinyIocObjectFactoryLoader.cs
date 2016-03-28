@@ -51,6 +51,10 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IPackagesListObjectFactory, PackagesListObjectFactory>();
             container.Register<IPackageFactory, PackageFactory>();
             container.Register<IPackageObjectFactory, PackageObjectFactory>();
+
+            container.RegisterMultiple(typeof(IPackageDependency), new[] { typeof(PackageDependency), typeof(CoreVersionPackageDependency), typeof(ManagedPackageDependency) });
+            container.Register<IPackageDependenciesListObjectFactory, PackageDependenciesListObjectFactory>();
+            container.Register<IPackageDependencyObjectFactory, PackageDependencyObjectFactory>();
         }
 
         public object GetFactory(string factoryName)

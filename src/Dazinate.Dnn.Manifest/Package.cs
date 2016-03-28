@@ -24,13 +24,6 @@ namespace Dazinate.Dnn.Manifest
             _packageTypeListFactory = packageTypeListFactory;
         }
 
-        //public static readonly PropertyInfo<IDnnManifest> ManifestProperty = RegisterProperty<IDnnManifest>(c => c.Manifest);
-        //public IDnnManifest Manifest
-        //{
-        //    get { return GetProperty(ManifestProperty); }
-        //    set { SetProperty(ManifestProperty, value); }
-        //}
-
         public static readonly PropertyInfo<string> NameProperty = RegisterProperty<string>(c => c.Name);
         public string Name
         {
@@ -111,16 +104,6 @@ namespace Dazinate.Dnn.Manifest
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(NameProperty));
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(TypeProperty));
 
-            //BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(VersionProperty, (c) =>
-            //{
-            //    Package target = (Package)c.Target;
-            //    Version result;
-               
-               
-            //}));
-
-            // BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(VersionProperty));
-
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(VersionProperty, (c) =>
             {
                 Package target = (Package)c.Target;
@@ -153,8 +136,6 @@ namespace Dazinate.Dnn.Manifest
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(FriendlyNameProperty));
             BusinessRules.AddRule(new Csla.Rules.CommonRules.MaxLength(FriendlyNameProperty, 250));
             BusinessRules.AddRule(new Csla.Rules.CommonRules.MaxLength(DescriptionProperty, 2000));
-
-            //  BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(IconFileProperty, ManifestProperty));
 
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(IconFileProperty, (c) =>
             {
@@ -212,10 +193,6 @@ namespace Dazinate.Dnn.Manifest
 
                 }
             }));
-
-          //  BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(PackagesDnnManifest.VersionProperty, IconFileProperty));
-           // BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(IconFileProperty, PackagesDnnManifest.VersionProperty));
-
 
         }
 

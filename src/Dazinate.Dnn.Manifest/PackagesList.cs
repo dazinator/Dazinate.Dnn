@@ -41,4 +41,28 @@ namespace Dazinate.Dnn.Manifest
             return (IPackage)result;
         }
     }
+
+
+
+    [ObjectFactory(typeof(IPackageDependenciesListObjectFactory))]
+    [Serializable]
+    public class PackageDependenciesList : BusinessListBase<PackageDependenciesList, IPackageDependency>, IPackageDependenciesList
+    {
+        private readonly IPackageFactory _factory;
+
+        public PackageDependenciesList() : this(new PackageFactory())
+        {
+        }
+
+        internal PackageDependenciesList(IPackageFactory factory)
+        {
+            _factory = factory;
+        }
+
+        public void Accept(IManifestXmlWriterVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+       
+    }
 }

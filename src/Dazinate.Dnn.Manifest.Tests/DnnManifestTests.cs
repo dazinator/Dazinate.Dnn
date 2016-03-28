@@ -13,21 +13,12 @@ namespace Dazinate.Dnn.Manifest.Tests
     public class DnnManifestTests : BaseBusinessTest, IDisposable
     {
 
-        // private IContainer _container;
-
         /// <summary>
         /// Constructor is executed prior to every individual test.
         /// </summary>
         public DnnManifestTests()
         {
             Console.Write("initialising");
-            //  var builder = new ContainerBuilder();
-            // builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
-            // _containerBuilder = builder;
-
-
-            //  _container = builder.Build();
-            // Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader();
         }
 
         private string LoadManifestXml(string localFileName)
