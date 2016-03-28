@@ -2,6 +2,6 @@
 {
     public interface IObjectActivator
     {
-        T Activate<T>();
+        T Activate<T>() where T : class;
     }
 }

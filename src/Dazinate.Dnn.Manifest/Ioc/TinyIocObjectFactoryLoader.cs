@@ -1,43 +1,56 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Reflection;
-using Autofac;
-using Autofac.Core.Registration;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Factory;
+using Dazinate.Dnn.Manifest.ObjectFactory;
+using TinyIoC;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
-    public class AutoFacObjectFactoryLoader : IObjectFactoryLoader
+    public class TinyIocObjectFactoryLoader : IObjectFactoryLoader
     {
 
-        static AutoFacObjectFactoryLoader()
+        static TinyIocObjectFactoryLoader()
         {
             SerializationWorkaround();
         }
 
-        private readonly IComponentContext _container;
+        private readonly TinyIoCContainer _container;
 
         private readonly ConcurrentDictionary<string, Type> _cachedTypes;
 
         /// <summary>
         /// Creates an object factory loader that uses autofac to resolve types. 
         /// </summary>
-        public AutoFacObjectFactoryLoader()
+        public TinyIocObjectFactoryLoader() : this(TinyIoCContainer.Current)
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
-            _container = builder.Build();
-            _cachedTypes = new ConcurrentDictionary<string, Type>();
+
         }
 
-        public AutoFacObjectFactoryLoader(IComponentContext container)
+        public TinyIocObjectFactoryLoader(TinyIoCContainer container)
         {
             if (container == null)
             {
                 throw new ArgumentNullException(nameof(container));
             }
             _container = container;
+            SetupContainer(_container);
             _cachedTypes = new ConcurrentDictionary<string, Type>();
+        }
+
+        private void SetupContainer(TinyIoCContainer container)
+        {
+            container.Register<IObjectActivator, TinyIocObjectActivator>();
+            container.Register<IPackagesDnnManifestObjectFactory, PackagesDnnManifestObjectFactory>();
+            container.Register<IDnnManifest, PackagesDnnManifest>();
+            container.Register<IDnnManifestFactory<IPackagesDnnManifest>, PackagesDnnManifestFactory>();
+            container.Register<IDnnManifestFactory<IDnnManifest>, PackagesDnnManifestFactory>();
+            container.Register<IPackageTypeListFactory>(new PackageTypeListFactory());
+            container.Register<IPackageTypeListObjectFactory, PackageTypeListObjectFactory>();
+            container.Register<IPackagesListObjectFactory, PackagesListObjectFactory>();
+            container.Register<IPackageFactory, PackageFactory>();
+            container.Register<IPackageObjectFactory, PackageObjectFactory>();
         }
 
         public object GetFactory(string factoryName)
@@ -48,7 +61,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
                 var implementation = _container.Resolve(type);
                 return implementation;
             }
-            catch (ComponentNotRegisteredException cnrex)
+            catch (TinyIoCResolutionException cnrex)
             {
                 throw new ObjectFactoryNotRegisteredException(factoryName, cnrex);
             }
@@ -111,6 +124,6 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
         #endregion
 
-      
+
     }
 }

@@ -17,14 +17,14 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             _activator = activator;
         }
 
-        protected T CreateNew<T>()
+        protected T CreateNew<T>() where T : class
         {
             var obj = CreateInstance<T>();
             MarkNew(obj);
             return (T)obj;
         }
 
-        protected TType CreateInstance<TType>()
+        protected TType CreateInstance<TType>() where TType : class
         {
             var instance = _activator.Activate<TType>();
             return instance;

@@ -39,10 +39,6 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Csla, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
       <HintPath>..\packages\CSLA-Core.4.6.300\lib\net45\Csla.dll</HintPath>
       <Private>True</Private>
@@ -86,9 +82,8 @@
     <Compile Include="ILicense.cs" />
     <Compile Include="IManifestXmlWriterVisitor.cs" />
     <Compile Include="InvalidManifestFormatException.cs" />
-    <Compile Include="Ioc\AutofacModule.cs" />
-    <Compile Include="Ioc\AutofacObjectActivator.cs" />
-    <Compile Include="Ioc\AutoFacObjectFactoryLoader.cs" />
+    <Compile Include="Ioc\TinyIocObjectActivator.cs" />
+    <Compile Include="Ioc\TinyIocObjectFactoryLoader.cs" />
     <Compile Include="Ioc\IObjectActivator.cs" />
     <Compile Include="Ioc\ObjectFactoryNotRegisteredException.cs" />
     <Compile Include="IOwner.cs" />
@@ -118,6 +113,7 @@
     <Compile Include="PackageType.cs" />
     <Compile Include="PackageTypeList.cs" />
     <Compile Include="ReleaseNotes.cs" />
+    <Compile Include="TinyIoC.cs" />
     <Compile Include="Wip\XmlUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

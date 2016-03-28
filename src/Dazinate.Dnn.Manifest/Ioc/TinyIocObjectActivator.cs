@@ -1,30 +1,30 @@
 ﻿using System;
-using Autofac;
+using TinyIoC;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
-    public class AutofacObjectActivator : IObjectActivator
+    public class TinyIocObjectActivator : IObjectActivator
     {
-        private IComponentContext _componentContext;
+        private TinyIoCContainer _container;
 
-        public AutofacObjectActivator(IComponentContext componentContext)
+        public TinyIocObjectActivator(TinyIoCContainer container)
         {
-            _componentContext = componentContext;
+            _container = container;
         }
-        public T Activate<T>()
+        public T Activate<T>() where T : class
         {
             try
             {
-                if (_componentContext.IsRegistered<T>())
+                if (_container.CanResolve<T>())
                 {
-                    var instance = _componentContext.Resolve<T>();
+                    var instance = _container.Resolve<T>();
                     return instance;
                 }
 
                 return CreateInstance<T>();
 
             }
-            catch (global::Autofac.Core.Registration.ComponentNotRegisteredException)
+            catch (global::TinyIoC.TinyIoCResolutionException)
             {
                 // fallback to creating an instance using actviator directly. 
                 return CreateInstance<T>();

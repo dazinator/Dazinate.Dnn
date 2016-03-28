@@ -61,7 +61,7 @@ namespace Dazinate.Dnn.Manifest.Tests
                 if (_refCount == 1)
                 {
                     Console.Write("set csla factory loader");
-                    Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader();
+                    Csla.Server.FactoryDataPortal.FactoryLoader = new TinyIocObjectFactoryLoader();
                 }
             }
         }
