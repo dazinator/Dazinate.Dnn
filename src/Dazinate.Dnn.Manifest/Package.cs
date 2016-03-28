@@ -1,5 +1,6 @@
 using System;
 using Csla;
+using Csla.Core;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.ObjectFactory;
@@ -109,16 +110,33 @@ namespace Dazinate.Dnn.Manifest
 
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(NameProperty));
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(TypeProperty));
-            BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(VersionProperty));
+
+            //BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(VersionProperty, (c) =>
+            //{
+            //    Package target = (Package)c.Target;
+            //    Version result;
+               
+               
+            //}));
+
+            // BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(VersionProperty));
 
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(VersionProperty, (c) =>
             {
                 Package target = (Package)c.Target;
-                Version result;
-                if (!System.Version.TryParse(target.Version, out result))
+                if (string.IsNullOrWhiteSpace(target.Version))
                 {
-                    c.AddErrorResult("Invalid version number.");
+                    c.AddErrorResult("Version number is required.");
                 }
+                else
+                {
+                    Version result;
+                    if (!System.Version.TryParse(target.Version, out result))
+                    {
+                        c.AddErrorResult("Invalid version number.");
+                    }
+                }
+              
             }));
 
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(TypeProperty, (c) =>
@@ -175,7 +193,7 @@ namespace Dazinate.Dnn.Manifest
 
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(AzureCompatibleProperty, (c) =>
             {
-                // Icon file is invalid for a pre version 5 manifest.
+                // azure compat is invalid for a pre version 5 manifest.
                 Package target = (Package)c.Target;
                 var azureCompat = target.AzureCompatible;
 
@@ -195,8 +213,8 @@ namespace Dazinate.Dnn.Manifest
                 }
             }));
 
-     //       BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(PackagesDnnManifest.VersionProperty, IconFileProperty));
-      //      BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(IconFileProperty, PackagesDnnManifest.VersionProperty));
+          //  BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(PackagesDnnManifest.VersionProperty, IconFileProperty));
+           // BusinessRules.AddRule(new Csla.Rules.CommonRules.Dependency(IconFileProperty, PackagesDnnManifest.VersionProperty));
 
 
         }
@@ -206,5 +224,6 @@ namespace Dazinate.Dnn.Manifest
             visitor.Visit(this);
         }
 
+      
     }
 }

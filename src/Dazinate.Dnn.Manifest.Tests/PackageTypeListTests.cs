@@ -44,7 +44,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
         }
 
-      
+
     }
 
     public class BaseBusinessTest
@@ -52,17 +52,23 @@ namespace Dazinate.Dnn.Manifest.Tests
 
         private static int _refCount = 0;
         private static object _lock = new object();
+        private static bool _init = true;
 
         public BaseBusinessTest()
         {
             Interlocked.Increment(ref _refCount);
             lock (_lock)
             {
-                if (_refCount == 1)
+                if (_init)
                 {
-                    Console.Write("set csla factory loader");
+                    _init = false;
                     Csla.Server.FactoryDataPortal.FactoryLoader = new TinyIocObjectFactoryLoader();
                 }
+                //if (_refCount == 1)
+                //{
+                //    Console.Write("set csla factory loader");
+                //    Csla.Server.FactoryDataPortal.FactoryLoader = new TinyIocObjectFactoryLoader();
+                //}
             }
         }
 
@@ -74,7 +80,7 @@ namespace Dazinate.Dnn.Manifest.Tests
                 if (_refCount == 0)
                 {
                     Console.Write("disposed csla factory loader");
-                    Csla.Server.FactoryDataPortal.FactoryLoader = null;
+                    //   Csla.Server.FactoryDataPortal.FactoryLoader = null;
                 }
             }
             // _container.Dispose();

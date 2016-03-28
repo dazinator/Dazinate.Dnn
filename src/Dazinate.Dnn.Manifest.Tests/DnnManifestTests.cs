@@ -21,13 +21,13 @@ namespace Dazinate.Dnn.Manifest.Tests
         public DnnManifestTests()
         {
             Console.Write("initialising");
-          //  var builder = new ContainerBuilder();
-           // builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
+            //  var builder = new ContainerBuilder();
+            // builder.RegisterAssemblyModules(typeof(AutofacObjectActivator).Assembly);
             // _containerBuilder = builder;
 
 
-          //  _container = builder.Build();
-           // Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader();
+            //  _container = builder.Build();
+            // Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader();
         }
 
         private string LoadManifestXml(string localFileName)
@@ -144,7 +144,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             // Act           
             var factory = new PackagesDnnManifestFactory();
             var dnnManifest = factory.Get(manifestXml);
-          
+
             dnnManifest.Version = "xy.z";
 
             // Assert
@@ -163,7 +163,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
         [Theory]
         [InlineData("manifest.xml")]
-        public void Validation_Rule_Package_Icon_File_Only_Allowed_For_Manifests_Above_Version_5(string manifestFile)
+        public void Validation_Rule_Package_Icon_File_Only_Allowed_For_Manifests_Version_5_Or_Above(string manifestFile)
         {
             string manifestXml = LoadManifestXml(manifestFile);
 
@@ -188,7 +188,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Assert
             // Should now be invalid.
-            package.CheckRules();
+          //  package.CheckRules();
             Assert.False(package.IsValid);
             Assert.False(dnnManifest.IsValid);
 
@@ -196,6 +196,39 @@ namespace Dazinate.Dnn.Manifest.Tests
             var brokenRules = package.GetBrokenRules();
             var iconRule = brokenRules.GetFirstBrokenRule(Package.IconFileProperty);
             Assert.NotNull(iconRule);
+
+        }
+
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Validation_Rule_Package_Azure_Compatible_Flag_Only_Allowed_For_Manifests_Version_5_Or_Above(string manifestFile)
+        {
+            string manifestXml = LoadManifestXml(manifestFile);
+
+            // Act           
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+            var dnnManifest = factory.Get(manifestXml);
+
+            // set the manifest version to 6. and add a package with an icon.
+            dnnManifest.Version = "6.0";
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.AzureCompatible = true;
+
+            var brokenRules = package.GetBrokenRules();
+            var rule = brokenRules.GetFirstBrokenRule(Package.AzureCompatibleProperty);
+            Assert.Null(rule);
+
+            // change the manifest version to below 5.
+            dnnManifest.Version = "4.0";
+
+            // Assert
+            // Should now be invalid.
+           // package.CheckRules();
+            Assert.False(package.IsValid);
+
+            brokenRules = package.GetBrokenRules();
+            rule = brokenRules.GetFirstBrokenRule(Package.AzureCompatibleProperty);
+            Assert.NotNull(rule);
 
         }
 
@@ -381,7 +414,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
         }
 
-      
+
     }
 
 

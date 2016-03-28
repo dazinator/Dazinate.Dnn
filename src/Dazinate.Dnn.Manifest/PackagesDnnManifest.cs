@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
 using Csla;
+using Csla.Core;
 using Csla.Properties;
 using Csla.Rules;
 using Csla.Server;
@@ -42,20 +43,28 @@ namespace Dazinate.Dnn.Manifest
 
             base.AddBusinessRules();
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(TypeProperty));
-            BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(VersionProperty));
+            //  BusinessRules.AddRule(new Csla.Rules.CommonRules.Required(VersionProperty));
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(VersionProperty, (c) =>
             {
                 PackagesDnnManifest target = (PackagesDnnManifest)c.Target;
-                Version result;
-                if (!System.Version.TryParse(target.Version, out result))
+
+                if (string.IsNullOrWhiteSpace(target.Version))
                 {
-                    c.AddErrorResult("Invalid version number.");
+                    c.AddErrorResult("Version number is required.");
                 }
-                
-                foreach (var package in this.Packages)
+                else
                 {
-                    package.CheckRules();
+                    Version result;
+                    if (!System.Version.TryParse(target.Version, out result))
+                    {
+                        c.AddErrorResult("Invalid version number.");
+                    }
                 }
+
+                //foreach (var package in this.Packages)
+                //{
+                //    package.CheckRules();
+                //}
 
             }));
 
@@ -83,6 +92,18 @@ namespace Dazinate.Dnn.Manifest
             //}));
         }
 
+        protected override void PropertyHasChanged(IPropertyInfo property)
+        {
+            if (property == VersionProperty)
+            {
+                foreach (var package in this.Packages)
+                {
+                    package.CheckRules();
+                }
+            }
+            base.PropertyHasChanged(property);
+        }
+        
         public void Accept(IManifestXmlWriterVisitor visitor)
         {
             visitor.Visit(this);
