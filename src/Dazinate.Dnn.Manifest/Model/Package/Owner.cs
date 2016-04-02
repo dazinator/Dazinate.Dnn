@@ -1,6 +1,6 @@
 using System;
 using Csla;
-using Dazinate.Dnn.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Utils;
 using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Model.Package

@@ -1,7 +1,6 @@
 using Csla;
-using Dazinate.Dnn.Manifest.Model;
 
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+namespace Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory
 {
     public interface IPackagesDnnManifestObjectFactory
     {

@@ -2,8 +2,11 @@
 using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Dependency;
+using Dazinate.Dnn.Manifest.Model.DependencyList;
+using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Package;
-using Dazinate.Dnn.Manifest.Wip;
+using Dazinate.Dnn.Manifest.Model.PackagesList;
+using Dazinate.Dnn.Manifest.Utils;
 
 namespace Dazinate.Dnn.Manifest.Writer
 {

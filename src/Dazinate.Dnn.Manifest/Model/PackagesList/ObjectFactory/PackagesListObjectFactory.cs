@@ -1,8 +1,8 @@
 ﻿using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
-using Dazinate.Dnn.Manifest.Model.Package;
+using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
 
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+namespace Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory
 {
     public class PackagesListObjectFactory : BaseObjectFactory, IPackagesListObjectFactory
     {

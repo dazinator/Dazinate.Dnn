@@ -2,7 +2,7 @@ using System.Xml;
 using Csla;
 using Dazinate.Dnn.Manifest.Writer;
 
-namespace Dazinate.Dnn.Manifest.Model
+namespace Dazinate.Dnn.Manifest.Model.Manifest
 {
     public interface IDnnManifest : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
     {

@@ -1,6 +1,7 @@
 using System.Xml;
 using Csla;
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Manifest;
 
 namespace Dazinate.Dnn.Manifest.Factory
 {

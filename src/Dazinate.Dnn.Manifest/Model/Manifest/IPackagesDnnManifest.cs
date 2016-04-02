@@ -1,7 +1,6 @@
-﻿using Dazinate.Dnn.Manifest.Model.Dependency;
-using Dazinate.Dnn.Manifest.Model.Package;
+﻿using Dazinate.Dnn.Manifest.Model.PackagesList;
 
-namespace Dazinate.Dnn.Manifest.Model
+namespace Dazinate.Dnn.Manifest.Model.Manifest
 {
     public interface IPackagesDnnManifest : IDnnManifest
     {

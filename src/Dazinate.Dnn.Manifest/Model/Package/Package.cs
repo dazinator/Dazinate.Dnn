@@ -3,7 +3,9 @@ using Csla;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
-using Dazinate.Dnn.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.DependencyList;
+using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
 using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Model.Package

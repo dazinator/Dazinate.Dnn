@@ -1,9 +1,8 @@
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
-using Dazinate.Dnn.Manifest.Model.Dependency;
-using Dazinate.Dnn.Manifest.Wip;
+using Dazinate.Dnn.Manifest.Utils;
 
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+namespace Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory
 {
     public class DependencyObjectFactory : BaseObjectFactory, IDependencyObjectFactory
     {

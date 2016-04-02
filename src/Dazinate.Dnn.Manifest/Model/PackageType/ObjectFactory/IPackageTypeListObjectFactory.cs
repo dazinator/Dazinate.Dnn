@@ -1,6 +1,4 @@
-﻿using Dazinate.Dnn.Manifest.Model;
-
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+﻿namespace Dazinate.Dnn.Manifest.Model.PackageType.ObjectFactory
 {
     public interface IPackageTypeListObjectFactory
     {

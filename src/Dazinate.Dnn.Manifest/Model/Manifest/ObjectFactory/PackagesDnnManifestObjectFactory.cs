@@ -1,16 +1,15 @@
-using System;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 using Csla;
 using Dazinate.Dnn.Manifest.Ioc;
-using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.Package;
-using Dazinate.Dnn.Manifest.Wip;
+using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Utils;
 using Dazinate.Dnn.Manifest.Writer;
 
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+namespace Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory
 {
     public class PackagesDnnManifestObjectFactory : BaseObjectFactory, IPackagesDnnManifestObjectFactory
     {

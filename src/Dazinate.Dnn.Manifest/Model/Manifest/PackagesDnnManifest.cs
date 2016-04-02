@@ -5,11 +5,11 @@ using System.Xml;
 using Csla;
 using Csla.Core;
 using Csla.Server;
-using Dazinate.Dnn.Manifest.Model.Package;
-using Dazinate.Dnn.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.PackagesList;
 using Dazinate.Dnn.Manifest.Writer;
 
-namespace Dazinate.Dnn.Manifest.Model
+namespace Dazinate.Dnn.Manifest.Model.Manifest
 {
     [ObjectFactory(typeof(IPackagesDnnManifestObjectFactory))]
     [Serializable]
@@ -31,7 +31,7 @@ namespace Dazinate.Dnn.Manifest.Model
             set { SetProperty(VersionProperty, value); }
         }
 
-        public static readonly PropertyInfo<PackagesList> PackagesListProperty = RegisterProperty<PackagesList>(c => c.Packages);
+        public static readonly PropertyInfo<PackagesList.PackagesList> PackagesListProperty = RegisterProperty<PackagesList.PackagesList>(c => c.Packages);
         public IPackagesList Packages
         {
             get { return GetProperty(PackagesListProperty); }

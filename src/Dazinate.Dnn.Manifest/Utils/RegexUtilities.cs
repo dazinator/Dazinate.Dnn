@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+namespace Dazinate.Dnn.Manifest.Utils
 {
     public class RegexUtilities
     {

@@ -1,4 +1,4 @@
-﻿namespace Dazinate.Dnn.Manifest.Model
+﻿namespace Dazinate.Dnn.Manifest.Model.Manifest
 {
     public enum ManifestType
     {

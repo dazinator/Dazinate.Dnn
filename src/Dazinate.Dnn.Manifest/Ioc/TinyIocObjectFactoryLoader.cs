@@ -5,7 +5,13 @@ using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.Dependency;
-using Dazinate.Dnn.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.PackageType.ObjectFactory;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {

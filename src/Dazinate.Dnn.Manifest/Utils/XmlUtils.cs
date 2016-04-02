@@ -2,7 +2,7 @@ using System;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace Dazinate.Dnn.Manifest.Wip
+namespace Dazinate.Dnn.Manifest.Utils
 {
     public static class XmlUtils
     {

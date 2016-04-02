@@ -7,6 +7,7 @@ using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Xunit;
 

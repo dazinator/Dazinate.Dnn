@@ -2,10 +2,11 @@
 using Csla;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
-using Dazinate.Dnn.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Package;
+using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Writer;
 
-namespace Dazinate.Dnn.Manifest.Model.Package
+namespace Dazinate.Dnn.Manifest.Model.PackagesList
 {
     [ObjectFactory(typeof(IPackagesListObjectFactory))]
     [Serializable]

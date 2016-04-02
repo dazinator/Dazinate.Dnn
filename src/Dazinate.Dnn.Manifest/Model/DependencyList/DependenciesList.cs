@@ -3,10 +3,10 @@ using Csla;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
-using Dazinate.Dnn.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Writer;
 
-namespace Dazinate.Dnn.Manifest.Model.Package
+namespace Dazinate.Dnn.Manifest.Model.DependencyList
 {
     [ObjectFactory(typeof(IDependenciesListObjectFactory))]
     [Serializable]

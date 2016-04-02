@@ -1,4 +1,4 @@
-﻿namespace Dazinate.Dnn.Manifest.Model.Package
+﻿namespace Dazinate.Dnn.Manifest.Model.PackageType
 {
     public enum PackageType
     {

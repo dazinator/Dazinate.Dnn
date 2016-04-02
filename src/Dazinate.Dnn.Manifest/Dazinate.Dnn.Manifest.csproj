@@ -81,7 +81,7 @@
     <Compile Include="Factory\PackagesDnnManifestFactory.cs" />
     <Compile Include="Factory\PackageTypeListFactory.cs" />
     <Compile Include="Model\Manifest\IDnnManifest.cs" />
-    <Compile Include="Model\Package\DependenciesList.cs" />
+    <Compile Include="Model\DependencyList\DependenciesList.cs" />
     <Compile Include="Model\Package\ILicense.cs" />
     <Compile Include="Writer\IManifestXmlWriterVisitor.cs" />
     <Compile Include="Model\Manifest\InvalidManifestFormatException.cs" />
@@ -92,34 +92,34 @@
     <Compile Include="Model\Package\IOwner.cs" />
     <Compile Include="Model\Package\IPackage.cs" />
     <Compile Include="Model\Component\IComponent.cs" />
-    <Compile Include="Model\Dependency\IDependenciesList.cs" />
+    <Compile Include="Model\DependencyList\IDependenciesList.cs" />
     <Compile Include="Model\Dependency\IDependency.cs" />
     <Compile Include="Model\Manifest\IPackagesDnnManifest.cs" />
-    <Compile Include="Model\Package\IPackagesList.cs" />
+    <Compile Include="Model\PackagesList\IPackagesList.cs" />
     <Compile Include="Model\Package\IReleaseNotes.cs" />
     <Compile Include="Model\IVisitable.cs" />
     <Compile Include="Model\Package\License.cs" />
     <Compile Include="Model\Dependency\ManagedPackageDependency.cs" />
     <Compile Include="Model\Manifest\ManifestType.cs" />
     <Compile Include="Model\BaseObjectFactory.cs" />
-    <Compile Include="Model\Dependency\ObjectFactory\IDependenciesListObjectFactory.cs" />
+    <Compile Include="Model\DependencyList\ObjectFactory\IDependenciesListObjectFactory.cs" />
     <Compile Include="Model\Dependency\ObjectFactory\IDependencyObjectFactory.cs" />
     <Compile Include="Model\Package\ObjectFactory\IPackageObjectFactory.cs" />
     <Compile Include="Model\Manifest\ObjectFactory\IPackagesDnnManifestObjectFactory.cs" />
-    <Compile Include="Model\Package\ObjectFactory\IPackagesListObjectFactory.cs" />
+    <Compile Include="Model\PackagesList\ObjectFactory\IPackagesListObjectFactory.cs" />
     <Compile Include="Model\PackageType\ObjectFactory\IPackageTypeListObjectFactory.cs" />
     <Compile Include="Model\Dependency\ObjectFactory\DependencyObjectFactory.cs" />
     <Compile Include="Model\Package\ObjectFactory\PackageObjectFactory.cs" />
     <Compile Include="Model\Manifest\ObjectFactory\PackagesDnnManifestObjectFactory.cs" />
-    <Compile Include="Model\Dependency\ObjectFactory\DependenciesListObjectFactory.cs" />
-    <Compile Include="Model\Package\ObjectFactory\PackagesListObjectFactory.cs" />
+    <Compile Include="Model\DependencyList\ObjectFactory\DependenciesListObjectFactory.cs" />
+    <Compile Include="Model\PackagesList\ObjectFactory\PackagesListObjectFactory.cs" />
     <Compile Include="Model\PackageType\ObjectFactory\PackageTypeListObjectFactory.cs" />
     <Compile Include="Utils\RegexUtilities.cs" />
     <Compile Include="Model\Package\Owner.cs" />
     <Compile Include="Model\Package\Package.cs" />
     <Compile Include="Model\Dependency\PackageDependency.cs" />
     <Compile Include="Model\Manifest\PackagesDnnManifest.cs" />
-    <Compile Include="Model\Package\PackagesList.cs" />
+    <Compile Include="Model\PackagesList\PackagesList.cs" />
     <Compile Include="Writer\PackagesManifestXmlWriter.cs" />
     <Compile Include="Model\PackageType\PackageType.cs" />
     <Compile Include="Model\PackageType\PackageTypeList.cs" />
@@ -137,7 +137,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Csla\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

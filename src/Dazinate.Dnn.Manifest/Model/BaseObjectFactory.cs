@@ -1,7 +1,7 @@
 ﻿using System;
 using Dazinate.Dnn.Manifest.Ioc;
 
-namespace Dazinate.Dnn.Manifest.ObjectFactory
+namespace Dazinate.Dnn.Manifest.Model
 {
     public abstract class BaseObjectFactory : global::Csla.Server.ObjectFactory
     {
