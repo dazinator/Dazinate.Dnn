@@ -1,5 +1,7 @@
 ﻿using System;
 using Dazinate.Dnn.Manifest.Ioc;
+using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Package;
 
 namespace Dazinate.Dnn.Manifest.ObjectFactory
 {

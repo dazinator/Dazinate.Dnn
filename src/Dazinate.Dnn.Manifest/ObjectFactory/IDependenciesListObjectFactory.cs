@@ -3,8 +3,8 @@ using Dazinate.Dnn.Manifest.Model.Package;
 
 namespace Dazinate.Dnn.Manifest.ObjectFactory
 {
-    public interface IPackageObjectFactory
+    public interface IDependenciesListObjectFactory
     {
-        Package Fetch(XPathNavigator xpathNavigator);
+        DependenciesList Fetch(XPathNavigator xpathNavigator);
     }
 }

@@ -1,5 +1,6 @@
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
+using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Wip;
 
 namespace Dazinate.Dnn.Manifest.ObjectFactory
@@ -7,9 +8,11 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
     public class PackageObjectFactory : BaseObjectFactory, IPackageObjectFactory
     {
 
-        public PackageObjectFactory(IObjectActivator activator) : base(activator)
+        private readonly IDependenciesListObjectFactory _dependenciesListFactory;
+
+        public PackageObjectFactory(IObjectActivator activator, IDependenciesListObjectFactory dependenciesListFactory) : base(activator)
         {
-            //_packagesListFactory = packagesListFactory;
+            _dependenciesListFactory = dependenciesListFactory;
         }
 
         public Package Fetch(XPathNavigator packageNav)
@@ -46,6 +49,9 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
                 bool azureCompat = bool.Parse(azureCompatString);
                 LoadProperty(package, Package.AzureCompatibleProperty, azureCompat);
             }
+
+            var dependenciesList = _dependenciesListFactory.Fetch(packageNav);
+            LoadProperty(package, Package.DependenciesListProperty, dependenciesList);
 
             MarkAsChild(package);
             MarkOld(package);

@@ -3,8 +3,9 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
+using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.ObjectFactory;
-using TinyIoC;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
@@ -52,9 +53,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IPackageFactory, PackageFactory>();
             container.Register<IPackageObjectFactory, PackageObjectFactory>();
 
-            container.RegisterMultiple(typeof(IPackageDependency), new[] { typeof(PackageDependency), typeof(CoreVersionPackageDependency), typeof(ManagedPackageDependency) });
-            container.Register<IPackageDependenciesListObjectFactory, PackageDependenciesListObjectFactory>();
-            container.Register<IPackageDependencyObjectFactory, PackageDependencyObjectFactory>();
+            container.RegisterMultiple(typeof(IDependency), new[] { typeof(PackageDependency), typeof(CoreVersionDependency), typeof(ManagedPackageDependency) });
+            container.Register<IDependenciesListObjectFactory, DependenciesListObjectFactory>();
+            container.Register<IDependencyObjectFactory, DependencyObjectFactory>();
         }
 
         public object GetFactory(string factoryName)

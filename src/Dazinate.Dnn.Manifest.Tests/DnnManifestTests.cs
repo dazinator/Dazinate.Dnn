@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
+using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Package;
 using Xunit;
 
 namespace Dazinate.Dnn.Manifest.Tests
@@ -68,7 +71,11 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.True(dnnManifest.IsValid);
             Assert.NotNull(dnnManifest.Packages);
             var packages = dnnManifest.Packages;
+            Assert.True(packages.Count > 0);
 
+            var firstPackage = packages.First();
+            var dependencies = firstPackage.Dependencies;
+            Assert.True(dependencies.Count > 0);
             // todo: extend this test to validate object state against xml.
 
             Assert.False(dnnManifest.IsDirty);
@@ -86,7 +93,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Act           
             var dnnManifest = factory.Get(xmlContents);
-            dnnManifest.Packages.RemoveAt(0);
+            dnnManifest.Packages[0].Description = "changed";
             dnnManifest.Version = "7.0";
 
             // var writer = dnnManifest.GetXmlWriter();
@@ -179,7 +186,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Assert
             // Should now be invalid.
-          //  package.CheckRules();
+            //  package.CheckRules();
             Assert.False(package.IsValid);
             Assert.False(dnnManifest.IsValid);
 
@@ -214,7 +221,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Assert
             // Should now be invalid.
-           // package.CheckRules();
+            // package.CheckRules();
             Assert.False(package.IsValid);
 
             brokenRules = package.GetBrokenRules();

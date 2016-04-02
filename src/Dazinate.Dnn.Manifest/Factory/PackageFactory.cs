@@ -1,4 +1,5 @@
 ﻿using System;
+using Dazinate.Dnn.Manifest.Model.Package;
 
 namespace Dazinate.Dnn.Manifest.Factory
 {

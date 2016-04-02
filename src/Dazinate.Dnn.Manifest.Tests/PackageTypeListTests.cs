@@ -6,6 +6,7 @@ using System.Xml;
 using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
+using Dazinate.Dnn.Manifest.Model.Package;
 using Xunit;
 
 namespace Dazinate.Dnn.Manifest.Tests

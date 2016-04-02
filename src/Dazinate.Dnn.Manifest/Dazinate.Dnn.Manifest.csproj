@@ -71,7 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoreVersionPackageDependency.cs" />
+    <Compile Include="Model\Dependency\CoreVersionDependency.cs" />
+    <Compile Include="Model\Dependency\CustomDependency.cs" />
     <Compile Include="Factory\DnnManifestFactory.cs" />
     <Compile Include="Factory\IDnnManifestFactory.cs" />
     <Compile Include="Factory\IPackageFactory.cs" />
@@ -79,50 +80,52 @@
     <Compile Include="Factory\PackageFactory.cs" />
     <Compile Include="Factory\PackagesDnnManifestFactory.cs" />
     <Compile Include="Factory\PackageTypeListFactory.cs" />
-    <Compile Include="IDnnManifest.cs" />
-    <Compile Include="ILicense.cs" />
-    <Compile Include="IManifestXmlWriterVisitor.cs" />
-    <Compile Include="InvalidManifestFormatException.cs" />
+    <Compile Include="Model\IDnnManifest.cs" />
+    <Compile Include="Model\Package\DependenciesList.cs" />
+    <Compile Include="Model\Package\ILicense.cs" />
+    <Compile Include="Writer\IManifestXmlWriterVisitor.cs" />
+    <Compile Include="Model\InvalidManifestFormatException.cs" />
     <Compile Include="Ioc\TinyIocObjectActivator.cs" />
     <Compile Include="Ioc\TinyIocObjectFactoryLoader.cs" />
     <Compile Include="Ioc\IObjectActivator.cs" />
     <Compile Include="Ioc\ObjectFactoryNotRegisteredException.cs" />
-    <Compile Include="IOwner.cs" />
-    <Compile Include="IPackage.cs" />
-    <Compile Include="IPackageComponent.cs" />
-    <Compile Include="IPackageDependenciesList.cs" />
-    <Compile Include="IPackageDependency.cs" />
-    <Compile Include="IPackagesDnnManifest.cs" />
-    <Compile Include="IPackagesList.cs" />
-    <Compile Include="IReleaseNotes.cs" />
-    <Compile Include="IVisitable.cs" />
-    <Compile Include="License.cs" />
-    <Compile Include="ManagedPackageDependency.cs" />
-    <Compile Include="ManifestType.cs" />
+    <Compile Include="Model\Package\IOwner.cs" />
+    <Compile Include="Model\Package\IPackage.cs" />
+    <Compile Include="Model\Component\IComponent.cs" />
+    <Compile Include="Model\Dependency\IDependenciesList.cs" />
+    <Compile Include="Model\Dependency\IDependency.cs" />
+    <Compile Include="Model\IPackagesDnnManifest.cs" />
+    <Compile Include="Model\Package\IPackagesList.cs" />
+    <Compile Include="Model\Package\IReleaseNotes.cs" />
+    <Compile Include="Model\IVisitable.cs" />
+    <Compile Include="Model\Package\License.cs" />
+    <Compile Include="Model\Dependency\ManagedPackageDependency.cs" />
+    <Compile Include="Model\ManifestType.cs" />
     <Compile Include="ObjectFactory\BaseObjectFactory.cs" />
-    <Compile Include="ObjectFactory\IPackageDependenciesListObjectFactory.cs" />
-    <Compile Include="ObjectFactory\IPackageDependencyObjectFactory.cs" />
+    <Compile Include="ObjectFactory\IDependenciesListObjectFactory.cs" />
+    <Compile Include="ObjectFactory\IDependencyObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackageObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackagesDnnManifestObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackagesListObjectFactory.cs" />
     <Compile Include="ObjectFactory\IPackageTypeListObjectFactory.cs" />
-    <Compile Include="ObjectFactory\PackageDependencyObjectFactory.cs" />
+    <Compile Include="ObjectFactory\DependencyObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackageObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackagesDnnManifestObjectFactory.cs" />
-    <Compile Include="ObjectFactory\PackageDependenciesListObjectFactory.cs" />
+    <Compile Include="ObjectFactory\DependenciesListObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackagesListObjectFactory.cs" />
     <Compile Include="ObjectFactory\PackageTypeListObjectFactory.cs" />
     <Compile Include="ObjectFactory\RegexUtilities.cs" />
-    <Compile Include="Owner.cs" />
-    <Compile Include="Package.cs" />
-    <Compile Include="PackageDependency.cs" />
-    <Compile Include="PackagesDnnManifest.cs" />
-    <Compile Include="PackagesList.cs" />
-    <Compile Include="PackagesManifestXmlWriter.cs" />
-    <Compile Include="PackageType.cs" />
-    <Compile Include="PackageTypeList.cs" />
-    <Compile Include="ReleaseNotes.cs" />
-    <Compile Include="TinyIoC.cs" />
+    <Compile Include="Model\Package\Owner.cs" />
+    <Compile Include="Model\Package\Package.cs" />
+    <Compile Include="Model\Dependency\PackageDependency.cs" />
+    <Compile Include="Model\PackagesDnnManifest.cs" />
+    <Compile Include="Model\Package\PackagesList.cs" />
+    <Compile Include="Writer\PackagesManifestXmlWriter.cs" />
+    <Compile Include="Model\Package\PackageType.cs" />
+    <Compile Include="Model\PackageTypeList.cs" />
+    <Compile Include="Model\Package\ReleaseNotes.cs" />
+    <Compile Include="Ioc\TinyIoC.cs" />
+    <Compile Include="Model\Dependency\TypeDependency.cs" />
     <Compile Include="Wip\XmlUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +137,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

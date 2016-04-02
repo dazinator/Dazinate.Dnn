@@ -1,4 +1,5 @@
 using Csla;
+using Dazinate.Dnn.Manifest.Model;
 
 namespace Dazinate.Dnn.Manifest.Factory
 {
