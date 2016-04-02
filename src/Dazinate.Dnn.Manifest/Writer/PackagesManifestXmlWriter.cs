@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Wip;
@@ -88,6 +89,11 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteAttributeString("type", managedPackageDependency.Type);
             _writer.WriteString(managedPackageDependency.Value);
             _writer.WriteEndElement();
+        }
+
+        public void Visit(AssemblyComponent managedPackageDependency)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void Visit(IPackage package)

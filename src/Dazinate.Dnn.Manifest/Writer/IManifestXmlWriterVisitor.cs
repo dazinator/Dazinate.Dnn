@@ -1,4 +1,5 @@
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Package;
 
@@ -18,5 +19,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(PackageDependency packageDependency);
         void Visit(TypeDependency managedPackageDependency);
         void Visit(CustomDependency managedPackageDependency);
+        void Visit(AssemblyComponent managedPackageDependency);
     }
 }
