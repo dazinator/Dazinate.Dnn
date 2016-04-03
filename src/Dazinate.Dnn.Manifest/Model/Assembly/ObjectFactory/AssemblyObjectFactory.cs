@@ -47,5 +47,4 @@ namespace Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory
             return assy;
         }
     }
-
 }

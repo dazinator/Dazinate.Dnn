@@ -6,6 +6,8 @@ using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
+using Dazinate.Dnn.Manifest.Model.File;
+using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
@@ -31,5 +33,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(IAssembly assembly);
         void Visit(IComponentsList list);
         void Visit(IAuthenticationSystemComponent component);
+        void Visit(IFile file);
+        void Visit(IFilesList list);
+        void Visit(ICleanupComponent component);
     }
 }

@@ -7,6 +7,7 @@ using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Xunit;
@@ -81,6 +82,8 @@ namespace Dazinate.Dnn.Manifest.Tests
             var components = firstPackage.Components;
             Assert.True(components.Count > 0);
 
+            var cleanupComponent = firstPackage.Components.FirstOrDefault(a => a is ICleanupComponent);
+            Assert.NotNull(cleanupComponent);
 
             // todo: extend this test to validate object state against xml.
 

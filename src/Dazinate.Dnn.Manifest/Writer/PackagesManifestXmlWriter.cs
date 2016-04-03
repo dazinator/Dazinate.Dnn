@@ -9,6 +9,8 @@ using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
+using Dazinate.Dnn.Manifest.Model.File;
+using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
@@ -221,6 +223,53 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
 
 
+        }
+
+        public void Visit(IFile file)
+        {
+            _writer.WriteStartElement("file");
+
+            _writer.WriteElementString("path", file.Path);
+            _writer.WriteElementString("name", file.Name);
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(IFilesList list)
+        {
+            if (list.Any())
+            {
+                _writer.WriteStartElement("files");
+
+                foreach (var item in list)
+                {
+                    item.Accept(this);
+                }
+
+                _writer.WriteEndElement();
+            }
+
+          
+        }
+
+        public void Visit(ICleanupComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Cleanup");
+
+            if (!string.IsNullOrWhiteSpace(component.Version))
+            {
+                _writer.WriteAttributeString("version", component.Version);
+            }
+
+            if (!string.IsNullOrWhiteSpace(component.FileName))
+            {
+                _writer.WriteAttributeString("fileName", component.FileName);
+            }
+
+            component.Files.Accept(this);
+
+            _writer.WriteEndElement();
         }
 
         public void Visit(IAssemblyComponent component)

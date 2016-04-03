@@ -48,6 +48,18 @@
             <logoffControlSrc/>
           </authenticationService>
         </component>
+        <component type="Cleanup" version="07.40.00">
+          <files>
+            <file>
+              <path>bin</path>
+              <name>MyFile.dll</name>
+            </file>
+            <file>
+              <path>bin</path>
+              <name>MyOtherFile.dll</name>
+            </file>
+          </files>
+        </component>
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>

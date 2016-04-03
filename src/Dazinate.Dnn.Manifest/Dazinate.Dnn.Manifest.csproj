@@ -72,7 +72,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AssembliesList\AssembliesList.cs" />
+    <Compile Include="Model\Component\CleanupComponent.cs" />
+    <Compile Include="Model\Component\ICleanupComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\CleanupComponentSubObjectFactory.cs" />
+    <Compile Include="Model\FilesList\ObjectFactory\FilesListObjectFactory.cs" />
+    <Compile Include="Model\FilesList\ObjectFactory\IFilesListObjectFactory.cs" />
+    <Compile Include="Model\FilesList\FilesList.cs" />
+    <Compile Include="Model\FilesList\IFilesList.cs" />
     <Compile Include="Model\AssembliesList\ObjectFactory\AssembliesListObjectFactory.cs" />
+    <Compile Include="Model\File\File.cs" />
+    <Compile Include="Model\File\ObjectFactory\FileObjectFactory.cs" />
+    <Compile Include="Model\File\ObjectFactory\IFileObjectFactory.cs" />
+    <Compile Include="Model\File\IFile.cs" />
     <Compile Include="Model\Assembly\ObjectFactory\IAssemblyObjectFactory.cs" />
     <Compile Include="Model\Assembly\Assembly.cs" />
     <Compile Include="Model\Assembly\AssemblyAction.cs" />
