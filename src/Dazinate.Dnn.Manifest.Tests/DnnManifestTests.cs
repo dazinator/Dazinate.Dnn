@@ -77,6 +77,11 @@ namespace Dazinate.Dnn.Manifest.Tests
             var firstPackage = packages.First();
             var dependencies = firstPackage.Dependencies;
             Assert.True(dependencies.Count > 0);
+
+            var components = firstPackage.Components;
+            Assert.True(components.Count > 0);
+
+
             // todo: extend this test to validate object state against xml.
 
             Assert.False(dnnManifest.IsDirty);
@@ -101,6 +106,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
             {
+               // xmlWriter.Settings.OmitXmlDeclaration = true;
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
                 Console.Write(xmlStringBuilder.ToString());
             }

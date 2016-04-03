@@ -1,5 +1,8 @@
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.AssembliesList;
+using Dazinate.Dnn.Manifest.Model.Assembly;
 using Dazinate.Dnn.Manifest.Model.Component;
+using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
@@ -14,14 +17,17 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(ILicense license);
         void Visit(IOwner owner);
         void Visit(IPackage package);
-        void Visit(IPackagesList packagesList);
+        void Visit(IPackagesList list);
         void Visit(IReleaseNotes releaseNotes);
-        void Visit(IDependenciesList dependenciesList);
+        void Visit(IDependenciesList list);
         void Visit(CoreVersionDependency dependency);
-        void Visit(ManagedPackageDependency managedPackageDependency);
-        void Visit(PackageDependency packageDependency);
-        void Visit(TypeDependency managedPackageDependency);
-        void Visit(CustomDependency managedPackageDependency);
-        void Visit(AssemblyComponent managedPackageDependency);
+        void Visit(ManagedPackageDependency dependency);
+        void Visit(PackageDependency dependency);
+        void Visit(TypeDependency dependency);
+        void Visit(CustomDependency dependency);
+        void Visit(IAssemblyComponent component);
+        void Visit(IAssembliesList list);
+        void Visit(IAssembly assembly);
+        void Visit(IComponentsList list);
     }
 }

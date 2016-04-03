@@ -1,5 +1,6 @@
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
+using Dazinate.Dnn.Manifest.Model.ComponentsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Utils;
 
@@ -9,10 +10,12 @@ namespace Dazinate.Dnn.Manifest.Model.Package.ObjectFactory
     {
 
         private readonly IDependenciesListObjectFactory _dependenciesListFactory;
+        private readonly IComponentsListObjectFactory _componentsListFactory;
 
-        public PackageObjectFactory(IObjectActivator activator, IDependenciesListObjectFactory dependenciesListFactory) : base(activator)
+        public PackageObjectFactory(IObjectActivator activator, IDependenciesListObjectFactory dependenciesListFactory, IComponentsListObjectFactory componentsListFactory) : base(activator)
         {
             _dependenciesListFactory = dependenciesListFactory;
+            _componentsListFactory = componentsListFactory;
         }
 
         public Package Fetch(XPathNavigator packageNav)
@@ -52,6 +55,9 @@ namespace Dazinate.Dnn.Manifest.Model.Package.ObjectFactory
 
             var dependenciesList = _dependenciesListFactory.Fetch(packageNav);
             LoadProperty(package, Package.DependenciesListProperty, dependenciesList);
+
+            var componentsList = _componentsListFactory.Fetch(packageNav);
+            LoadProperty(package, Package.ComponentsListProperty, componentsList);
 
             MarkAsChild(package);
             MarkOld(package);
@@ -150,6 +156,9 @@ namespace Dazinate.Dnn.Manifest.Model.Package.ObjectFactory
             package.Owner = CreateInstance<Owner>();
             package.License = CreateInstance<License>();
             package.ReleaseNotes = CreateInstance<ReleaseNotes>();
+
+            package.Dependencies = _dependenciesListFactory.Create();
+            package.Components = _componentsListFactory.Create();
 
             MarkAsChild(package.Owner);
             MarkAsChild(package.License);

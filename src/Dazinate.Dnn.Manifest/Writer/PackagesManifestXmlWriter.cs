@@ -1,6 +1,11 @@
-﻿using System.Xml;
+﻿using System.Linq;
+using System.Reflection;
+using System.Xml;
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.AssembliesList;
+using Dazinate.Dnn.Manifest.Model.Assembly;
 using Dazinate.Dnn.Manifest.Model.Component;
+using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
@@ -94,11 +99,6 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
         }
 
-        public void Visit(AssemblyComponent managedPackageDependency)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Visit(IPackage package)
         {
 
@@ -125,6 +125,7 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             package.Dependencies.Accept(this);
+            package.Components.Accept(this);
 
             _writer.WriteEndElement();
         }
@@ -183,5 +184,78 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
 
         }
+
+        #region components
+
+        public void Visit(IComponentsList list)
+        {
+            if (list.Any())
+            {
+                _writer.WriteStartElement("components");
+
+                foreach (var item in list)
+                {
+                    item.Accept(this);
+                }
+
+                _writer.WriteEndElement();
+            }
+
+        }
+
+        public void Visit(IAssemblyComponent assemblyComponent)
+        {
+            if (assemblyComponent.Assemblies.Any())
+            {
+                _writer.WriteStartElement("component");
+                _writer.WriteAttributeString("type", "Assembly");
+
+                assemblyComponent.Assemblies.Accept(this);
+
+                _writer.WriteEndElement();
+            }
+        }
+
+        public void Visit(IAssembliesList assembliesList)
+        {
+            _writer.WriteStartElement("assemblies");
+
+            foreach (var assy in assembliesList)
+            {
+                assy.Accept(this);
+            }
+
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(IAssembly assembly)
+        {
+            _writer.WriteStartElement("assembly");
+            if (assembly.Action != AssemblyAction.Install)
+            {
+                _writer.WriteAttributeString("action", assembly.Action.ToString());
+            }
+
+            if (!string.IsNullOrWhiteSpace(assembly.Path))
+            {
+                _writer.WriteElementString("path", assembly.Path);
+            }
+            if (!string.IsNullOrWhiteSpace(assembly.Name))
+            {
+                _writer.WriteElementString("name", assembly.Name);
+            }
+            if (!string.IsNullOrWhiteSpace(assembly.Version))
+            {
+                _writer.WriteElementString("version", assembly.Version);
+            }
+
+            _writer.WriteEndElement();
+
+        }
+
+       
+
+        #endregion
     }
 }

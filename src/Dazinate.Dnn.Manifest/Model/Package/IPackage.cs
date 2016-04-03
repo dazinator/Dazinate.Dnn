@@ -1,4 +1,5 @@
 using Csla;
+using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Writer;
@@ -31,6 +32,8 @@ namespace Dazinate.Dnn.Manifest.Model.Package
         IReleaseNotes ReleaseNotes { get; set; }
 
         IDependenciesList Dependencies { get; }
+
+        IComponentsList Components { get; }
 
     }
 }

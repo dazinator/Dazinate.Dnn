@@ -26,7 +26,21 @@
         <!--<dependency type="package">SomeOtherPackage</dependency>-->
       </dependencies>
       <components>
-        <component type="Module">
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>[YourAssembly.dll]</name>
+              <version>1.0.0.0</version>
+            </assembly>
+            <assembly action="Unregister">
+              <path>bin</path>
+              <name>SomeOld.dll</name>
+              <version>1.0.0.0</version>
+            </assembly>
+          </assemblies>
+        </component>
+        <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>
             <foldername>[FolderName]</foldername>
@@ -63,14 +77,6 @@
             </moduleDefinitions>
           </desktopModule>
         </component>
-        <component type="Assembly">
-          <assemblies>
-            <assembly>
-              <path>bin</path>
-              <name>[YourAssembly.dll]</name>
-            </assembly>
-          </assemblies>
-        </component>
         <component type="ResourceFile">
           <resourceFiles>
             <basePath>DesktopModules/[FolderName]</basePath>
@@ -78,7 +84,7 @@
               <name>Resources.zip</name>
             </resourceFile>
           </resourceFiles>
-        </component>
+        </component>-->
       </components>
     </package>
 

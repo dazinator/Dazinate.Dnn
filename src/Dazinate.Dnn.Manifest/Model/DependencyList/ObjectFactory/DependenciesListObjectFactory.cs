@@ -37,12 +37,20 @@ namespace Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory
             return list;
         }
 
+        public IDependenciesList Create()
+        {
+            var list = CreateInstance<DependenciesList>();
+            MarkAsChild(list);
+            CheckRules(list);
+            return list;
+        }
+
 
         private void LoadPackageDependency(XPathNavigator nav, DependenciesList list)
         {
             var item = _packageDependencyFactory.Fetch(nav);
             list.Add(item);
         }
-        
+
     }
 }

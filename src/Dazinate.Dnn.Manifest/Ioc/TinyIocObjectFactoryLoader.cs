@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Reflection;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Model;
+using Dazinate.Dnn.Manifest.Model.AssembliesList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Component;
+using Dazinate.Dnn.Manifest.Model.Component.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Component.SubObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ComponentsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
@@ -12,6 +17,7 @@ using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackageType.ObjectFactory;
+using Assembly = System.Reflection.Assembly;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
@@ -62,6 +68,14 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.RegisterMultiple(typeof(IDependency), new[] { typeof(PackageDependency), typeof(CoreVersionDependency), typeof(ManagedPackageDependency) });
             container.Register<IDependenciesListObjectFactory, DependenciesListObjectFactory>();
             container.Register<IDependencyObjectFactory, DependencyObjectFactory>();
+
+
+            container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
+            container.Register<IComponentObjectFactory, ComponentObjectFactory>();
+            container.RegisterMultiple(typeof(IComponentSubObjectFactory), new[] { typeof(AssemblyComponentSubObjectFactory) });
+            container.Register<IAssembliesListObjectFactory, AssembliesListObjectFactory>();
+            container.Register<IAssemblyObjectFactory, AssemblyObjectFactory>();
+
         }
 
         public object GetFactory(string factoryName)

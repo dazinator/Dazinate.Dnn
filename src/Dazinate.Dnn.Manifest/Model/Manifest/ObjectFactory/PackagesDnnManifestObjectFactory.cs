@@ -138,7 +138,7 @@ namespace Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory
             var manifest = command.PackagesDnnManifest;
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true }))
             {
                 var manifestWriter = new PackagesDnnManifestXmlWriter(xmlWriter);
                 manifest.Accept(manifestWriter);

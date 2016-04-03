@@ -2,6 +2,7 @@ using System;
 using Csla;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
+using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
@@ -102,6 +103,13 @@ namespace Dazinate.Dnn.Manifest.Model.Package
         {
             get { return GetProperty(DependenciesListProperty); }
             set { SetProperty(DependenciesListProperty, value); }
+        }
+
+        public static readonly PropertyInfo<ComponentsList.ComponentsList> ComponentsListProperty = RegisterProperty<ComponentsList.ComponentsList>(c => c.Components);
+        public IComponentsList Components
+        {
+            get { return GetProperty(ComponentsListProperty); }
+            set { SetProperty(ComponentsListProperty, value); }
         }
 
         protected override void AddBusinessRules()

@@ -71,6 +71,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\AssembliesList\AssembliesList.cs" />
+    <Compile Include="Model\AssembliesList\ObjectFactory\AssembliesListObjectFactory.cs" />
+    <Compile Include="Model\Assembly\ObjectFactory\IAssemblyObjectFactory.cs" />
+    <Compile Include="Model\Assembly\Assembly.cs" />
+    <Compile Include="Model\Assembly\AssemblyAction.cs" />
+    <Compile Include="Model\Assembly\ObjectFactory\AssemblyObjectFactory.cs" />
+    <Compile Include="Model\ComponentsList\ComponentsList.cs" />
+    <Compile Include="Model\ComponentsList\IComponentsList.cs" />
+    <Compile Include="Model\ComponentsList\ObjectFactory\ComponentsListObjectFactory.cs" />
+    <Compile Include="Model\ComponentsList\ObjectFactory\IComponentsListObjectFactory.cs" />
+    <Compile Include="Model\Component\AssemblyComponent.cs" />
+    <Compile Include="Model\AssembliesList\IAssembliesList.cs" />
+    <Compile Include="Model\AssembliesList\ObjectFactory\IAssembliesListObjectFactory.cs" />
+    <Compile Include="Model\Assembly\IAssembly.cs" />
+    <Compile Include="Model\Component\IAssemblyComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\AssemblyComponentSubObjectFactory.cs" />
+    <Compile Include="Model\Component\ObjectFactory\ComponentObjectFactory.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\IComponentSubObjectFactory.cs" />
+    <Compile Include="Model\Component\ObjectFactory\IComponentObjectFactory.cs" />
     <Compile Include="Model\Dependency\CoreVersionDependency.cs" />
     <Compile Include="Model\Dependency\CustomDependency.cs" />
     <Compile Include="Factory\DnnManifestFactory.cs" />
