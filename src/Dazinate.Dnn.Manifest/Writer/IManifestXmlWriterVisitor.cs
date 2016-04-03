@@ -1,6 +1,7 @@
 using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.AssembliesList;
 using Dazinate.Dnn.Manifest.Model.Assembly;
+using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
@@ -29,5 +30,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(IAssembliesList list);
         void Visit(IAssembly assembly);
         void Visit(IComponentsList list);
+        void Visit(IAuthenticationSystemComponent component);
     }
 }

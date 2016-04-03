@@ -12,6 +12,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component
     [Serializable]
     public class AssemblyComponent : BusinessBase<AssemblyComponent>, IAssemblyComponent
     {
+
         public static readonly PropertyInfo<AssembliesList.AssembliesList> AssembliesListProperty = RegisterProperty<AssembliesList.AssembliesList>(c => c.Assemblies);
         public IAssembliesList Assemblies
         {

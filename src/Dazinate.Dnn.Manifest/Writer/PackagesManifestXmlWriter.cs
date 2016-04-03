@@ -4,6 +4,7 @@ using System.Xml;
 using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.AssembliesList;
 using Dazinate.Dnn.Manifest.Model.Assembly;
+using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
@@ -203,14 +204,33 @@ namespace Dazinate.Dnn.Manifest.Writer
 
         }
 
-        public void Visit(IAssemblyComponent assemblyComponent)
+        public void Visit(IAuthenticationSystemComponent component)
         {
-            if (assemblyComponent.Assemblies.Any())
+
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "AuthenticationSystem");
+
+            _writer.WriteStartElement("authenticationService");
+
+            _writer.WriteElementString("type", component.Type);
+            _writer.WriteElementString("settingsControlSrc", component.SettingsControlSource);
+            _writer.WriteElementString("loginControlSrc", component.LoginControlSource);
+            _writer.WriteElementString("logoffControlSrc", component.LogoffControlSource);
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+
+        }
+
+        public void Visit(IAssemblyComponent component)
+        {
+            if (component.Assemblies.Any())
             {
                 _writer.WriteStartElement("component");
                 _writer.WriteAttributeString("type", "Assembly");
 
-                assemblyComponent.Assemblies.Accept(this);
+                component.Assemblies.Accept(this);
 
                 _writer.WriteEndElement();
             }
@@ -254,7 +274,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
         }
 
-       
+
 
         #endregion
     }

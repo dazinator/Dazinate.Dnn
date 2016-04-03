@@ -13,5 +13,6 @@ namespace Dazinate.Dnn.Manifest.Model.Component
         /// <param name="package"></param>
         /// <returns></returns>
         bool IsCompatibleWithPackage(IPackage package);
+       
     }
 }

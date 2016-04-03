@@ -72,7 +72,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
             container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
             container.Register<IComponentObjectFactory, ComponentObjectFactory>();
-            container.RegisterMultiple(typeof(IComponentSubObjectFactory), new[] { typeof(AssemblyComponentSubObjectFactory) });
+            container.RegisterMultiple(typeof(IComponentSubObjectFactory), new[] { typeof(AssemblyComponentSubObjectFactory), typeof(AuthenticationSystemSubObjectFactory) });
             container.Register<IAssembliesListObjectFactory, AssembliesListObjectFactory>();
             container.Register<IAssemblyObjectFactory, AssemblyObjectFactory>();
 

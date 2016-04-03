@@ -77,6 +77,9 @@
     <Compile Include="Model\Assembly\Assembly.cs" />
     <Compile Include="Model\Assembly\AssemblyAction.cs" />
     <Compile Include="Model\Assembly\ObjectFactory\AssemblyObjectFactory.cs" />
+    <Compile Include="Model\Component\AuthenticationSystemComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\AuthenticationSystemObjectFactory.cs" />
+    <Compile Include="Model\Component\IAuthenticationSystemComponent.cs" />
     <Compile Include="Model\ComponentsList\ComponentsList.cs" />
     <Compile Include="Model\ComponentsList\IComponentsList.cs" />
     <Compile Include="Model\ComponentsList\ObjectFactory\ComponentsListObjectFactory.cs" />

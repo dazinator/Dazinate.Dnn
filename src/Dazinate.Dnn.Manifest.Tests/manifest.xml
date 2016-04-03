@@ -40,6 +40,14 @@
             </assembly>
           </assemblies>
         </component>
+        <component type="AuthenticationSystem">
+          <authenticationService>
+            <type>OpenID</type>
+            <settingsControlSrc>DesktopModules/AuthenticationServices/OpenID/Settings.ascx</settingsControlSrc>
+            <loginControlSrc>DesktopModules/AuthenticationServices/OpenID/Login.ascx</loginControlSrc>
+            <logoffControlSrc/>
+          </authenticationService>
+        </component>
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>
