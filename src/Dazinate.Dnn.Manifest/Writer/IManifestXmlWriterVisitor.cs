@@ -9,6 +9,8 @@ using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Model.Node;
+using Dazinate.Dnn.Manifest.Model.NodesList;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
 
@@ -36,5 +38,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(IFile file);
         void Visit(IFilesList list);
         void Visit(ICleanupComponent component);
+        void Visit(INode node);
+        void Visit(INodesList list);
+        void Visit(IConfigComponent component);
     }
 }

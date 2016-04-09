@@ -12,6 +12,8 @@ using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Model.Node;
+using Dazinate.Dnn.Manifest.Model.NodesList;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
 using Dazinate.Dnn.Manifest.Utils;
@@ -249,7 +251,7 @@ namespace Dazinate.Dnn.Manifest.Writer
                 _writer.WriteEndElement();
             }
 
-          
+
         }
 
         public void Visit(ICleanupComponent component)
@@ -269,6 +271,109 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             component.Files.Accept(this);
 
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(INode node)
+        {
+            _writer.WriteStartElement("node");
+
+            if (!string.IsNullOrWhiteSpace(node.Path))
+            {
+                _writer.WriteAttributeString("path", node.Path);
+            }
+
+            if (node.Action != null)
+            {
+                var action = node.Action.ToString().ToLowerInvariant();
+                if (!string.IsNullOrWhiteSpace(action))
+                {
+                    _writer.WriteAttributeString("action", action);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.TargetPath))
+            {
+                _writer.WriteAttributeString("targetpath", node.TargetPath);
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.Key))
+            {
+                _writer.WriteAttributeString("key", node.Key);
+            }
+
+            if (node.Collision != null)
+            {
+                var collision = node.Collision.ToString().ToLowerInvariant();
+                if (!string.IsNullOrWhiteSpace(collision))
+                {
+                    _writer.WriteAttributeString("collision", collision);
+                }
+            }
+           
+
+            if (!string.IsNullOrWhiteSpace(node.Name))
+            {
+                _writer.WriteAttributeString("name", node.Name);
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.Value))
+            {
+                _writer.WriteAttributeString("value", node.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.Namespace))
+            {
+                _writer.WriteAttributeString("nameSpace", node.Namespace);
+            }
+
+            if (!string.IsNullOrWhiteSpace(node.NamespacePrefix))
+            {
+                _writer.WriteAttributeString("nameSpacePrefix", node.NamespacePrefix);
+            }
+
+            _writer.WriteRaw(node.InnerXml);
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(INodesList list)
+        {
+            _writer.WriteStartElement("nodes");
+            foreach (var node in list)
+            {
+                node.Accept(this);
+            }
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(IConfigComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Config");
+
+            _writer.WriteStartElement("config");
+
+            // install nodes list.
+            _writer.WriteStartElement("install");
+            _writer.WriteStartElement("configuration");
+
+            component.InstallNodes.Accept(this);
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            // uninstall nodes list.
+            _writer.WriteStartElement("uninstall");
+            _writer.WriteStartElement("configuration");
+
+            component.UninstallNodes.Accept(this);
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+
+            _writer.WriteEndElement();
             _writer.WriteEndElement();
         }
 

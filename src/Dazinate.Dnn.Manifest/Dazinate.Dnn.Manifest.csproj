@@ -72,9 +72,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AssembliesList\AssembliesList.cs" />
+    <Compile Include="Model\Component\ConfigComponent.cs" />
     <Compile Include="Model\Component\CleanupComponent.cs" />
     <Compile Include="Model\Component\ICleanupComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\ConfigComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\CleanupComponentSubObjectFactory.cs" />
+    <Compile Include="Model\NodesList\ObjectFactory\NodesListObjectFactory.cs" />
+    <Compile Include="Model\NodesList\ObjectFactory\INodesListObjectFactory.cs" />
+    <Compile Include="Model\NodesList\NodesList.cs" />
+    <Compile Include="Model\Node\ObjectFactory\NodeObjectFactory.cs" />
+    <Compile Include="Model\Node\ObjectFactory\INodeObjectFactory.cs" />
+    <Compile Include="Model\Node\NodeAction.cs" />
+    <Compile Include="Model\Node\NodeCollision.cs" />
+    <Compile Include="Model\Node\INode.cs" />
+    <Compile Include="Model\NodesList\INodesList.cs" />
     <Compile Include="Model\FilesList\ObjectFactory\FilesListObjectFactory.cs" />
     <Compile Include="Model\FilesList\ObjectFactory\IFilesListObjectFactory.cs" />
     <Compile Include="Model\FilesList\FilesList.cs" />
@@ -115,6 +126,7 @@
     <Compile Include="Factory\PackageTypeListFactory.cs" />
     <Compile Include="Model\Manifest\IDnnManifest.cs" />
     <Compile Include="Model\DependencyList\DependenciesList.cs" />
+    <Compile Include="Model\Node\Node.cs" />
     <Compile Include="Model\Package\ILicense.cs" />
     <Compile Include="Writer\IManifestXmlWriterVisitor.cs" />
     <Compile Include="Model\Manifest\InvalidManifestFormatException.cs" />

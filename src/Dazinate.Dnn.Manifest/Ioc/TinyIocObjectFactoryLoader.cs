@@ -16,6 +16,8 @@ using Dazinate.Dnn.Manifest.Model.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.Node.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.NodesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackageType.ObjectFactory;
@@ -74,11 +76,21 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
             container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
             container.Register<IComponentObjectFactory, ComponentObjectFactory>();
-            container.RegisterMultiple(typeof(IComponentSubObjectFactory), new[] { typeof(AssemblyComponentSubObjectFactory), typeof(AuthenticationSystemSubObjectFactory), typeof(CleanupComponentSubObjectFactory) });
+
+            container.RegisterMultiple(typeof(IComponentSubObjectFactory),
+                new[] { typeof(AssemblyComponentSubObjectFactory),
+                    typeof(AuthenticationSystemSubObjectFactory),
+                    typeof(CleanupComponentSubObjectFactory),
+                    typeof(ConfigComponentSubObjectFactory)});
+
+
             container.Register<IAssembliesListObjectFactory, AssembliesListObjectFactory>();
             container.Register<IAssemblyObjectFactory, AssemblyObjectFactory>();
             container.Register<IFileObjectFactory, FileObjectFactory>();
             container.Register<IFilesListObjectFactory, FilesListObjectFactory>();
+            container.Register<INodesListObjectFactory, NodesListObjectFactory>();
+            container.Register<INodeObjectFactory, NodeObjectFactory>();
+          
 
         }
 

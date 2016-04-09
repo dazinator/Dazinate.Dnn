@@ -3,10 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
-using Dazinate.Dnn.Manifest.Ioc;
-using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Package;
@@ -14,6 +11,7 @@ using Xunit;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
+   
     [Collection("Csla")]
     public class DnnManifestTests : BaseBusinessTest, IDisposable
     {
@@ -109,7 +107,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
             {
-               // xmlWriter.Settings.OmitXmlDeclaration = true;
+                // xmlWriter.Settings.OmitXmlDeclaration = true;
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
                 Console.Write(xmlStringBuilder.ToString());
             }
@@ -118,6 +116,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(dnnManifest.IsSavable);
             Assert.False(dnnManifest.IsDirty);
         }
+      
 
         [Theory]
         [InlineData("manifest.xml")]

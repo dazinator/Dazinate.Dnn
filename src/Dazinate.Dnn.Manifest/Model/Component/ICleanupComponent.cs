@@ -1,5 +1,6 @@
 using Dazinate.Dnn.Manifest.Model.AssembliesList;
 using Dazinate.Dnn.Manifest.Model.FilesList;
+using Dazinate.Dnn.Manifest.Model.NodesList;
 
 namespace Dazinate.Dnn.Manifest.Model.Component
 {
@@ -9,4 +10,17 @@ namespace Dazinate.Dnn.Manifest.Model.Component
         string FileName { get; }
         IFilesList Files { get; }
     }
+
+    public interface IConfigComponent : IComponent
+    {
+        string ConfigFile { get; }
+
+
+        INodesList InstallNodes { get; }
+
+        INodesList UninstallNodes { get; }
+    }
+
+  
+
 }

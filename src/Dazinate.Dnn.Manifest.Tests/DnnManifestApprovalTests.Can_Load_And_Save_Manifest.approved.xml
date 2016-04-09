@@ -1,0 +1,78 @@
+﻿<dotnetnuke type="Package" version="6.0">
+  <packages>
+    <package name="SomePackageName" type="Module" version="0.0.1">
+      <friendlyName>SomePackageName</friendlyName>
+      <description>changed</description>
+      <owner>
+        <name>Daz</name>
+        <organization>Daz</organization>
+        <url>http://www.someurl.com</url>
+        <email>&lt;a href="mailto:support@someorg.com"&gt;support@someorg.com&lt;/a&gt;</email>
+      </owner>
+      <license src="License.lic" />
+      <releaseNotes src="ReleaseNotes.txt" />
+      <dependencies>
+        <dependency type="coreVersion">05.04.01</dependency>
+        <dependency type="managedPackage" version="1.0.0">AnotherPackageRequiredByThisComponent</dependency>
+        <dependency type="package">AnotherPackageRequiredByThisComponent</dependency>
+        <dependency type="type">System.Security.Principal.GenericPrincipal</dependency>
+        <dependency type="SomeCustomDependencyType">ValueNeededBySomeCustomDependencyType</dependency>
+      </dependencies>
+      <components>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>[yourassembly.dll]</name>
+              <version>1.0.0.0</version>
+            </assembly>
+            <assembly action="Unregister">
+              <path>bin</path>
+              <name>someold.dll</name>
+              <version>1.0.0.0</version>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="AuthenticationSystem">
+          <authenticationService>
+            <type>openid</type>
+            <settingsControlSrc>desktopmodules/authenticationservices/openid/settings.ascx</settingsControlSrc>
+            <loginControlSrc>desktopmodules/authenticationservices/openid/login.ascx</loginControlSrc>
+            <logoffControlSrc />
+          </authenticationService>
+        </component>
+        <component type="Cleanup" version="07.40.00">
+          <files>
+            <file>
+              <path>bin</path>
+              <name>myfile.dll</name>
+            </file>
+            <file>
+              <path>bin</path>
+              <name>myotherfile.dll</name>
+            </file>
+          </files>
+        </component>
+        <component type="Config">
+          <config>
+            <install>
+              <configuration>
+                <nodes>
+                  <node path="/configuration/system.webServer/handlers" action="update" key="path" collision="overwrite">
+                    <add name="RadProgressHandler" verb="*" path="Telerik.RadUploadProgressHandler.ashx" type="Telerik.Web.UI.Upload.RadUploadProgressHandler, Telerik.Web.UI" preCondition="integratedMode" />
+                  </node>
+                  <node />
+                </nodes>
+              </configuration>
+            </install>
+            <uninstall>
+              <configuration>
+                <nodes />
+              </configuration>
+            </uninstall>
+          </config>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
