@@ -41,8 +41,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component
 
         public bool IsCompatibleWithPackage(IPackage package)
         {
-            // generic components are compatible with all packages.
-            return true;
+            return package.Type.ToLowerInvariant() == "container";
         }
     }
 }
