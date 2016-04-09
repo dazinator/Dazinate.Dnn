@@ -9,6 +9,8 @@ using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Component.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component.SubObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ComponentsList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ContainerFile.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ContainerFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
@@ -81,7 +83,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
                 new[] { typeof(AssemblyComponentSubObjectFactory),
                     typeof(AuthenticationSystemSubObjectFactory),
                     typeof(CleanupComponentSubObjectFactory),
-                    typeof(ConfigComponentSubObjectFactory)});
+                    typeof(ConfigComponentSubObjectFactory),
+                    typeof(ContainerComponentSubObjectFactory)
+                });
 
 
             container.Register<IAssembliesListObjectFactory, AssembliesListObjectFactory>();
@@ -90,7 +94,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IFilesListObjectFactory, FilesListObjectFactory>();
             container.Register<INodesListObjectFactory, NodesListObjectFactory>();
             container.Register<INodeObjectFactory, NodeObjectFactory>();
-          
+            container.Register<IContainerFilesListObjectFactory, ContainerFilesListObjectFactory>();
+            container.Register<IContainerFileObjectFactory, ContainerFileObjectFactory>();
+
 
         }
 

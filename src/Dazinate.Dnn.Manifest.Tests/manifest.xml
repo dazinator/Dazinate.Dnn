@@ -80,6 +80,17 @@
             </uninstall>
           </config>
         </component>
+        <component type="Container">
+          <containerFiles>
+            <basePath />
+            <containerName>MyContainer</containerName>
+            <containerFile>
+              <path>somefile</path>
+              <name>somename</name>
+            </containerFile>
+            <containerFile />
+          </containerFiles>
+        </component>
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>

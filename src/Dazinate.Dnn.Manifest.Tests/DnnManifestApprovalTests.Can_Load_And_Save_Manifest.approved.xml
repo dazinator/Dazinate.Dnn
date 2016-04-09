@@ -73,6 +73,20 @@
             </uninstall>
           </config>
         </component>
+        <component type="Container">
+          <containerFiles>
+            <basePath />
+            <containerName>MyContainer</containerName>
+            <containerFile>
+              <path>somefile</path>
+              <name>somename</name>
+            </containerFile>
+            <containerFile>
+              <path />
+              <name />
+            </containerFile>
+          </containerFiles>
+        </component>
       </components>
     </package>
   </packages>

@@ -7,6 +7,8 @@ using Dazinate.Dnn.Manifest.Model.Assembly;
 using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
+using Dazinate.Dnn.Manifest.Model.ContainerFile;
+using Dazinate.Dnn.Manifest.Model.ContainerFilesList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
@@ -227,7 +229,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
         }
 
-        public void Visit(IFile file)
+        public void Visit(File file)
         {
             _writer.WriteStartElement("file");
 
@@ -310,7 +312,7 @@ namespace Dazinate.Dnn.Manifest.Writer
                     _writer.WriteAttributeString("collision", collision);
                 }
             }
-           
+
 
             if (!string.IsNullOrWhiteSpace(node.Name))
             {
@@ -380,6 +382,42 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+        }
+
+        public void Visit(IContainerFilesList list)
+        {
+            foreach (var file in list)
+            {
+                file.Accept(this);
+            }
+        }
+
+        public void Visit(IContainerComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Container");
+
+            _writer.WriteStartElement("containerFiles");
+
+            _writer.WriteElementString("basePath", component.BasePath);
+            _writer.WriteElementString("containerName", component.ContainerName);
+
+            component.Files.Accept(this);
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(ContainerFile file)
+        {
+            _writer.WriteStartElement("containerFile");
+
+            _writer.WriteElementString("path", file.Path);
+            _writer.WriteElementString("name", file.Name);
+
+            _writer.WriteEndElement();
+
         }
 
         public void Visit(IAssemblyComponent component)

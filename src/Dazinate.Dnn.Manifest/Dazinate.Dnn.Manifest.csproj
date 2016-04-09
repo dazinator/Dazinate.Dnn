@@ -72,11 +72,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AssembliesList\AssembliesList.cs" />
+    <Compile Include="Model\Component\ContainerComponent.cs" />
     <Compile Include="Model\Component\ConfigComponent.cs" />
     <Compile Include="Model\Component\CleanupComponent.cs" />
     <Compile Include="Model\Component\ICleanupComponent.cs" />
+    <Compile Include="Model\Component\IContainerComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\ContainerComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ConfigComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\CleanupComponentSubObjectFactory.cs" />
+    <Compile Include="Model\ContainerFilesList\ContainerFilesList.cs" />
+    <Compile Include="Model\ContainerFilesList\IContainerFilesList.cs" />
+    <Compile Include="Model\ContainerFilesList\ObjectFactory\ContainerFilesListObjectFactory.cs" />
+    <Compile Include="Model\ContainerFilesList\ObjectFactory\IContainerFilesListObjectFactory.cs" />
+    <Compile Include="Model\ContainerFile\ContainerFile.cs" />
+    <Compile Include="Model\ContainerFile\IContainerFile.cs" />
+    <Compile Include="Model\ContainerFile\ObjectFactory\ContainerFileObjectFactory.cs" />
+    <Compile Include="Model\ContainerFile\ObjectFactory\IContainerFileObjectFactory.cs" />
     <Compile Include="Model\NodesList\ObjectFactory\NodesListObjectFactory.cs" />
     <Compile Include="Model\NodesList\ObjectFactory\INodesListObjectFactory.cs" />
     <Compile Include="Model\NodesList\NodesList.cs" />

@@ -4,6 +4,8 @@ using Dazinate.Dnn.Manifest.Model.Assembly;
 using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
+using Dazinate.Dnn.Manifest.Model.ContainerFile;
+using Dazinate.Dnn.Manifest.Model.ContainerFilesList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
@@ -35,11 +37,16 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(IAssembly assembly);
         void Visit(IComponentsList list);
         void Visit(IAuthenticationSystemComponent component);
-        void Visit(IFile file);
+        void Visit(File file);
         void Visit(IFilesList list);
         void Visit(ICleanupComponent component);
         void Visit(INode node);
         void Visit(INodesList list);
         void Visit(IConfigComponent component);
+        void Visit(IContainerFilesList packagesManifest);
+        void Visit(IContainerComponent packagesManifest);
+        void Visit(ContainerFile packagesManifest);
+
+
     }
 }
