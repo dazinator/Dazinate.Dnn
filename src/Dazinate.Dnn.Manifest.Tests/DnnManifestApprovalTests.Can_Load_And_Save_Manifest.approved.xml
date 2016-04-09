@@ -55,6 +55,7 @@
         </component>
         <component type="Config">
           <config>
+            <configFile>web.config</configFile>
             <install>
               <configuration>
                 <nodes>

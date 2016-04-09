@@ -354,6 +354,11 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteStartElement("config");
 
+            if (!string.IsNullOrWhiteSpace(component.ConfigFile))
+            {
+                _writer.WriteElementString("configFile", component.ConfigFile);
+            }
+
             // install nodes list.
             _writer.WriteStartElement("install");
             _writer.WriteStartElement("configuration");
