@@ -9,6 +9,8 @@ using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.ContainerFile;
 using Dazinate.Dnn.Manifest.Model.ContainerFilesList;
+using Dazinate.Dnn.Manifest.Model.DashboardControl;
+using Dazinate.Dnn.Manifest.Model.DashboardControlsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
@@ -418,6 +420,42 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+        }
+
+        public void Visit(DashboardControlComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "DashboardControl");
+
+            component.Controls.Accept(this);
+
+            _writer.WriteEndElement();
+
+
+        }
+
+        public void Visit(DashboardControlsList list)
+        {
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+        }
+
+        public void Visit(DashboardControl dashboardControl)
+        {
+            _writer.WriteStartElement("dashboardControl");
+
+            _writer.WriteElementString("key", dashboardControl.Key);
+            _writer.WriteElementString("src", dashboardControl.Source);
+
+            _writer.WriteElementString("localResources", dashboardControl.LocalResourcesFile);
+            _writer.WriteElementString("controllerClass", dashboardControl.ControllerClass);
+            _writer.WriteElementString("isEnabled", dashboardControl.IsEnabled.ToString().ToLowerInvariant());
+            _writer.WriteElementString("viewOrder", dashboardControl.ViewOrder.ToString());
+
+
+            _writer.WriteEndElement();
         }
 
         public void Visit(IAssemblyComponent component)

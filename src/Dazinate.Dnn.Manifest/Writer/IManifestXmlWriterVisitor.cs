@@ -1,11 +1,11 @@
-using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.AssembliesList;
 using Dazinate.Dnn.Manifest.Model.Assembly;
-using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.ContainerFile;
 using Dazinate.Dnn.Manifest.Model.ContainerFilesList;
+using Dazinate.Dnn.Manifest.Model.DashboardControl;
+using Dazinate.Dnn.Manifest.Model.DashboardControlsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
@@ -43,10 +43,11 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(INode node);
         void Visit(INodesList list);
         void Visit(IConfigComponent component);
-        void Visit(IContainerFilesList packagesManifest);
-        void Visit(IContainerComponent packagesManifest);
-        void Visit(ContainerFile packagesManifest);
-
-
+        void Visit(IContainerFilesList list);
+        void Visit(IContainerComponent component);
+        void Visit(ContainerFile file);
+        void Visit(DashboardControlComponent component);
+        void Visit(DashboardControlsList list);
+        void Visit(DashboardControl dashboardControl);
     }
 }

@@ -72,14 +72,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AssembliesList\AssembliesList.cs" />
+    <Compile Include="Model\Component\DashboardControlComponent.cs" />
     <Compile Include="Model\Component\ContainerComponent.cs" />
     <Compile Include="Model\Component\ConfigComponent.cs" />
     <Compile Include="Model\Component\CleanupComponent.cs" />
     <Compile Include="Model\Component\ICleanupComponent.cs" />
     <Compile Include="Model\Component\IContainerComponent.cs" />
+    <Compile Include="Model\Component\IDashboardControlComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\DashboardControlComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ContainerComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ConfigComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\CleanupComponentSubObjectFactory.cs" />
+    <Compile Include="Model\DashboardControlsList\DashboardControlsList.cs" />
+    <Compile Include="Model\DashboardControl\DashboardControl.cs" />
+    <Compile Include="Model\DashboardControl\IDashboardControl.cs" />
+    <Compile Include="Model\DashboardControlsList\ObjectFactory\DashboardControlsListObjectFactory.cs" />
+    <Compile Include="Model\DashboardControlsList\IDashboardControlsList.cs" />
+    <Compile Include="Model\DashboardControl\ObjectFactory\DashboardControlObjectFactory.cs" />
+    <Compile Include="Model\DashboardControl\ObjectFactory\IDashboardControlObjectFactory.cs" />
+    <Compile Include="Model\DashboardControlsList\ObjectFactory\IDashboardControlsListObjectFactory.cs" />
     <Compile Include="Model\ContainerFilesList\ContainerFilesList.cs" />
     <Compile Include="Model\ContainerFilesList\IContainerFilesList.cs" />
     <Compile Include="Model\ContainerFilesList\ObjectFactory\ContainerFilesListObjectFactory.cs" />

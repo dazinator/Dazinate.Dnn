@@ -11,6 +11,8 @@ using Dazinate.Dnn.Manifest.Model.Component.SubObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ComponentsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ContainerFile.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ContainerFilesList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.DashboardControl.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.DashboardControlsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
@@ -84,7 +86,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(AuthenticationSystemSubObjectFactory),
                     typeof(CleanupComponentSubObjectFactory),
                     typeof(ConfigComponentSubObjectFactory),
-                    typeof(ContainerComponentSubObjectFactory)
+                    typeof(ContainerComponentSubObjectFactory),
+                    typeof(DashboardControlComponentSubObjectFactory)
                 });
 
 
@@ -96,6 +99,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<INodeObjectFactory, NodeObjectFactory>();
             container.Register<IContainerFilesListObjectFactory, ContainerFilesListObjectFactory>();
             container.Register<IContainerFileObjectFactory, ContainerFileObjectFactory>();
+            container.Register<IDashboardControlsListObjectFactory, DashboardControlsListObjectFactory>();
+            container.Register<IDashboardControlObjectFactory, DashboardControlObjectFactory>();
 
 
         }

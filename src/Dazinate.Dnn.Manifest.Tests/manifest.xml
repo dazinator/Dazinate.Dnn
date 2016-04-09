@@ -91,6 +91,16 @@
             <containerFile />
           </containerFiles>
         </component>
+        <component type="DashboardControl">
+          <dashboardControl>
+            <key>Server</key>
+            <src>DesktopModules/Admin/Dashboard/Modules/Server.ascx</src>
+            <localResources>DesktopModules/Admin/Dashboard/App_LocalResources/SharedResources.ascx</localResources>
+            <controllerClass>DotNetNuke.Modules.Dashboard.Components.Server.ServerController</controllerClass>
+            <isEnabled>true</isEnabled>
+            <viewOrder>1</viewOrder>
+          </dashboardControl>
+        </component>
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>
