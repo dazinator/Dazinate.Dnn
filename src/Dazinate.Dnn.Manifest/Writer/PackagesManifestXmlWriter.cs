@@ -15,6 +15,8 @@ using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
+using Dazinate.Dnn.Manifest.Model.LanguageFile;
+using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Node;
 using Dazinate.Dnn.Manifest.Model.NodesList;
@@ -488,6 +490,57 @@ namespace Dazinate.Dnn.Manifest.Writer
 
         }
 
+        public void Visit(LanguageFilesList list)
+        {
+            foreach (var file in list)
+            {
+                file.Accept(this);
+            }
+        }
+
+        public void Visit(LanguageFile file)
+        {
+            _writer.WriteStartElement("languageFile");
+
+            _writer.WriteElementString("path", file.Path);
+            _writer.WriteElementString("name", file.Name);
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(CoreLanguageComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "CoreLanguage");
+
+            if (component.Files.Any())
+            {
+                _writer.WriteStartElement("languageFiles");
+
+                if (!string.IsNullOrWhiteSpace(component.Code))
+                {
+                    _writer.WriteElementString("code", component.Code);
+                }
+
+                if (!string.IsNullOrWhiteSpace(component.DisplayName))
+                {
+                    _writer.WriteElementString("displayName", component.DisplayName);
+                }
+
+                if (!string.IsNullOrWhiteSpace(component.Fallback))
+                {
+                    _writer.WriteElementString("fallback", component.Fallback);
+                }
+
+                component.Files.Accept(this);
+
+                _writer.WriteEndElement();
+            }
+
+
+            _writer.WriteEndElement();
+        }
+
         public void Visit(IAssemblyComponent component)
         {
             if (component.Assemblies.Any())
@@ -538,7 +591,6 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
 
         }
-
 
 
         #endregion

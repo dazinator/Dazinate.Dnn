@@ -114,6 +114,23 @@
             </file>
           </files>
         </component>
+        <component type="CoreLanguage">
+          <languageFiles>
+            <code>ca-ES</code>
+            <displayName>Catala (España)</displayName>
+            <fallback>en-US</fallback>
+            <languageFile>
+              <path>admin\ControlPanel\App_LocalResources</path>
+              <name>classic.ascx.ca-es.resx</name>
+            </languageFile>
+            <languageFile>
+              <path>admin\ControlPanel\App_LocalResources</path>
+              <name>iconbar.ascx.ca-es.resx</name>
+            </languageFile>
+          </languageFiles>
+        </component>
+
+
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>

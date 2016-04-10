@@ -18,6 +18,9 @@ using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.LanguageFile.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
+using Dazinate.Dnn.Manifest.Model.LanguageFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Node.ObjectFactory;
@@ -77,7 +80,6 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IDependenciesListObjectFactory, DependenciesListObjectFactory>();
             container.Register<IDependencyObjectFactory, DependencyObjectFactory>();
 
-
             container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
             container.Register<IComponentObjectFactory, ComponentObjectFactory>();
 
@@ -88,7 +90,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(ConfigComponentSubObjectFactory),
                     typeof(ContainerComponentSubObjectFactory),
                     typeof(DashboardControlComponentSubObjectFactory),
-                    typeof(FileComponentSubObjectFactory)
+                    typeof(FileComponentSubObjectFactory),
+                    typeof(CoreLanguageComponentSubObjectFactory)
                 });
 
 
@@ -102,6 +105,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IContainerFileObjectFactory, ContainerFileObjectFactory>();
             container.Register<IDashboardControlsListObjectFactory, DashboardControlsListObjectFactory>();
             container.Register<IDashboardControlObjectFactory, DashboardControlObjectFactory>();
+            container.Register<ILanguageFilesListObjectFactory, LanguageFilesListObjectFactory>();
+            container.Register<ILanguageFileObjectFactory, LanguageFileObjectFactory>();
 
 
         }

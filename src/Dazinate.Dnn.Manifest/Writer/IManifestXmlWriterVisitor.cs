@@ -10,6 +10,8 @@ using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
+using Dazinate.Dnn.Manifest.Model.LanguageFile;
+using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Node;
 using Dazinate.Dnn.Manifest.Model.NodesList;
@@ -50,5 +52,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(DashboardControlsList list);
         void Visit(DashboardControl dashboardControl);
         void Visit(FileComponent component);
+        void Visit(LanguageFilesList packagesManifest);
+        void Visit(LanguageFile packagesManifest);
+        void Visit(CoreLanguageComponent packagesManifest);
     }
 }

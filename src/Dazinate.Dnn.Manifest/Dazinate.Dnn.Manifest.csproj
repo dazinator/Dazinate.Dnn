@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AssembliesList\AssembliesList.cs" />
+    <Compile Include="Model\Component\CoreLanguageComponent.cs" />
     <Compile Include="Model\Component\DashboardControlComponent.cs" />
     <Compile Include="Model\Component\ContainerComponent.cs" />
     <Compile Include="Model\Component\ConfigComponent.cs" />
@@ -79,8 +80,18 @@
     <Compile Include="Model\Component\FileComponent.cs" />
     <Compile Include="Model\Component\ICleanupComponent.cs" />
     <Compile Include="Model\Component\IContainerComponent.cs" />
+    <Compile Include="Model\Component\ICoreLanguageComponent.cs" />
     <Compile Include="Model\Component\IDashboardControlComponent.cs" />
     <Compile Include="Model\Component\IFileComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\CoreLanguageComponentSubObjectFactory.cs" />
+    <Compile Include="Model\LanguageFilesList\ContainerFilesList.cs" />
+    <Compile Include="Model\LanguageFilesList\ObjectFactory\LanguageFilesListObjectFactory.cs" />
+    <Compile Include="Model\LanguageFile\LanguageFile.cs" />
+    <Compile Include="Model\LanguageFile\ObjectFactory\LanguageFileObjectFactory.cs" />
+    <Compile Include="Model\LanguageFile\ObjectFactory\ILanguageFileObjectFactory.cs" />
+    <Compile Include="Model\LanguageFilesList\ObjectFactory\ILanguageFilesListObjectFactory.cs" />
+    <Compile Include="Model\LanguageFile\ILanguageFile.cs" />
+    <Compile Include="Model\LanguageFilesList\ILanguageFilesList.cs" />
     <Compile Include="Model\Component\SubObjectFactory\FileComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\DashboardControlComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ContainerComponentSubObjectFactory.cs" />
