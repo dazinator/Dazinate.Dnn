@@ -101,6 +101,19 @@
             <viewOrder>1</viewOrder>
           </dashboardControl>
         </component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\MyModule</basePath>
+            <file>
+              <path>app_localresources</path>
+              <name>MyModule.ascx.resx</name>
+            </file>
+            <file>
+              <name>MyModule.ascx</name>
+              <sourceFileName>some/path/in/zip/mymodule.ascx</sourceFileName>
+            </file>
+          </files>
+        </component>
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>

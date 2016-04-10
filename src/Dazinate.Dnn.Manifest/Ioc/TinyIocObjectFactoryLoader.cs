@@ -87,7 +87,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(CleanupComponentSubObjectFactory),
                     typeof(ConfigComponentSubObjectFactory),
                     typeof(ContainerComponentSubObjectFactory),
-                    typeof(DashboardControlComponentSubObjectFactory)
+                    typeof(DashboardControlComponentSubObjectFactory),
+                    typeof(FileComponentSubObjectFactory)
                 });
 
 

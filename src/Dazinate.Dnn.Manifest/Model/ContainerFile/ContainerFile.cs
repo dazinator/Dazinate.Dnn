@@ -27,6 +27,20 @@ namespace Dazinate.Dnn.Manifest.Model.ContainerFile
             set { SetProperty(NameProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> SourceFileNameProperty = RegisterProperty<string>(c => c.SourceFileName);
+        public string SourceFileName
+        {
+            get { return GetProperty(SourceFileNameProperty); }
+            set { SetProperty(SourceFileNameProperty, value); }
+        }
+
+        protected override void AddBusinessRules()
+        {
+            //todo: pretty sure sourcefilename is invalid for container files.
+            base.AddBusinessRules();
+        }
+
+
         public void Accept(IManifestXmlWriterVisitor visitor)
         {
             visitor.Visit(this);

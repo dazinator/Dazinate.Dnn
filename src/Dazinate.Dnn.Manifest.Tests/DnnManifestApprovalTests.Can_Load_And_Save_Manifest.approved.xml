@@ -45,11 +45,11 @@
           <files>
             <file>
               <path>bin</path>
-              <name>myfile.dll</name>
+              <name>MyFile.dll</name>
             </file>
             <file>
               <path>bin</path>
-              <name>myotherfile.dll</name>
+              <name>MyOtherFile.dll</name>
             </file>
           </files>
         </component>
@@ -96,6 +96,20 @@
             <isEnabled>true</isEnabled>
             <viewOrder>1</viewOrder>
           </dashboardControl>
+        </component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\MyModule</basePath>
+            <file>
+              <path>app_localresources</path>
+              <name>MyModule.ascx.resx</name>
+            </file>
+            <file>
+              <path />
+              <name>MyModule.ascx</name>
+              <sourceFileName>some/path/in/zip/mymodule.ascx</sourceFileName>
+            </file>
+          </files>
         </component>
       </components>
     </package>

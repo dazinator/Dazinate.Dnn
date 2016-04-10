@@ -76,9 +76,12 @@
     <Compile Include="Model\Component\ContainerComponent.cs" />
     <Compile Include="Model\Component\ConfigComponent.cs" />
     <Compile Include="Model\Component\CleanupComponent.cs" />
+    <Compile Include="Model\Component\FileComponent.cs" />
     <Compile Include="Model\Component\ICleanupComponent.cs" />
     <Compile Include="Model\Component\IContainerComponent.cs" />
     <Compile Include="Model\Component\IDashboardControlComponent.cs" />
+    <Compile Include="Model\Component\IFileComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\FileComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\DashboardControlComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ContainerComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ConfigComponentSubObjectFactory.cs" />

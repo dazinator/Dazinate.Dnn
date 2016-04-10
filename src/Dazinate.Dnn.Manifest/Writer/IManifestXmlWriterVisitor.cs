@@ -49,5 +49,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(DashboardControlComponent component);
         void Visit(DashboardControlsList list);
         void Visit(DashboardControl dashboardControl);
+        void Visit(FileComponent component);
     }
 }

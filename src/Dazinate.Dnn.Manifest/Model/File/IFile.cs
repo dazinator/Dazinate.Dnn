@@ -7,5 +7,7 @@ namespace Dazinate.Dnn.Manifest.Model.File
     {
         string Path { get; set; }
         string Name { get; set; }
+
+        string SourceFileName { get; set; }
     }
 }

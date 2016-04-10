@@ -17,12 +17,15 @@ namespace Dazinate.Dnn.Manifest.Model.File.ObjectFactory
             // Create the correct concrete dependency based on the xml.
             var businessObject = CreateInstance<File>();
            
-            var path = XmlUtils.ReadElement(nav, "path").ToLowerInvariant();
+            var path = XmlUtils.ReadElement(nav, "path");
             LoadProperty(businessObject, File.PathProperty, path);
 
-            var name = XmlUtils.ReadElement(nav, "name").ToLowerInvariant();
+            var name = XmlUtils.ReadElement(nav, "name");
             LoadProperty(businessObject, File.NameProperty, name);
-         
+
+            var sourceFileName = XmlUtils.ReadElement(nav, "sourceFileName");
+            LoadProperty(businessObject, File.SourceFileNameProperty, sourceFileName);
+
             MarkAsChild(businessObject);
             MarkOld(businessObject);
             CheckRules(businessObject);

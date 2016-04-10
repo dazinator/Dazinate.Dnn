@@ -1,4 +1,4 @@
-namespace Dazinate.Dnn.Manifest.Model.File
+namespace Dazinate.Dnn.Manifest.Model.Node
 {
     public enum NodeCollision
     {

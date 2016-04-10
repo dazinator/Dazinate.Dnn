@@ -24,6 +24,13 @@ namespace Dazinate.Dnn.Manifest.Model.File
             set { SetProperty(NameProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> SourceFileNameProperty = RegisterProperty<string>(c => c.SourceFileName);
+        public string SourceFileName
+        {
+            get { return GetProperty(SourceFileNameProperty); }
+            set { SetProperty(SourceFileNameProperty, value); }
+        }
+
         public void Accept(IManifestXmlWriterVisitor visitor)
         {
             visitor.Visit(this);
