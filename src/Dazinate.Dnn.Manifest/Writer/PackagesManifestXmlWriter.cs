@@ -541,6 +541,40 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
         }
 
+        public void Visit(ExtensionLanguageComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "ExtensionLanguage");
+
+            if (component.Files.Any())
+            {
+                _writer.WriteStartElement("languageFiles");
+
+                if (!string.IsNullOrWhiteSpace(component.Code))
+                {
+                    _writer.WriteElementString("code", component.Code);
+                }
+
+                if (!string.IsNullOrWhiteSpace(component.Package))
+                {
+                    _writer.WriteElementString("package", component.Package);
+                }
+
+                if (!string.IsNullOrWhiteSpace(component.BasePath))
+                {
+                    _writer.WriteElementString("basePath", component.BasePath);
+                }
+
+                component.Files.Accept(this);
+
+                _writer.WriteEndElement();
+            }
+
+
+            _writer.WriteEndElement();
+
+        }
+
         public void Visit(IAssemblyComponent component)
         {
             if (component.Assemblies.Any())

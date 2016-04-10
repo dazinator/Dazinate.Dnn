@@ -16,11 +16,11 @@ namespace Dazinate.Dnn.Manifest.Model.LanguageFile.ObjectFactory
         {
             // Create the correct concrete dependency based on the xml.
             var businessObject = CreateInstance<LanguageFile>();
-           
-            var path = XmlUtils.ReadElement(nav, "path").ToLowerInvariant();
+
+            var path = XmlUtils.ReadElement(nav, "path");
             LoadProperty(businessObject, LanguageFile.PathProperty, path);
 
-            var name = XmlUtils.ReadElement(nav, "name").ToLowerInvariant();
+            var name = XmlUtils.ReadElement(nav, "name");
             LoadProperty(businessObject, LanguageFile.NameProperty, name);
          
             MarkAsChild(businessObject);

@@ -21,10 +21,10 @@ namespace Dazinate.Dnn.Manifest.Model.Component.SubObjectFactory
 
             var authServiceNav = nav.SelectSingleNode("authenticationService");
 
-            var type = XmlUtils.ReadElement(authServiceNav, "type").ToLowerInvariant();
-            var settingsControlSrc = XmlUtils.ReadElement(authServiceNav, "settingsControlSrc").ToLowerInvariant();
-            var loginControlSrc = XmlUtils.ReadElement(authServiceNav, "loginControlSrc").ToLowerInvariant();
-            var logoffControlSrc = XmlUtils.ReadElement(authServiceNav, "logoffControlSrc").ToLowerInvariant();
+            var type = XmlUtils.ReadElement(authServiceNav, "type");
+            var settingsControlSrc = XmlUtils.ReadElement(authServiceNav, "settingsControlSrc");
+            var loginControlSrc = XmlUtils.ReadElement(authServiceNav, "loginControlSrc");
+            var logoffControlSrc = XmlUtils.ReadElement(authServiceNav, "logoffControlSrc");
 
             LoadProperty(businessObject, AuthenticationSystemComponent.TypeProperty, type);
             LoadProperty(businessObject, AuthenticationSystemComponent.SettingsControlSourceProperty, settingsControlSrc);

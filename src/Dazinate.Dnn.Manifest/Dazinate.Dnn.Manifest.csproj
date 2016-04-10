@@ -77,13 +77,16 @@
     <Compile Include="Model\Component\ContainerComponent.cs" />
     <Compile Include="Model\Component\ConfigComponent.cs" />
     <Compile Include="Model\Component\CleanupComponent.cs" />
+    <Compile Include="Model\Component\ExtensionLanguageComponent.cs" />
     <Compile Include="Model\Component\FileComponent.cs" />
     <Compile Include="Model\Component\ICleanupComponent.cs" />
     <Compile Include="Model\Component\IContainerComponent.cs" />
     <Compile Include="Model\Component\ICoreLanguageComponent.cs" />
     <Compile Include="Model\Component\IDashboardControlComponent.cs" />
+    <Compile Include="Model\Component\IExtensionLanguageComponent.cs" />
     <Compile Include="Model\Component\IFileComponent.cs" />
     <Compile Include="Model\Component\SubObjectFactory\CoreLanguageComponentSubObjectFactory.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\ExtensionLanguageComponentSubObjectFactory.cs" />
     <Compile Include="Model\LanguageFilesList\ContainerFilesList.cs" />
     <Compile Include="Model\LanguageFilesList\ObjectFactory\LanguageFilesListObjectFactory.cs" />
     <Compile Include="Model\LanguageFile\LanguageFile.cs" />

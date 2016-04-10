@@ -22,7 +22,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component.ObjectFactory
         {
             // Create the correct concrete dependency based on the xml.
 
-            var componentType = XmlUtils.ReadRequiredAttribute(nav, "type").ToLowerInvariant();
+            var componentType = XmlUtils.ReadRequiredAttribute(nav, "type");
             IComponentSubObjectFactory subFactory = ResolveSubFactory(componentType);
 
             IComponent component = subFactory.Fetch(nav);

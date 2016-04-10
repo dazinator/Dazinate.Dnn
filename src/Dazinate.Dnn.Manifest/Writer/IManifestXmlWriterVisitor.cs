@@ -55,5 +55,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(LanguageFilesList packagesManifest);
         void Visit(LanguageFile packagesManifest);
         void Visit(CoreLanguageComponent packagesManifest);
+        void Visit(ExtensionLanguageComponent packagesManifest);
     }
 }

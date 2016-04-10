@@ -91,7 +91,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(ContainerComponentSubObjectFactory),
                     typeof(DashboardControlComponentSubObjectFactory),
                     typeof(FileComponentSubObjectFactory),
-                    typeof(CoreLanguageComponentSubObjectFactory)
+                    typeof(CoreLanguageComponentSubObjectFactory),
+                    typeof(ExtensionLanguageComponentSubObjectFactory)
                 });
 
 

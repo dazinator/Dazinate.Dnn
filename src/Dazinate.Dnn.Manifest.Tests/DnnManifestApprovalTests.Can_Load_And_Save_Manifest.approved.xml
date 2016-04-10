@@ -23,21 +23,21 @@
           <assemblies>
             <assembly>
               <path>bin</path>
-              <name>[yourassembly.dll]</name>
+              <name>[YourAssembly.dll]</name>
               <version>1.0.0.0</version>
             </assembly>
             <assembly action="Unregister">
               <path>bin</path>
-              <name>someold.dll</name>
+              <name>SomeOld.dll</name>
               <version>1.0.0.0</version>
             </assembly>
           </assemblies>
         </component>
         <component type="AuthenticationSystem">
           <authenticationService>
-            <type>openid</type>
-            <settingsControlSrc>desktopmodules/authenticationservices/openid/settings.ascx</settingsControlSrc>
-            <loginControlSrc>desktopmodules/authenticationservices/openid/login.ascx</loginControlSrc>
+            <type>OpenID</type>
+            <settingsControlSrc>DesktopModules/AuthenticationServices/OpenID/Settings.ascx</settingsControlSrc>
+            <loginControlSrc>DesktopModules/AuthenticationServices/OpenID/Login.ascx</loginControlSrc>
             <logoffControlSrc />
           </authenticationService>
         </component>
@@ -117,12 +117,27 @@
             <displayName>Catala (España)</displayName>
             <fallback>en-US</fallback>
             <languageFile>
-              <path>admin\controlpanel\app_localresources</path>
+              <path>admin\ControlPanel\App_LocalResources</path>
               <name>classic.ascx.ca-es.resx</name>
             </languageFile>
             <languageFile>
-              <path>admin\controlpanel\app_localresources</path>
+              <path>admin\ControlPanel\App_LocalResources</path>
               <name>iconbar.ascx.ca-es.resx</name>
+            </languageFile>
+          </languageFiles>
+        </component>
+        <component type="ExtensionLanguage">
+          <languageFiles>
+            <code>en-US</code>
+            <package>DefaultAuthentication</package>
+            <basePath>DesktopModules\AuthenticationServices\DNN</basePath>
+            <languageFile>
+              <path>app_localresources</path>
+              <name>Login.ascx.resx</name>
+            </languageFile>
+            <languageFile>
+              <path>app_localresources</path>
+              <name>Settings.ascx.resx</name>
             </languageFile>
           </languageFiles>
         </component>

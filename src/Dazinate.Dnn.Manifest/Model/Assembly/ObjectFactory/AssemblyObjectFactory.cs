@@ -32,13 +32,13 @@ namespace Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory
             }
             LoadProperty(assy, Assembly.ActionProperty, assemblyAction);
 
-            var path = XmlUtils.ReadElement(nav, "path").ToLowerInvariant();
+            var path = XmlUtils.ReadElement(nav, "path");
             LoadProperty(assy, Assembly.PathProperty, path);
 
-            var name = XmlUtils.ReadElement(nav, "name").ToLowerInvariant();
+            var name = XmlUtils.ReadElement(nav, "name");
             LoadProperty(assy, Assembly.NameProperty, name);
 
-            var version = XmlUtils.ReadElement(nav, "version").ToLowerInvariant();
+            var version = XmlUtils.ReadElement(nav, "version");
             LoadProperty(assy, Assembly.VersionProperty, version);
 
             MarkAsChild(assy);
