@@ -1,5 +1,6 @@
 using Csla;
 using Dazinate.Dnn.Manifest.Model.EventAttributesList;
+using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Model.EventMessage

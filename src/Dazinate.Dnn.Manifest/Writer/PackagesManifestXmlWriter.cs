@@ -13,6 +13,9 @@ using Dazinate.Dnn.Manifest.Model.DashboardControl;
 using Dazinate.Dnn.Manifest.Model.DashboardControlsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
+using Dazinate.Dnn.Manifest.Model.EventAttribute;
+using Dazinate.Dnn.Manifest.Model.EventAttributesList;
+using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFile;
@@ -484,7 +487,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
                 _writer.WriteEndElement();
             }
-         
+
 
             _writer.WriteEndElement();
 
@@ -573,6 +576,97 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+        }
+
+        public void Visit(ModuleComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Module");
+
+            _writer.WriteStartElement("desktopModule");
+
+            _writer.WriteElementString("moduleName", component.ModuleName);
+            _writer.WriteElementString("foldername", component.FolderName);
+
+            if (!string.IsNullOrWhiteSpace(component.BusinessControllerClass))
+            {
+                _writer.WriteElementString("businessControllerClass", component.BusinessControllerClass);
+            }
+
+            if (!string.IsNullOrWhiteSpace(component.CodeSubDirectory))
+            {
+                _writer.WriteElementString("codeSubdirectory", component.CodeSubDirectory);
+            }
+
+            if (component.IsAdmin != null)
+            {
+                _writer.WriteElementString("isAdmin", component.IsAdmin.ToString());
+            }
+
+            if (component.IsPremium != null)
+            {
+                _writer.WriteElementString("isPremium ", component.IsPremium.ToString());
+            }
+
+            if (component.SupportedFeatures.Any())
+            {
+                component.SupportedFeatures.Accept(this);
+            }
+
+            if (component.ModuleDefinitions.Any())
+            {
+                component.ModuleDefinitions.Accept(this);
+            }
+
+            if (component.EventMessage != null)
+            {
+                component.EventMessage.Accept(this);
+            }
+
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(EventMessage eventMessage)
+        {
+            _writer.WriteStartElement("eventMessage");
+
+            if (!string.IsNullOrWhiteSpace(eventMessage.ProcessorType))
+            {
+                _writer.WriteElementString("processorType", eventMessage.ProcessorType);
+            }
+
+            if (!string.IsNullOrWhiteSpace(eventMessage.ProcessorCommand))
+            {
+                _writer.WriteElementString("processorCommand", eventMessage.ProcessorCommand);
+            }
+
+            if (eventMessage.Attributes.Any())
+            {
+                eventMessage.Attributes.Accept(this);
+            }
+
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(EventAttribute eventAttribute)
+        {
+            _writer.WriteElementString(eventAttribute.Name, eventAttribute.Value);
+        }
+
+        public void Visit(EventAttributesList list)
+        {
+            _writer.WriteStartElement("attributes");
+
+            foreach (var att in list)
+            {
+                att.Accept(this);
+            }
+
+            _writer.WriteEndElement();
         }
 
         public void Visit(IAssemblyComponent component)

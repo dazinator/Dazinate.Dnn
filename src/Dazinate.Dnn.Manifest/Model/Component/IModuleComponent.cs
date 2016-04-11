@@ -11,8 +11,8 @@ namespace Dazinate.Dnn.Manifest.Model.Component
         string FolderName { get; set; }
         string BusinessControllerClass { get; set; }
         string CodeSubDirectory { get; set; }
-        bool IsAdmin { get; set; }
-        bool IsPremium { get; set; }
+        bool? IsAdmin { get; set; }
+        bool? IsPremium { get; set; }
 
         ISupportedFeaturesList SupportedFeatures { get; }
 

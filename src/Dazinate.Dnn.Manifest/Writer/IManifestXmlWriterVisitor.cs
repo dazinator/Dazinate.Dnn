@@ -8,6 +8,9 @@ using Dazinate.Dnn.Manifest.Model.DashboardControl;
 using Dazinate.Dnn.Manifest.Model.DashboardControlsList;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.DependencyList;
+using Dazinate.Dnn.Manifest.Model.EventAttribute;
+using Dazinate.Dnn.Manifest.Model.EventAttributesList;
+using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFile;
@@ -52,9 +55,13 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(DashboardControlsList list);
         void Visit(DashboardControl dashboardControl);
         void Visit(FileComponent component);
-        void Visit(LanguageFilesList packagesManifest);
-        void Visit(LanguageFile packagesManifest);
-        void Visit(CoreLanguageComponent packagesManifest);
-        void Visit(ExtensionLanguageComponent packagesManifest);
+        void Visit(LanguageFilesList list);
+        void Visit(LanguageFile languageFile);
+        void Visit(CoreLanguageComponent component);
+        void Visit(ExtensionLanguageComponent component);
+        void Visit(ModuleComponent component);
+        void Visit(EventMessage eventMessage);
+        void Visit(EventAttribute eventAttribute);
+        void Visit(EventAttributesList list);
     }
 }

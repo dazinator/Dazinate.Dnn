@@ -16,6 +16,9 @@ using Dazinate.Dnn.Manifest.Model.DashboardControlsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.EventAttribute;
+using Dazinate.Dnn.Manifest.Model.EventAttributesList;
+using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.LanguageFile.ObjectFactory;
@@ -92,7 +95,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(DashboardControlComponentSubObjectFactory),
                     typeof(FileComponentSubObjectFactory),
                     typeof(CoreLanguageComponentSubObjectFactory),
-                    typeof(ExtensionLanguageComponentSubObjectFactory)
+                    typeof(ExtensionLanguageComponentSubObjectFactory),
+                    typeof(ModuleComponentSubObjectFactory)
                 });
 
 
@@ -108,6 +112,12 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IDashboardControlObjectFactory, DashboardControlObjectFactory>();
             container.Register<ILanguageFilesListObjectFactory, LanguageFilesListObjectFactory>();
             container.Register<ILanguageFileObjectFactory, LanguageFileObjectFactory>();
+
+            container.Register<IEventMessageObjectFactory, EventMessageObjectFactory>();
+
+            container.Register<IEventAttributesListObjectFactory, EventAttributesListObjectFactory>();
+            container.Register<IEventAttributeObjectFactory, EventAttributeObjectFactory>();
+
 
 
         }
