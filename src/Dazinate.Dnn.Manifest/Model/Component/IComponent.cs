@@ -1,5 +1,4 @@
 using Csla;
-using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Writer;
 

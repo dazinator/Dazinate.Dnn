@@ -84,6 +84,14 @@
     <Compile Include="Model\Component\ICoreLanguageComponent.cs" />
     <Compile Include="Model\Component\IDashboardControlComponent.cs" />
     <Compile Include="Model\Component\IProviderComponent.cs" />
+    <Compile Include="Model\Component\IResourceFileComponent.cs" />
+    <Compile Include="Model\Component\ResourceFileComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\ResourceFileComponentSubObjectFactory.cs" />
+    <Compile Include="Model\ResourceFilesList\ObjectFactory\IResourceFilesListObjectFactory.cs" />
+    <Compile Include="Model\ResourceFilesList\ObjectFactory\ResourceFilesListObjectFactory.cs" />
+    <Compile Include="Model\ResourceFilesList\ResourceFilesList.cs" />
+    <Compile Include="Model\ResourceFile\IResourceFile.cs" />
+    <Compile Include="Model\ResourceFilesList\IResourceFilesList.cs" />
     <Compile Include="Model\Component\ModuleComponent.cs" />
     <Compile Include="Model\Component\ProviderComponent.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ModuleComponentSubObjectFactory.cs" />
@@ -127,6 +135,9 @@
     <Compile Include="Model\ModulePermissionsList\IModulePermissionsList.cs" />
     <Compile Include="Model\ModulePermission\IModulePermission.cs" />
     <Compile Include="Model\ModulePermission\ObjectFactory\ModulePermissionObjectFactory.cs" />
+    <Compile Include="Model\ResourceFile\ObjectFactory\IResourceFileObjectFactory.cs" />
+    <Compile Include="Model\ResourceFile\ObjectFactory\ResourceFileObjectFactory.cs" />
+    <Compile Include="Model\ResourceFile\ResourceFile.cs" />
     <Compile Include="Model\SupportedFeaturesList\ISupportedFeaturesList.cs" />
     <Compile Include="Model\SupportedFeature\ObjectFactory\ISupportedFeatureObjectFactory.cs" />
     <Compile Include="Model\SupportedFeaturesList\ObjectFactory\ISupportedFeaturesListObjectFactory.cs" />

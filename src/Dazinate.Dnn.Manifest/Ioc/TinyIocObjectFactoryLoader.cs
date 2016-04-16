@@ -40,6 +40,8 @@ using Dazinate.Dnn.Manifest.Model.NodesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackageType.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ResourceFile.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ResourceFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList.ObjectFactory;
 using Assembly = System.Reflection.Assembly;
@@ -108,7 +110,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(CoreLanguageComponentSubObjectFactory),
                     typeof(ExtensionLanguageComponentSubObjectFactory),
                     typeof(ModuleComponentSubObjectFactory),
-                    typeof(ProviderComponentSubObjectFactory)
+                    typeof(ProviderComponentSubObjectFactory),
+                    typeof(ResourceFileComponentSubObjectFactory)
                 });
 
             // Assembly component
@@ -153,7 +156,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IModuleControlsListObjectFactory, ModuleControlsListObjectFactory>();
             container.Register<IModuleControlObjectFactory, ModuleControlObjectFactory>();
 
-
+            // Resource File component
+            container.Register<IResourceFilesListObjectFactory, ResourceFilesListObjectFactory>();
+            container.Register<IResourceFileObjectFactory, ResourceFileObjectFactory>();
 
         }
 

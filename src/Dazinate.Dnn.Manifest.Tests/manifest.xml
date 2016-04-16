@@ -177,14 +177,14 @@
           </desktopModule>
         </component>
         <component type="Provider" />
-        <!-- <component type="ResourceFile">
+        <component type="ResourceFile">
           <resourceFiles>
-            <basePath>DesktopModules/[FolderName]</basePath>
+            <basePath>DesktopModules\MyModule</basePath>
             <resourceFile>
-              <name>Resources.zip</name>
+              <name>resources.zip</name>
             </resourceFile>
           </resourceFiles>
-        </component>-->
+        </component>
       </components>
     </package>
 

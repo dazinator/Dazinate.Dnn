@@ -26,6 +26,8 @@ using Dazinate.Dnn.Manifest.Model.Node;
 using Dazinate.Dnn.Manifest.Model.NodesList;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
+using Dazinate.Dnn.Manifest.Model.ResourceFile;
+using Dazinate.Dnn.Manifest.Model.ResourceFilesList;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 
@@ -80,5 +82,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(ModuleControlsList list);
         void Visit(ModuleDefinitionsList list);
         void Visit(ProviderComponent component);
+        void Visit(ResourceFileComponent component);
+        void Visit(ResourceFilesList list);
+        void Visit(ResourceFile file);
     }
 }
