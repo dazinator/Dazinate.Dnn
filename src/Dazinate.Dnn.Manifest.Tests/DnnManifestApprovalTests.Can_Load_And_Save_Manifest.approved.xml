@@ -173,6 +173,7 @@
             </moduleDefinitions>
           </desktopModule>
         </component>
+        <component type="Provider" />
       </components>
     </package>
   </packages>

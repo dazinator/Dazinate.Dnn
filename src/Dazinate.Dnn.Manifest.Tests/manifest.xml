@@ -176,44 +176,8 @@
             </moduleDefinitions>
           </desktopModule>
         </component>
-        <!--<component type="Module">
-          <desktopModule>
-            <moduleName>[YourModuleName]</moduleName>
-            <foldername>[FolderName]</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>[Friendly Module Name]</friendlyName>
-                <defaultCacheTime>60</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey>
-                    </controlKey>
-                    <controlSrc>[YourControllerOrPathToView]/[YourViewFileName].[YourViewFileExtension]</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>[Default title when added to page]</controlTitle>
-                    <controlType>View</controlType>
-                    <helpUrl>
-                    </helpUrl>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>settings</controlKey>
-                    <controlSrc>[YourControllerOrPathToSettings]/[YourSettingsFileName].[YourSettingsFileExtension]</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>[Default settings title]</controlTitle>
-                    <controlType>View</controlType>
-                    <helpUrl>
-                    </helpUrl>
-                  </moduleControl>
-                </moduleControls>
-                <permissions>
-                </permissions>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="ResourceFile">
+        <component type="Provider" />
+        <!-- <component type="ResourceFile">
           <resourceFiles>
             <basePath>DesktopModules/[FolderName]</basePath>
             <resourceFile>

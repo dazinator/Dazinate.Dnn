@@ -107,7 +107,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(FileComponentSubObjectFactory),
                     typeof(CoreLanguageComponentSubObjectFactory),
                     typeof(ExtensionLanguageComponentSubObjectFactory),
-                    typeof(ModuleComponentSubObjectFactory)
+                    typeof(ModuleComponentSubObjectFactory),
+                    typeof(ProviderComponentSubObjectFactory)
                 });
 
             // Assembly component
@@ -149,7 +150,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IModulePermissionsListObjectFactory, ModulePermissionsListObjectFactory>();
             container.Register<IModulePermissionObjectFactory, ModulePermissionObjectFactory>();
 
-            container.Register<IModuleControlsListObjectFactory,ModuleControlsListObjectFactory>();
+            container.Register<IModuleControlsListObjectFactory, ModuleControlsListObjectFactory>();
             container.Register<IModuleControlObjectFactory, ModuleControlObjectFactory>();
 
 

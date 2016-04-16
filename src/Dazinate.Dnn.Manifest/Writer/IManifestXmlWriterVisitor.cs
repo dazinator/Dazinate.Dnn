@@ -79,5 +79,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(ModuleControl moduleControl);
         void Visit(ModuleControlsList list);
         void Visit(ModuleDefinitionsList list);
+        void Visit(ProviderComponent component);
     }
 }

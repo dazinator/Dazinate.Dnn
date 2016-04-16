@@ -616,6 +616,13 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
         }
 
+        public void Visit(ProviderComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Provider");
+            _writer.WriteEndElement();
+        }
+
         public void Visit(ModuleDefinition moduleDefinition)
         {
             _writer.WriteStartElement("moduleDefinition");

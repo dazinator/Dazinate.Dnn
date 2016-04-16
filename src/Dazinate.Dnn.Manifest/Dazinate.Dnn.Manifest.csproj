@@ -83,8 +83,11 @@
     <Compile Include="Model\Component\IContainerComponent.cs" />
     <Compile Include="Model\Component\ICoreLanguageComponent.cs" />
     <Compile Include="Model\Component\IDashboardControlComponent.cs" />
+    <Compile Include="Model\Component\IProviderComponent.cs" />
     <Compile Include="Model\Component\ModuleComponent.cs" />
+    <Compile Include="Model\Component\ProviderComponent.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ModuleComponentSubObjectFactory.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\ProviderComponentSubObjectFactory.cs" />
     <Compile Include="Model\EventAttributesList\EventAttributesList.cs" />
     <Compile Include="Model\EventAttributesList\ObjectFactory\EventAttributesListObjectFactory.cs" />
     <Compile Include="Model\EventAttributesList\ObjectFactory\IEventAttributesListObjectFactory.cs" />
