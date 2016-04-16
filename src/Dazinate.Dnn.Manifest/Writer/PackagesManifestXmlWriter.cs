@@ -34,6 +34,8 @@ using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
 using Dazinate.Dnn.Manifest.Model.ResourceFile;
 using Dazinate.Dnn.Manifest.Model.ResourceFilesList;
+using Dazinate.Dnn.Manifest.Model.Script;
+using Dazinate.Dnn.Manifest.Model.ScriptsList;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 using Dazinate.Dnn.Manifest.Utils;
@@ -656,6 +658,45 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("path", file.Path);
             WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
 
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(Script script)
+        {
+            _writer.WriteStartElement("script");
+
+            _writer.WriteAttributeString("type", script.Type.ToString());
+
+            WriteElementIfNotEmpty("path", script.Path);
+            WriteElementIfNotEmpty("name", script.Name);
+            WriteElementIfNotEmpty("version", script.Version);
+
+            WriteElementIfNotEmpty("sourceFileName", script.SourceFileName);
+
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(ScriptsList list)
+        {
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+        }
+
+        public void Visit(ScriptComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Script");
+
+            _writer.WriteStartElement("scripts");
+
+            WriteElementIfNotEmpty("basePath", component.BasePath);
+
+            component.Scripts.Accept(this);
+
+            _writer.WriteEndElement();
             _writer.WriteEndElement();
         }
 

@@ -28,6 +28,9 @@ using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
 using Dazinate.Dnn.Manifest.Model.ResourceFile;
 using Dazinate.Dnn.Manifest.Model.ResourceFilesList;
+using Dazinate.Dnn.Manifest.Model.Script;
+using Dazinate.Dnn.Manifest.Model.Script.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ScriptsList;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 
@@ -85,5 +88,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(ResourceFileComponent component);
         void Visit(ResourceFilesList list);
         void Visit(ResourceFile file);
+        void Visit(Script script);
+        void Visit(ScriptsList list);
+        void Visit(ScriptComponent component);
     }
 }

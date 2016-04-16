@@ -85,8 +85,11 @@
     <Compile Include="Model\Component\IDashboardControlComponent.cs" />
     <Compile Include="Model\Component\IProviderComponent.cs" />
     <Compile Include="Model\Component\IResourceFileComponent.cs" />
+    <Compile Include="Model\Component\IScriptComponent.cs" />
     <Compile Include="Model\Component\ResourceFileComponent.cs" />
+    <Compile Include="Model\Component\ScriptComponent.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ResourceFileComponentSubObjectFactory.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\ScriptComponentSubObjectFactory.cs" />
     <Compile Include="Model\ResourceFilesList\ObjectFactory\IResourceFilesListObjectFactory.cs" />
     <Compile Include="Model\ResourceFilesList\ObjectFactory\ResourceFilesListObjectFactory.cs" />
     <Compile Include="Model\ResourceFilesList\ResourceFilesList.cs" />
@@ -138,6 +141,15 @@
     <Compile Include="Model\ResourceFile\ObjectFactory\IResourceFileObjectFactory.cs" />
     <Compile Include="Model\ResourceFile\ObjectFactory\ResourceFileObjectFactory.cs" />
     <Compile Include="Model\ResourceFile\ResourceFile.cs" />
+    <Compile Include="Model\ScriptsList\IScriptsList.cs" />
+    <Compile Include="Model\ScriptsList\ObjectFactory\IScriptsListObjectFactory.cs" />
+    <Compile Include="Model\ScriptsList\ObjectFactory\ScriptsListObjectFactory.cs" />
+    <Compile Include="Model\ScriptsList\ScriptsList.cs" />
+    <Compile Include="Model\Script\IScript.cs" />
+    <Compile Include="Model\Script\ObjectFactory\IScriptObjectFactory.cs" />
+    <Compile Include="Model\Script\ObjectFactory\ScriptObjectFactory.cs" />
+    <Compile Include="Model\Script\Script.cs" />
+    <Compile Include="Model\Script\ScriptType.cs" />
     <Compile Include="Model\SupportedFeaturesList\ISupportedFeaturesList.cs" />
     <Compile Include="Model\SupportedFeature\ObjectFactory\ISupportedFeatureObjectFactory.cs" />
     <Compile Include="Model\SupportedFeaturesList\ObjectFactory\ISupportedFeaturesListObjectFactory.cs" />
