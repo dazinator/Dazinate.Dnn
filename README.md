@@ -1,9 +1,3 @@
-# Dazinate.Dnn
-This repository contains some .net utility libaries (work still in progress) that may be useful for stand alone applications that 
-wish to "do things" with Dnn. 
-
-These libraries do not have any depedencies on any Dnn assemblies, so that they can be used from applications outside Dnn.
-
 ## Manifests
 
 This library, provides a domain model for working with Dnn manifest files, including validation. 
