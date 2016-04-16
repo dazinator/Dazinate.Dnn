@@ -21,9 +21,9 @@ namespace Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory
             list.RaiseListChangedEvents = false;
 
             // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("files/file"))
+            foreach (XPathNavigator item in xpathNavigator.Select("files/file"))
             {
-                LoadFileItem(dependencyNav, list);
+                LoadFileItem(item, list);
             }
 
             list.RaiseListChangedEvents = true;

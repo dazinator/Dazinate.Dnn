@@ -228,46 +228,21 @@
             <supportsPartialRendering>False</supportsPartialRendering>
           </moduleControl>
         </component>
-      </components>
-    </package>
-
-    <!--example skin-->
-    <!--<package name="MySkin" type="Skin" version="5.0.6">
-      <friendlyName>My Fantastic Skin</friendlyName>
-      <description>My Fantastic Skin</description>
-      <owner>
-        <name>Joe Bloggs</name>
-        <organization>Some Org</organization>
-        <url>http://www.someurl.com</url>
-        <email><![CDATA[<a href="mailto:joebloggs@someorg.com">joebloggs@someorg.com</a>]]></email>
-      </owner>
-      <license src="License.lic"></license>
-      <releaseNotes></releaseNotes>
-      <components>
         <component type="Skin">
           <skinFiles>
             <skinName>MySkin</skinName>
             <basePath>Portals\_default\Skins\MySkin</basePath>
+            <skinFile>
+              <path>app_localresources</path>
+              <name>some.ascx.resx</name>
+            </skinFile>
+            <skinFile>
+              <path>app_localresources</path>
+              <name>another.ascx.resx</name>
+            </skinFile>
           </skinFiles>
         </component>
-        <component type="Assembly">
-          <assemblies>
-            <assembly>
-              <path>bin</path>
-              <name>MySkin.dll</name>
-            </assembly>
-          </assemblies>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>Portals\_default\Skins\MySkin</basePath>
-            <resourceFile>
-              <name>resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
       </components>
-    </package>-->
-
+    </package>
   </packages>
 </dotnetnuke>

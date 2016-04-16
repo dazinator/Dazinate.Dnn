@@ -225,6 +225,20 @@
             <supportsPartialRendering>False</supportsPartialRendering>
           </moduleControl>
         </component>
+        <component type="Skin">
+          <skinFiles>
+            <skinName>MySkin</skinName>
+            <basePath>Portals\_default\Skins\MySkin</basePath>
+            <skinFile>
+              <path>app_localresources</path>
+              <name>some.ascx.resx</name>
+            </skinFile>
+            <skinFile>
+              <path>app_localresources</path>
+              <name>another.ascx.resx</name>
+            </skinFile>
+          </skinFiles>
+        </component>
       </components>
     </package>
   </packages>

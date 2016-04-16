@@ -86,6 +86,14 @@
     <Compile Include="Model\Component\IProviderComponent.cs" />
     <Compile Include="Model\Component\IResourceFileComponent.cs" />
     <Compile Include="Model\Component\IScriptComponent.cs" />
+    <Compile Include="Model\Component\ISkinComponent.cs" />
+    <Compile Include="Model\Component\SkinComponent.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\SkinComponentSubObjectFactory.cs" />
+    <Compile Include="Model\SkinFilesList\ISkinFilesList.cs" />
+    <Compile Include="Model\SkinFilesList\ObjectFactory\ISkinFilesListObjectFactory.cs" />
+    <Compile Include="Model\SkinFilesList\ObjectFactory\SkinFilesListObjectFactory.cs" />
+    <Compile Include="Model\SkinFilesList\SkinFilesList.cs" />
+    <Compile Include="Model\SkinFile\ISkinFile.cs" />
     <Compile Include="Model\Component\ISkinObjectComponent.cs" />
     <Compile Include="Model\Component\IUrlProviderComponent.cs" />
     <Compile Include="Model\Component\ResourceFileComponent.cs" />
@@ -156,6 +164,9 @@
     <Compile Include="Model\Script\ObjectFactory\ScriptObjectFactory.cs" />
     <Compile Include="Model\Script\Script.cs" />
     <Compile Include="Model\Script\ScriptType.cs" />
+    <Compile Include="Model\SkinFile\ObjectFactory\ISkinFileObjectFactory.cs" />
+    <Compile Include="Model\SkinFile\ObjectFactory\SkinFileObjectFactory.cs" />
+    <Compile Include="Model\SkinFile\SkinFile.cs" />
     <Compile Include="Model\SupportedFeaturesList\ISupportedFeaturesList.cs" />
     <Compile Include="Model\SupportedFeature\ObjectFactory\ISupportedFeatureObjectFactory.cs" />
     <Compile Include="Model\SupportedFeaturesList\ObjectFactory\ISupportedFeaturesListObjectFactory.cs" />

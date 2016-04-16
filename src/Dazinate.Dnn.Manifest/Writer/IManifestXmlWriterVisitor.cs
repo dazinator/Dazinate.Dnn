@@ -31,6 +31,8 @@ using Dazinate.Dnn.Manifest.Model.ResourceFilesList;
 using Dazinate.Dnn.Manifest.Model.Script;
 using Dazinate.Dnn.Manifest.Model.Script.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ScriptsList;
+using Dazinate.Dnn.Manifest.Model.SkinFile;
+using Dazinate.Dnn.Manifest.Model.SkinFilesList;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 
@@ -93,5 +95,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(ScriptComponent component);
         void Visit(UrlProviderComponent component);
         void Visit(SkinObjectComponent component);
+        void Visit(SkinFile file);
+        void Visit(SkinFilesList list);
+        void Visit(SkinComponent component);
     }
 }

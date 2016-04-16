@@ -44,6 +44,8 @@ using Dazinate.Dnn.Manifest.Model.ResourceFile.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ResourceFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Script.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ScriptsList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.SkinFile.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.SkinFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList.ObjectFactory;
 using Assembly = System.Reflection.Assembly;
@@ -116,7 +118,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(ResourceFileComponentSubObjectFactory),
                     typeof(ScriptComponentSubObjectFactory),
                     typeof(UrlProviderComponentSubObjectFactory),
-                    typeof(SkinObjectComponentSubObjectFactory)
+                    typeof(SkinObjectComponentSubObjectFactory),
+                    typeof(SkinComponentSubObjectFactory)
                 });
 
             // Assembly component
@@ -168,6 +171,10 @@ namespace Dazinate.Dnn.Manifest.Ioc
             // Script component
             container.Register<IScriptsListObjectFactory, ScriptsListObjectFactory>();
             container.Register<IScriptObjectFactory, ScriptObjectFactory>();
+
+            // skin component
+            container.Register<ISkinFilesListObjectFactory, SkinFilesListObjectFactory>();
+            container.Register<ISkinFileObjectFactory, SkinFileObjectFactory>();
 
         }
 

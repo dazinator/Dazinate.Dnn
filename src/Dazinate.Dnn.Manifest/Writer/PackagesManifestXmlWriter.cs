@@ -32,6 +32,8 @@ using Dazinate.Dnn.Manifest.Model.ResourceFile;
 using Dazinate.Dnn.Manifest.Model.ResourceFilesList;
 using Dazinate.Dnn.Manifest.Model.Script;
 using Dazinate.Dnn.Manifest.Model.ScriptsList;
+using Dazinate.Dnn.Manifest.Model.SkinFile;
+using Dazinate.Dnn.Manifest.Model.SkinFilesList;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature;
 using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 using Dazinate.Dnn.Manifest.Utils;
@@ -730,6 +732,42 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
+        }
+      
+        public void Visit(SkinComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "Skin");
+
+            _writer.WriteStartElement("skinFiles");
+
+            WriteElementIfNotEmpty("skinName", component.SkinName);
+            WriteElementIfNotEmpty("basePath", component.BasePath);
+
+            component.Files.Accept(this);
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(SkinFilesList list)
+        {
+            foreach (var file in list)
+            {
+                file.Accept(this);
+            }
+        }
+
+        public void Visit(SkinFile file)
+        {
+            _writer.WriteStartElement("skinFile");
+
+            _writer.WriteElementString("path", file.Path);
+            _writer.WriteElementString("name", file.Name);
+
+            WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
+
+            _writer.WriteEndElement();
         }
 
         public void Visit(ModuleDefinition moduleDefinition)

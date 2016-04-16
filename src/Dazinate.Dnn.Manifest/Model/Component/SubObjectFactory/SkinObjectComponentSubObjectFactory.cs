@@ -32,7 +32,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component.SubObjectFactory
             var supportsPartialRendering = XmlUtils.ReadElement(node, "supportsPartialRendering");
             var boolValue = bool.Parse(supportsPartialRendering);
             LoadProperty(component, SkinObjectComponent.SupportsPartialRenderingProperty, boolValue);
-            
+
             return component;
         }
 
