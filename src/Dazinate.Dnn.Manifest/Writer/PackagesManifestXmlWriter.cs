@@ -1,11 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using System.Xml;
-using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.AssembliesList;
 using Dazinate.Dnn.Manifest.Model.Assembly;
-using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.ComponentsList;
 using Dazinate.Dnn.Manifest.Model.ContainerFile;
@@ -715,6 +711,22 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("rewriteAllUrls", component.RewriteAllUrls.ToString());
             _writer.WriteElementString("desktopModule", component.DesktopModule);
             
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(SkinObjectComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "SkinObject");
+
+            _writer.WriteStartElement("moduleControl");
+
+            WriteElementIfNotEmpty("controlKey", component.ControlKey);
+            WriteElementIfNotEmpty("controlSrc", component.ControlSource);
+            WriteElementIfNotEmpty("supportsPartialRendering", component.SupportsPartialRendering.ToString());
+
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 

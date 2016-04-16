@@ -218,6 +218,13 @@
             <desktopModule>SomeModule</desktopModule>
           </urlProvider>
         </component>
+        <component type="SkinObject">
+          <moduleControl>
+            <controlKey>YourCompanyNameTellFriend</controlKey>
+            <controlSrc>DesktopModules/YourCompanyNameSkinObjects/TellFriend.ascx</controlSrc>
+            <supportsPartialRendering>False</supportsPartialRendering>
+          </moduleControl>
+        </component>
       </components>
     </package>
   </packages>

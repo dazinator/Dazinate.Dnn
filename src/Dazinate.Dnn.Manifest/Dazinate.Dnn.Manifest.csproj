@@ -86,11 +86,14 @@
     <Compile Include="Model\Component\IProviderComponent.cs" />
     <Compile Include="Model\Component\IResourceFileComponent.cs" />
     <Compile Include="Model\Component\IScriptComponent.cs" />
+    <Compile Include="Model\Component\ISkinObjectComponent.cs" />
     <Compile Include="Model\Component\IUrlProviderComponent.cs" />
     <Compile Include="Model\Component\ResourceFileComponent.cs" />
     <Compile Include="Model\Component\ScriptComponent.cs" />
+    <Compile Include="Model\Component\SkinObjectComponent.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ResourceFileComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\ScriptComponentSubObjectFactory.cs" />
+    <Compile Include="Model\Component\SubObjectFactory\SkinObjectComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\SubObjectFactory\UrlProviderComponentSubObjectFactory.cs" />
     <Compile Include="Model\Component\UrlProviderComponent.cs" />
     <Compile Include="Model\ResourceFilesList\ObjectFactory\IResourceFilesListObjectFactory.cs" />
