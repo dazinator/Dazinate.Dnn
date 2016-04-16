@@ -210,6 +210,17 @@
             </script>
           </scripts>
         </component>
+        <component type="UrlProvider">
+          <urlProvider>
+            <name>My Special Url Extension Provider</name>
+            <type>SomeModule.UrlProvider.SpecialUrlProvider</type>
+            <settingsControlSrc>DesktopModules/SomeModule/Settings.ascx</settingsControlSrc>
+            <redirectAllUrls>false</redirectAllUrls>
+            <replaceAllUrls>false</replaceAllUrls>
+            <rewriteAllUrls>false</rewriteAllUrls>
+            <desktopModule>SomeModule</desktopModule>
+          </urlProvider>
+        </component>
       </components>
     </package>
 

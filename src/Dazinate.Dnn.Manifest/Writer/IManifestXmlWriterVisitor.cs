@@ -91,5 +91,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(Script script);
         void Visit(ScriptsList list);
         void Visit(ScriptComponent component);
+        void Visit(UrlProviderComponent component);
     }
 }

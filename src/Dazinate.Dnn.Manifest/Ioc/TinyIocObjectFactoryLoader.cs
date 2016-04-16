@@ -114,7 +114,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(ModuleComponentSubObjectFactory),
                     typeof(ProviderComponentSubObjectFactory),
                     typeof(ResourceFileComponentSubObjectFactory),
-                    typeof(ScriptComponentSubObjectFactory)
+                    typeof(ScriptComponentSubObjectFactory),
+                    typeof(UrlProviderComponentSubObjectFactory)
                 });
 
             // Assembly component

@@ -700,6 +700,26 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
         }
 
+        public void Visit(UrlProviderComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "UrlProvider");
+
+            _writer.WriteStartElement("urlProvider");
+
+            WriteElementIfNotEmpty("name", component.Name);
+            WriteElementIfNotEmpty("type", component.Type);
+            WriteElementIfNotEmpty("settingsControlSrc", component.SettingsControlSource);
+            WriteElementIfNotEmpty("redirectAllUrls", component.RedirectAllUrls.ToString());
+            WriteElementIfNotEmpty("replaceAllUrls", component.ReplaceAllUrls.ToString());
+            WriteElementIfNotEmpty("rewriteAllUrls", component.RewriteAllUrls.ToString());
+            _writer.WriteElementString("desktopModule", component.DesktopModule);
+            
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+        }
+
         public void Visit(ModuleDefinition moduleDefinition)
         {
             _writer.WriteStartElement("moduleDefinition");
@@ -732,7 +752,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteElementString("controlKey", moduleControl.ControlKey);
             // WriteElementIfNotEmpty("controlKey", moduleControl.ControlKey);
-        
+
             WriteElementIfNotEmpty("controlSrc", moduleControl.ControlSource);
             WriteElementIfNotNull("supportsPartialRendering", moduleControl.SupportsPartialRendering);
             WriteElementIfNotNull("controlTitle", moduleControl.ControlTitle);
