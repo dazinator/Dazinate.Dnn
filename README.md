@@ -14,6 +14,19 @@ You can load a manifest like so:
 Once you have the business object, you will see that it has methods and properties to fully manipulate the manifest, 
 by adding and editing packages, dependencies, components etc.
 
+When you are ready to save the manifest back to Xml:
+
+```
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = dnnManifest.SaveToXml(xmlWriter);
+                Console.Write(xmlStringBuilder.ToString());
+            }
+            
+```
+
 The business object fully supports data-binding, and validation rules, thanks to CSLA, so you can directly bind it to your UI framework of choice (WPF, Windows Forms etc)
 
 Dirty tracking, and validation rules are run automatically, and you can check the status of the business object easily:
