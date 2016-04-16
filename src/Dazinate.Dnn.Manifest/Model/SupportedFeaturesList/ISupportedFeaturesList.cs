@@ -1,4 +1,5 @@
 using Csla;
+using Dazinate.Dnn.Manifest.Model.DashboardControlsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.SupportedFeature;
 using Dazinate.Dnn.Manifest.Writer;
 

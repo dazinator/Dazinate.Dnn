@@ -1,6 +1,6 @@
 using System.Xml.XPath;
 
-namespace Dazinate.Dnn.Manifest.Model.EventMessage
+namespace Dazinate.Dnn.Manifest.Model.EventMessage.ObjectFactory
 {
     public interface IEventMessageObjectFactory
     {

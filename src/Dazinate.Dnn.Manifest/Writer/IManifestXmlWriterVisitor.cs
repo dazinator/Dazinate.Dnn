@@ -16,10 +16,18 @@ using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFile;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Model.ModuleControl;
+using Dazinate.Dnn.Manifest.Model.ModuleControlsList;
+using Dazinate.Dnn.Manifest.Model.ModuleDefinition;
+using Dazinate.Dnn.Manifest.Model.ModuleDefinitionsList;
+using Dazinate.Dnn.Manifest.Model.ModulePermission;
+using Dazinate.Dnn.Manifest.Model.ModulePermissionsList;
 using Dazinate.Dnn.Manifest.Model.Node;
 using Dazinate.Dnn.Manifest.Model.NodesList;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
+using Dazinate.Dnn.Manifest.Model.SupportedFeature;
+using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 
 namespace Dazinate.Dnn.Manifest.Writer
 {
@@ -63,5 +71,13 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(EventMessage eventMessage);
         void Visit(EventAttribute eventAttribute);
         void Visit(EventAttributesList list);
+        void Visit(SupportedFeaturesList list);
+        void Visit(SupportedFeature supportedFeature);
+        void Visit(ModuleDefinition moduleDefinition);
+        void Visit(ModulePermission modulePermission);
+        void Visit(ModulePermissionsList list);
+        void Visit(ModuleControl moduleControl);
+        void Visit(ModuleControlsList list);
+        void Visit(ModuleDefinitionsList list);
     }
 }

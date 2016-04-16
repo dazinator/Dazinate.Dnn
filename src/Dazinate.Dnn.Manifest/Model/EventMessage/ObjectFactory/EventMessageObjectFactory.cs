@@ -1,9 +1,9 @@
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
-using Dazinate.Dnn.Manifest.Model.EventAttributesList;
+using Dazinate.Dnn.Manifest.Model.EventAttributesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Utils;
 
-namespace Dazinate.Dnn.Manifest.Model.EventMessage
+namespace Dazinate.Dnn.Manifest.Model.EventMessage.ObjectFactory
 {
     public class EventMessageObjectFactory : BaseObjectFactory, IEventMessageObjectFactory
     {

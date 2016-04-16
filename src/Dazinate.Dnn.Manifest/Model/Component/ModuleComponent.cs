@@ -58,7 +58,6 @@ namespace Dazinate.Dnn.Manifest.Model.Component
         }
 
 
-
         public static readonly PropertyInfo<SupportedFeaturesList.SupportedFeaturesList> SupportedFeaturesProperty = RegisterProperty<SupportedFeaturesList.SupportedFeaturesList>(c => c.SupportedFeatures);
         public ISupportedFeaturesList SupportedFeatures
         {
@@ -66,7 +65,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component
             set { SetProperty(SupportedFeaturesProperty, value); }
         }
 
-        public static readonly PropertyInfo<ModuleDefinitionsList> ModuleDefinitionsProperty = RegisterProperty<ModuleDefinitionsList>(c => c.ModuleDefinitions);
+        public static readonly PropertyInfo<ModuleDefinitionsList.ModuleDefinitionsList> ModuleDefinitionsProperty = RegisterProperty<ModuleDefinitionsList.ModuleDefinitionsList>(c => c.ModuleDefinitions);
         public IModuleDefinitionsList ModuleDefinitions
         {
             get { return GetProperty(ModuleDefinitionsProperty); }
@@ -79,8 +78,6 @@ namespace Dazinate.Dnn.Manifest.Model.Component
             get { return GetProperty(EventMessageProperty); }
             set { SetProperty(EventMessageProperty, value); }
         }
-
-
 
 
         public void Accept(IManifestXmlWriterVisitor visitor)

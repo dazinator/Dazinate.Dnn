@@ -1,7 +1,7 @@
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
 
-namespace Dazinate.Dnn.Manifest.Model.EventAttribute
+namespace Dazinate.Dnn.Manifest.Model.EventAttribute.ObjectFactory
 {
     public class EventAttributeObjectFactory : BaseObjectFactory, IEventAttributeObjectFactory
     {

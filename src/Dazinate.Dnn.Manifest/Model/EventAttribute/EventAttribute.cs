@@ -1,6 +1,7 @@
 using System;
 using Csla;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Model.EventAttribute.ObjectFactory;
 using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Model.EventAttribute

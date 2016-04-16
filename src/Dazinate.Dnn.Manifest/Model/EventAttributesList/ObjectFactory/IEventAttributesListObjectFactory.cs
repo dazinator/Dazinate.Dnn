@@ -1,7 +1,6 @@
 using System.Xml.XPath;
-using Dazinate.Dnn.Manifest.Model.FilesList;
 
-namespace Dazinate.Dnn.Manifest.Model.EventAttributesList
+namespace Dazinate.Dnn.Manifest.Model.EventAttributesList.ObjectFactory
 {
     public interface IEventAttributesListObjectFactory
     {

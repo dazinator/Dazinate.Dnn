@@ -1,8 +1,8 @@
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Ioc;
-using Dazinate.Dnn.Manifest.Model.EventAttribute;
+using Dazinate.Dnn.Manifest.Model.EventAttribute.ObjectFactory;
 
-namespace Dazinate.Dnn.Manifest.Model.EventAttributesList
+namespace Dazinate.Dnn.Manifest.Model.EventAttributesList.ObjectFactory
 {
     public class EventAttributesListObjectFactory : BaseObjectFactory, IEventAttributesListObjectFactory
     {

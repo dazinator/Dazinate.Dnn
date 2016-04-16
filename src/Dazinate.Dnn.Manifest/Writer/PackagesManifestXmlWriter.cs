@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Xml;
 using Dazinate.Dnn.Manifest.Model;
@@ -21,10 +22,18 @@ using Dazinate.Dnn.Manifest.Model.FilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFile;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Model.ModuleControl;
+using Dazinate.Dnn.Manifest.Model.ModuleControlsList;
+using Dazinate.Dnn.Manifest.Model.ModuleDefinition;
+using Dazinate.Dnn.Manifest.Model.ModuleDefinitionsList;
+using Dazinate.Dnn.Manifest.Model.ModulePermission;
+using Dazinate.Dnn.Manifest.Model.ModulePermissionsList;
 using Dazinate.Dnn.Manifest.Model.Node;
 using Dazinate.Dnn.Manifest.Model.NodesList;
 using Dazinate.Dnn.Manifest.Model.Package;
 using Dazinate.Dnn.Manifest.Model.PackagesList;
+using Dazinate.Dnn.Manifest.Model.SupportedFeature;
+using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList;
 using Dazinate.Dnn.Manifest.Utils;
 
 namespace Dazinate.Dnn.Manifest.Writer
@@ -124,10 +133,7 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteElementString("friendlyName", package.FriendlyName.ToString());
             _writer.WriteElementString("description", package.Description.ToString());
 
-            if (!string.IsNullOrWhiteSpace(package.IconFile))
-            {
-                _writer.WriteElementString("iconFile", package.IconFile.ToString());
-            }
+            WriteElementIfNotEmpty("iconFile", package.IconFile);
 
             package.Owner?.Accept(this);
             package.License?.Accept(this);
@@ -163,10 +169,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteStartElement("license");
 
-            if (!string.IsNullOrWhiteSpace(licence.SourceFile))
-            {
-                _writer.WriteAttributeString("src", licence.SourceFile);
-            }
+            WriteAttributeIfNotEmpty("src", licence.SourceFile);
 
             if (!string.IsNullOrWhiteSpace(licence.Contents))
             {
@@ -185,10 +188,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteStartElement("releaseNotes");
 
-            if (!string.IsNullOrWhiteSpace(releaseNotes.SourceFile))
-            {
-                _writer.WriteAttributeString("src", releaseNotes.SourceFile);
-            }
+            WriteAttributeIfNotEmpty("src", releaseNotes.SourceFile);
 
             if (!string.IsNullOrWhiteSpace(releaseNotes.Contents))
             {
@@ -243,10 +243,7 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteElementString("path", file.Path);
             _writer.WriteElementString("name", file.Name);
 
-            if (!string.IsNullOrWhiteSpace(file.SourceFileName))
-            {
-                _writer.WriteElementString("sourceFileName", file.SourceFileName);
-            }
+            WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
 
             _writer.WriteEndElement();
         }
@@ -267,15 +264,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteStartElement("component");
             _writer.WriteAttributeString("type", "Cleanup");
 
-            if (!string.IsNullOrWhiteSpace(component.Version))
-            {
-                _writer.WriteAttributeString("version", component.Version);
-            }
-
-            if (!string.IsNullOrWhiteSpace(component.FileName))
-            {
-                _writer.WriteAttributeString("fileName", component.FileName);
-            }
+            WriteAttributeIfNotEmpty("version", component.Version);
+            WriteAttributeIfNotEmpty("fileName", component.FileName);
 
             if (component.Files.Any())
             {
@@ -293,10 +283,7 @@ namespace Dazinate.Dnn.Manifest.Writer
         {
             _writer.WriteStartElement("node");
 
-            if (!string.IsNullOrWhiteSpace(node.Path))
-            {
-                _writer.WriteAttributeString("path", node.Path);
-            }
+            WriteAttributeIfNotEmpty("path", node.Path);
 
             if (node.Action != null)
             {
@@ -307,15 +294,9 @@ namespace Dazinate.Dnn.Manifest.Writer
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(node.TargetPath))
-            {
-                _writer.WriteAttributeString("targetpath", node.TargetPath);
-            }
+            WriteAttributeIfNotEmpty("targetpath", node.TargetPath);
+            WriteAttributeIfNotEmpty("key", node.Key);
 
-            if (!string.IsNullOrWhiteSpace(node.Key))
-            {
-                _writer.WriteAttributeString("key", node.Key);
-            }
 
             if (node.Collision != null)
             {
@@ -326,26 +307,10 @@ namespace Dazinate.Dnn.Manifest.Writer
                 }
             }
 
-
-            if (!string.IsNullOrWhiteSpace(node.Name))
-            {
-                _writer.WriteAttributeString("name", node.Name);
-            }
-
-            if (!string.IsNullOrWhiteSpace(node.Value))
-            {
-                _writer.WriteAttributeString("value", node.Value);
-            }
-
-            if (!string.IsNullOrWhiteSpace(node.Namespace))
-            {
-                _writer.WriteAttributeString("nameSpace", node.Namespace);
-            }
-
-            if (!string.IsNullOrWhiteSpace(node.NamespacePrefix))
-            {
-                _writer.WriteAttributeString("nameSpacePrefix", node.NamespacePrefix);
-            }
+            WriteAttributeIfNotEmpty("name", node.Name);
+            WriteAttributeIfNotEmpty("value", node.Value);
+            WriteAttributeIfNotEmpty("nameSpace", node.Namespace);
+            WriteAttributeIfNotEmpty("nameSpacePrefix", node.NamespacePrefix);
 
             _writer.WriteRaw(node.InnerXml);
 
@@ -369,10 +334,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteStartElement("config");
 
-            if (!string.IsNullOrWhiteSpace(component.ConfigFile))
-            {
-                _writer.WriteElementString("configFile", component.ConfigFile);
-            }
+            WriteElementIfNotEmpty("configFile", component.ConfigFile);
 
             // install nodes list.
             _writer.WriteStartElement("install");
@@ -478,10 +440,7 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 _writer.WriteStartElement("files");
 
-                if (!string.IsNullOrWhiteSpace(component.BasePath))
-                {
-                    _writer.WriteElementString("basePath", component.BasePath);
-                }
+                WriteElementIfNotEmpty("basePath", component.BasePath);
 
                 component.Files.Accept(this);
 
@@ -520,20 +479,9 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 _writer.WriteStartElement("languageFiles");
 
-                if (!string.IsNullOrWhiteSpace(component.Code))
-                {
-                    _writer.WriteElementString("code", component.Code);
-                }
-
-                if (!string.IsNullOrWhiteSpace(component.DisplayName))
-                {
-                    _writer.WriteElementString("displayName", component.DisplayName);
-                }
-
-                if (!string.IsNullOrWhiteSpace(component.Fallback))
-                {
-                    _writer.WriteElementString("fallback", component.Fallback);
-                }
+                WriteElementIfNotEmpty("code", component.Code);
+                WriteElementIfNotEmpty("displayName", component.DisplayName);
+                WriteElementIfNotEmpty("fallback", component.Fallback);
 
                 component.Files.Accept(this);
 
@@ -553,20 +501,9 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 _writer.WriteStartElement("languageFiles");
 
-                if (!string.IsNullOrWhiteSpace(component.Code))
-                {
-                    _writer.WriteElementString("code", component.Code);
-                }
-
-                if (!string.IsNullOrWhiteSpace(component.Package))
-                {
-                    _writer.WriteElementString("package", component.Package);
-                }
-
-                if (!string.IsNullOrWhiteSpace(component.BasePath))
-                {
-                    _writer.WriteElementString("basePath", component.BasePath);
-                }
+                WriteElementIfNotEmpty("code", component.Code);
+                WriteElementIfNotEmpty("package", component.Package);
+                WriteElementIfNotEmpty("basePath", component.BasePath);
 
                 component.Files.Accept(this);
 
@@ -588,25 +525,13 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteElementString("moduleName", component.ModuleName);
             _writer.WriteElementString("foldername", component.FolderName);
 
-            if (!string.IsNullOrWhiteSpace(component.BusinessControllerClass))
-            {
-                _writer.WriteElementString("businessControllerClass", component.BusinessControllerClass);
-            }
+            WriteElementIfNotEmpty("businessControllerClass", component.BusinessControllerClass);
 
-            if (!string.IsNullOrWhiteSpace(component.CodeSubDirectory))
-            {
-                _writer.WriteElementString("codeSubdirectory", component.CodeSubDirectory);
-            }
+            WriteElementIfNotEmpty("codeSubdirectory", component.CodeSubDirectory);
 
-            if (component.IsAdmin != null)
-            {
-                _writer.WriteElementString("isAdmin", component.IsAdmin.ToString());
-            }
+            WriteElementIfNotNull("isAdmin", component.IsAdmin);
+            WriteElementIfNotNull("isPremium", component.IsPremium);
 
-            if (component.IsPremium != null)
-            {
-                _writer.WriteElementString("isPremium ", component.IsPremium.ToString());
-            }
 
             if (component.SupportedFeatures.Any())
             {
@@ -623,7 +548,6 @@ namespace Dazinate.Dnn.Manifest.Writer
                 component.EventMessage.Accept(this);
             }
 
-
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -633,15 +557,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         {
             _writer.WriteStartElement("eventMessage");
 
-            if (!string.IsNullOrWhiteSpace(eventMessage.ProcessorType))
-            {
-                _writer.WriteElementString("processorType", eventMessage.ProcessorType);
-            }
-
-            if (!string.IsNullOrWhiteSpace(eventMessage.ProcessorCommand))
-            {
-                _writer.WriteElementString("processorCommand", eventMessage.ProcessorCommand);
-            }
+            WriteElementIfNotEmpty("processorType", eventMessage.ProcessorCommand);
+            WriteElementIfNotEmpty("processorCommand", eventMessage.ProcessorType);
 
             if (eventMessage.Attributes.Any())
             {
@@ -667,6 +584,105 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             _writer.WriteEndElement();
+        }
+
+        public void Visit(SupportedFeaturesList list)
+        {
+            _writer.WriteStartElement("supportedFeatures");
+
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(SupportedFeature supportedFeature)
+        {
+            _writer.WriteStartElement("supportedFeature");
+            _writer.WriteAttributeString("type", supportedFeature.FeatureType.ToString());
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(ModuleDefinitionsList list)
+        {
+            _writer.WriteStartElement("moduleDefinitions");
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(ModuleDefinition moduleDefinition)
+        {
+            _writer.WriteStartElement("moduleDefinition");
+
+            WriteElementIfNotEmpty("friendlyName", moduleDefinition.FriendlyName);
+            WriteElementIfNotNull("defaultCacheTime", moduleDefinition.DefaultCacheTime);
+
+            moduleDefinition.ModuleControls.Accept(this);
+
+            moduleDefinition.ModulePermissions.Accept(this);
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(ModuleControlsList list)
+        {
+            _writer.WriteStartElement("moduleControls");
+
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(ModuleControl moduleControl)
+        {
+            _writer.WriteStartElement("moduleControl");
+
+            _writer.WriteElementString("controlKey", moduleControl.ControlKey);
+            // WriteElementIfNotEmpty("controlKey", moduleControl.ControlKey);
+        
+            WriteElementIfNotEmpty("controlSrc", moduleControl.ControlSource);
+            WriteElementIfNotNull("supportsPartialRendering", moduleControl.SupportsPartialRendering);
+            WriteElementIfNotNull("controlTitle", moduleControl.ControlTitle);
+            WriteElementIfNotEmpty("controlType", moduleControl.ControlType);
+            WriteElementIfNotNull("iconFile", moduleControl.IconFile);
+            WriteElementIfNotNull("helpUrl", moduleControl.HelpUrl);
+            WriteElementIfNotNull("viewOrder", moduleControl.ViewOrder);
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(ModulePermissionsList list)
+        {
+            _writer.WriteStartElement("permissions");
+
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(ModulePermission modulePermission)
+        {
+
+            _writer.WriteStartElement("permission");
+
+            WriteAttributeIfNotEmpty("code", modulePermission.Code);
+            WriteAttributeIfNotEmpty("key", modulePermission.Key);
+            WriteAttributeIfNotEmpty("name", modulePermission.Name);
+
+            _writer.WriteEndElement();
+
         }
 
         public void Visit(IAssemblyComponent component)
@@ -703,18 +719,9 @@ namespace Dazinate.Dnn.Manifest.Writer
                 _writer.WriteAttributeString("action", assembly.Action.ToString());
             }
 
-            if (!string.IsNullOrWhiteSpace(assembly.Path))
-            {
-                _writer.WriteElementString("path", assembly.Path);
-            }
-            if (!string.IsNullOrWhiteSpace(assembly.Name))
-            {
-                _writer.WriteElementString("name", assembly.Name);
-            }
-            if (!string.IsNullOrWhiteSpace(assembly.Version))
-            {
-                _writer.WriteElementString("version", assembly.Version);
-            }
+            WriteElementIfNotEmpty("path", assembly.Path);
+            WriteElementIfNotEmpty("name", assembly.Name);
+            WriteElementIfNotEmpty("version", assembly.Version);
 
             _writer.WriteEndElement();
 
@@ -722,5 +729,34 @@ namespace Dazinate.Dnn.Manifest.Writer
 
 
         #endregion
+
+        #region Util Methods
+
+        private void WriteElementIfNotEmpty(string elementName, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                _writer.WriteElementString(elementName, value);
+            }
+        }
+
+        private void WriteAttributeIfNotEmpty(string attributeName, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                _writer.WriteAttributeString(attributeName, value);
+            }
+        }
+
+        private void WriteElementIfNotNull<T>(string elementName, T value)
+        {
+            if (value != null)
+            {
+                _writer.WriteElementString(elementName, value.ToString());
+            }
+        }
+
+        #endregion
+
     }
 }

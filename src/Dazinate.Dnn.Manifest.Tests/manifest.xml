@@ -144,7 +144,38 @@
             </languageFile>
           </languageFiles>
         </component>
-
+        <component type="Module">
+          <desktopModule>
+            <moduleName>MyModule</moduleName>
+            <foldername>MyModule</foldername>
+            <businessControllerClass>DotNetNuke.Modules.MyModule.BusinessController,DotNetNuke.Modules.MyModule</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Portable" />
+              <supportedFeature type="Searchable" />
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>MyModule</friendlyName>
+                <defaultCacheTime>-1</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/MyModule/Default.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl></helpUrl>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+                <permissions>
+                  <permission code="MYCODE" key="ROWEDIT" name="Edit Row" />
+                </permissions>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
         <!--<component type="Module">
           <desktopModule>
             <moduleName>[YourModuleName]</moduleName>

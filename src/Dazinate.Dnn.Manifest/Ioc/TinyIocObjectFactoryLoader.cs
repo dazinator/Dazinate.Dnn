@@ -17,8 +17,11 @@ using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.EventAttribute;
+using Dazinate.Dnn.Manifest.Model.EventAttribute.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.EventAttributesList;
+using Dazinate.Dnn.Manifest.Model.EventAttributesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.EventMessage;
+using Dazinate.Dnn.Manifest.Model.EventMessage.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.LanguageFile.ObjectFactory;
@@ -26,11 +29,19 @@ using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ModuleControl.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ModuleControlsList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ModuleDefinition.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ModuleDefinitionsList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ModulePermission.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.ModulePermissionsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Node.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.NodesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Package.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackagesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.PackageType.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.SupportedFeature.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.SupportedFeaturesList.ObjectFactory;
 using Assembly = System.Reflection.Assembly;
 
 namespace Dazinate.Dnn.Manifest.Ioc
@@ -99,24 +110,47 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(ModuleComponentSubObjectFactory)
                 });
 
-
+            // Assembly component
             container.Register<IAssembliesListObjectFactory, AssembliesListObjectFactory>();
             container.Register<IAssemblyObjectFactory, AssemblyObjectFactory>();
+
+            // file component and cleanup component
             container.Register<IFileObjectFactory, FileObjectFactory>();
             container.Register<IFilesListObjectFactory, FilesListObjectFactory>();
+
+            // config component
             container.Register<INodesListObjectFactory, NodesListObjectFactory>();
             container.Register<INodeObjectFactory, NodeObjectFactory>();
+
+            // container component
             container.Register<IContainerFilesListObjectFactory, ContainerFilesListObjectFactory>();
             container.Register<IContainerFileObjectFactory, ContainerFileObjectFactory>();
+
+            // dashboard control component
             container.Register<IDashboardControlsListObjectFactory, DashboardControlsListObjectFactory>();
             container.Register<IDashboardControlObjectFactory, DashboardControlObjectFactory>();
+
+            // extension language and core language component
             container.Register<ILanguageFilesListObjectFactory, LanguageFilesListObjectFactory>();
             container.Register<ILanguageFileObjectFactory, LanguageFileObjectFactory>();
 
+            // Module component
             container.Register<IEventMessageObjectFactory, EventMessageObjectFactory>();
 
             container.Register<IEventAttributesListObjectFactory, EventAttributesListObjectFactory>();
             container.Register<IEventAttributeObjectFactory, EventAttributeObjectFactory>();
+
+            container.Register<ISupportedFeaturesListObjectFactory, SupportedFeaturesListObjectFactory>();
+            container.Register<ISupportedFeatureObjectFactory, SupportedFeatureObjectFactory>();
+
+            container.Register<IModuleDefinitionsListObjectFactory, ModuleDefinitionsListObjectFactory>();
+            container.Register<IModuleDefinitionObjectFactory, ModuleDefinitionObjectFactory>();
+
+            container.Register<IModulePermissionsListObjectFactory, ModulePermissionsListObjectFactory>();
+            container.Register<IModulePermissionObjectFactory, ModulePermissionObjectFactory>();
+
+            container.Register<IModuleControlsListObjectFactory,ModuleControlsListObjectFactory>();
+            container.Register<IModuleControlObjectFactory, ModuleControlObjectFactory>();
 
 
 
