@@ -92,5 +92,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.UrlProvider
         {
             return package.Type.ToLowerInvariant() == "provider";
         }
+
+        public override string ToString()
+        {
+            return "Url Provider";
+        }
     }
 }

@@ -20,5 +20,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Provider
         {
             return package.Type.ToLowerInvariant() == "provider";
         }
+
+        public override string ToString()
+        {
+            return "Provider";
+        }
     }
 }

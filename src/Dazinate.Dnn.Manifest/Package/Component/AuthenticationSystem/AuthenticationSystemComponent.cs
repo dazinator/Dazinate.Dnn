@@ -48,5 +48,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.AuthenticationSystem
         {
             return package.Type.ToLowerInvariant() == "auth_system";
         }
+
+        public override string ToString()
+        {
+            return "Authentication System";
+        }
     }
 }

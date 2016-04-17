@@ -41,5 +41,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container
         {
             return package.Type.ToLowerInvariant() == "container";
         }
+
+        public override string ToString()
+        {
+            return "Container";
+        }
     }
 }

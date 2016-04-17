@@ -27,5 +27,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl
         {
             return package.Type.ToLowerInvariant() == "dashboardcontrol";
         }
+
+        public override string ToString()
+        {
+            return "Dashboard Control";
+        }
     }
 }

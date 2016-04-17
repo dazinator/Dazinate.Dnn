@@ -34,5 +34,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script
         {
             return true;
         }
+
+        public override string ToString()
+        {
+            return "Script";
+        }
     }
 }

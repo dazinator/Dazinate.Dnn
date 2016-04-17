@@ -36,5 +36,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.File
         {
             return true;
         }
+
+        public override string ToString()
+        {
+            return "File";
+        }
     }
 }

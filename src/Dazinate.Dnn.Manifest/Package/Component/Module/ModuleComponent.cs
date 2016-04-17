@@ -85,5 +85,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module
         {
             return package.Type.ToLowerInvariant() == "module";
         }
+
+        public override string ToString()
+        {
+            return "Module";
+        }
     }
 }

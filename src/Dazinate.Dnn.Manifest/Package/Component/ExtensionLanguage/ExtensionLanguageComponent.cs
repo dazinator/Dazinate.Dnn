@@ -49,5 +49,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ExtensionLanguage
         {
             return package.Type.ToLowerInvariant() == "extensionlanguagepack";
         }
+
+        public override string ToString()
+        {
+            return "Extension Language";
+        }
     }
 }

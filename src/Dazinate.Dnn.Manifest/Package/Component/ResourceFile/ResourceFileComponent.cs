@@ -34,5 +34,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile
         {
             return true;
         }
+
+        public override string ToString()
+        {
+            return "Resource File";
+        }
     }
 }

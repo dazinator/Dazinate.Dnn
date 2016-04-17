@@ -43,5 +43,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Config
             // generic components are compatible with all packages.
             return true;
         }
+
+        public override string ToString()
+        {
+            return "Config";
+        }
     }
 }

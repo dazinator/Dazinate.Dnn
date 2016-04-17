@@ -28,5 +28,10 @@ namespace Dazinate.Dnn.Manifest.Package.Dependency
         {
             visitor.Visit(this);
         }
+
+        public override string ToString()
+        {
+            return "Manged Package";
+        }
     }
 }

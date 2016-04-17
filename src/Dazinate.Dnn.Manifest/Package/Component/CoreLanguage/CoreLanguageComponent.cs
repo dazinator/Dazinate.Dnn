@@ -49,5 +49,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.CoreLanguage
         {
             return package.Type.ToLowerInvariant() == "corelanguagepack";
         }
+
+        public override string ToString()
+        {
+            return "Core Language";
+        }
     }
 }

@@ -51,5 +51,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.SkinObject
         {
             return package.Type.ToLowerInvariant() == "skinobject";
         }
+
+        public override string ToString()
+        {
+            return "Skin Object";
+        }
     }
 }

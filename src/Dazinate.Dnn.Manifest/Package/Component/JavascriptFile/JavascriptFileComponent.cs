@@ -35,5 +35,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile
         {
             return package.Type.ToLowerInvariant() == "javascript_library";
         }
+
+        public override string ToString()
+        {
+            return "Javascript File";
+        }
     }
 }

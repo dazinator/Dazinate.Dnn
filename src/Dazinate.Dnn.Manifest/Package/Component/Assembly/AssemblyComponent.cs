@@ -28,5 +28,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly
             // generic components are compatible with all packages.
             return true;
         }
+
+        public override string ToString()
+        {
+            return "Assembly";
+        }
     }
 }
