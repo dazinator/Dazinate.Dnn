@@ -1,5 +1,5 @@
 ﻿using System;
-using Dazinate.Dnn.Manifest.Model.Package;
+using Dazinate.Dnn.Manifest.Package;
 
 namespace Dazinate.Dnn.Manifest.Factory
 {
@@ -8,7 +8,7 @@ namespace Dazinate.Dnn.Manifest.Factory
     {
         public IPackage CreateNew()
         {
-            return Csla.DataPortal.Create<Package>();
+            return Csla.DataPortal.Create<Package.Package>();
         }
     }
 }

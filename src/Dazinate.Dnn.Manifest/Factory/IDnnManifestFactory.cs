@@ -1,6 +1,5 @@
 ﻿using System.Xml;
-using Dazinate.Dnn.Manifest.Model;
-using Dazinate.Dnn.Manifest.Model.Manifest;
+using Dazinate.Dnn.Manifest.Base;
 
 namespace Dazinate.Dnn.Manifest.Factory
 {

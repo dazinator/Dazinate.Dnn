@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Dazinate.Dnn.Manifest.Factory;
-using Dazinate.Dnn.Manifest.Model.Component;
-using Dazinate.Dnn.Manifest.Model.Manifest;
-using Dazinate.Dnn.Manifest.Model.Package;
+using Dazinate.Dnn.Manifest.Package.Component.Cleanup;
 using Xunit;
 
 namespace Dazinate.Dnn.Manifest.Tests
@@ -201,7 +199,7 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var brokenRules = package.GetBrokenRules();
-            var iconRule = brokenRules.GetFirstBrokenRule(Package.IconFileProperty);
+            var iconRule = brokenRules.GetFirstBrokenRule(Package.Package.IconFileProperty);
             Assert.NotNull(iconRule);
 
         }
@@ -222,7 +220,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             package.AzureCompatible = true;
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.AzureCompatibleProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.AzureCompatibleProperty);
             Assert.Null(rule);
 
             // change the manifest version to below 5.
@@ -234,7 +232,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             brokenRules = package.GetBrokenRules();
-            rule = brokenRules.GetFirstBrokenRule(Package.AzureCompatibleProperty);
+            rule = brokenRules.GetFirstBrokenRule(Package.Package.AzureCompatibleProperty);
             Assert.NotNull(rule);
 
         }
@@ -259,7 +257,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.NameProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.NameProperty);
             Assert.NotNull(rule);
 
         }
@@ -284,7 +282,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.TypeProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.TypeProperty);
             Assert.NotNull(rule);
 
         }
@@ -308,7 +306,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.VersionProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.VersionProperty);
             Assert.NotNull(rule);
 
         }
@@ -332,11 +330,11 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.VersionProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.VersionProperty);
             Assert.NotNull(rule);
 
             package.Version = "1.0.2";
-            rule = brokenRules.GetFirstBrokenRule(Package.VersionProperty);
+            rule = brokenRules.GetFirstBrokenRule(Package.Package.VersionProperty);
             Assert.Null(rule);
         }
 
@@ -359,7 +357,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.FriendlyNameProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.FriendlyNameProperty);
             Assert.NotNull(rule);
 
         }
@@ -383,11 +381,11 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.FriendlyNameProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.FriendlyNameProperty);
             Assert.NotNull(rule);
 
             package.FriendlyName = "less than 250";
-            rule = brokenRules.GetFirstBrokenRule(Package.FriendlyNameProperty);
+            rule = brokenRules.GetFirstBrokenRule(Package.Package.FriendlyNameProperty);
             Assert.Null(rule);
 
         }
@@ -412,11 +410,11 @@ namespace Dazinate.Dnn.Manifest.Tests
             Assert.False(package.IsValid);
 
             var brokenRules = package.GetBrokenRules();
-            var rule = brokenRules.GetFirstBrokenRule(Package.DescriptionProperty);
+            var rule = brokenRules.GetFirstBrokenRule(Package.Package.DescriptionProperty);
             Assert.NotNull(rule);
 
             package.Description = "less than 2000";
-            rule = brokenRules.GetFirstBrokenRule(Package.DescriptionProperty);
+            rule = brokenRules.GetFirstBrokenRule(Package.Package.DescriptionProperty);
             Assert.Null(rule);
 
         }
