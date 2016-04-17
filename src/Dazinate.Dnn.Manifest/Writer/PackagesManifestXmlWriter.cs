@@ -787,6 +787,21 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
         }
 
+        public void Visit(JavascriptLibraryComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "JavaScript_Library");
+            
+            WriteElementIfNotEmpty("libraryName", component.LibraryName);
+            WriteElementIfNotEmpty("fileName", component.FileName);
+            WriteElementIfNotEmpty("preferredScriptLocation", component.PreferredScriptLocation);
+            WriteElementIfNotEmpty("CDNPath", component.CdnPath);
+            WriteElementIfNotEmpty("objectName", component.ObjectName);
+
+            _writer.WriteEndElement();
+          
+        }
+
         public void Visit(SkinFilesList list)
         {
             foreach (var file in list)

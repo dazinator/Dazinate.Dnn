@@ -253,6 +253,15 @@
             </jsfile>
           </jsfiles>
         </component>
+        <component type="JavaScript_Library">
+          <javaScriptLibrary>
+            <libraryName>jquery</libraryName>
+            <fileName>jquery.min.js</fileName>
+            <preferredScriptLocation>BodyBottom</preferredScriptLocation>
+            <CDNPath>https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.2/jquery.min.js</CDNPath>
+            <objectName>jQuery</objectName>
+          </javaScriptLibrary>
+        </component>
       </components>
     </package>
   </packages>

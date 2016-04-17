@@ -7,7 +7,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component
     {
         IJavascriptFilesList Files { get; }
 
-        string LibraryFolderName { get; }
+        string LibraryFolderName { get; set; }
 
     }
 }

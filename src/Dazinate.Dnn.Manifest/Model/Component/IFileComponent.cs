@@ -6,7 +6,7 @@ namespace Dazinate.Dnn.Manifest.Model.Component
     {
         IFilesList Files { get; }
 
-        string BasePath { get; }
+        string BasePath { get; set; }
 
     }
 }

@@ -2,10 +2,8 @@
 using System.Collections.Concurrent;
 using Csla.Server;
 using Dazinate.Dnn.Manifest.Factory;
-using Dazinate.Dnn.Manifest.Model;
 using Dazinate.Dnn.Manifest.Model.AssembliesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Assembly.ObjectFactory;
-using Dazinate.Dnn.Manifest.Model.Component;
 using Dazinate.Dnn.Manifest.Model.Component.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Component.SubObjectFactory;
 using Dazinate.Dnn.Manifest.Model.ComponentsList.ObjectFactory;
@@ -16,18 +14,14 @@ using Dazinate.Dnn.Manifest.Model.DashboardControlsList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Dependency;
 using Dazinate.Dnn.Manifest.Model.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.DependencyList.ObjectFactory;
-using Dazinate.Dnn.Manifest.Model.EventAttribute;
 using Dazinate.Dnn.Manifest.Model.EventAttribute.ObjectFactory;
-using Dazinate.Dnn.Manifest.Model.EventAttributesList;
 using Dazinate.Dnn.Manifest.Model.EventAttributesList.ObjectFactory;
-using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.EventMessage.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.JavascriptFile.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.JavascriptFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.LanguageFile.ObjectFactory;
-using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.Manifest;
 using Dazinate.Dnn.Manifest.Model.Manifest.ObjectFactory;
@@ -122,7 +116,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(UrlProviderComponentSubObjectFactory),
                     typeof(SkinObjectComponentSubObjectFactory),
                     typeof(SkinComponentSubObjectFactory),
-                    typeof(JavascriptFileComponentSubObjectFactory)
+                    typeof(JavascriptFileComponentSubObjectFactory),
+                    typeof(JavascriptLibraryComponentSubObjectFactory)
                 });
 
             // Assembly component
@@ -170,7 +165,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
             // Resource File component
             container.Register<IResourceFilesListObjectFactory, ResourceFilesListObjectFactory>();
             container.Register<IResourceFileObjectFactory, ResourceFileObjectFactory>();
-            
+
             // Script component
             container.Register<IScriptsListObjectFactory, ScriptsListObjectFactory>();
             container.Register<IScriptObjectFactory, ScriptObjectFactory>();

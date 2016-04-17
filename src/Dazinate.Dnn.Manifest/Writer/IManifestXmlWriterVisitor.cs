@@ -103,5 +103,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(JavascriptFile file);
         void Visit(JavascriptFilesList list);
         void Visit(JavascriptFileComponent component);
+        void Visit(JavascriptLibraryComponent component);
     }
 }
