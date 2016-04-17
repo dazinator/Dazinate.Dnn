@@ -13,6 +13,8 @@ using Dazinate.Dnn.Manifest.Model.EventAttributesList;
 using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
+using Dazinate.Dnn.Manifest.Model.JavascriptFile;
+using Dazinate.Dnn.Manifest.Model.JavascriptFilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFile;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
@@ -98,5 +100,8 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(SkinFile file);
         void Visit(SkinFilesList list);
         void Visit(SkinComponent component);
+        void Visit(JavascriptFile file);
+        void Visit(JavascriptFilesList list);
+        void Visit(JavascriptFileComponent component);
     }
 }

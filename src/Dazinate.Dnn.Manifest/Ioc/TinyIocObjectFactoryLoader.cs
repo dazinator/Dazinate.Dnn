@@ -24,6 +24,8 @@ using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.EventMessage.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.FilesList.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.JavascriptFile.ObjectFactory;
+using Dazinate.Dnn.Manifest.Model.JavascriptFilesList.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.LanguageFile.ObjectFactory;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList.ObjectFactory;
@@ -119,7 +121,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
                     typeof(ScriptComponentSubObjectFactory),
                     typeof(UrlProviderComponentSubObjectFactory),
                     typeof(SkinObjectComponentSubObjectFactory),
-                    typeof(SkinComponentSubObjectFactory)
+                    typeof(SkinComponentSubObjectFactory),
+                    typeof(JavascriptFileComponentSubObjectFactory)
                 });
 
             // Assembly component
@@ -175,6 +178,10 @@ namespace Dazinate.Dnn.Manifest.Ioc
             // skin component
             container.Register<ISkinFilesListObjectFactory, SkinFilesListObjectFactory>();
             container.Register<ISkinFileObjectFactory, SkinFileObjectFactory>();
+
+            //  jsfile component
+            container.Register<IJavascriptFilesListObjectFactory, JavascriptFilesListObjectFactory>();
+            container.Register<IJavascriptFileObjectFactory, JavascriptFileObjectFactory>();
 
         }
 

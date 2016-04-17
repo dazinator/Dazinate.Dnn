@@ -15,6 +15,8 @@ using Dazinate.Dnn.Manifest.Model.EventAttributesList;
 using Dazinate.Dnn.Manifest.Model.EventMessage;
 using Dazinate.Dnn.Manifest.Model.File;
 using Dazinate.Dnn.Manifest.Model.FilesList;
+using Dazinate.Dnn.Manifest.Model.JavascriptFile;
+using Dazinate.Dnn.Manifest.Model.JavascriptFilesList;
 using Dazinate.Dnn.Manifest.Model.LanguageFile;
 using Dazinate.Dnn.Manifest.Model.LanguageFilesList;
 using Dazinate.Dnn.Manifest.Model.Manifest;
@@ -743,6 +745,41 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             WriteElementIfNotEmpty("skinName", component.SkinName);
             WriteElementIfNotEmpty("basePath", component.BasePath);
+
+            component.Files.Accept(this);
+
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
+
+        public void Visit(JavascriptFile file)
+        {
+            _writer.WriteStartElement("jsfile");
+
+            WriteElementIfNotEmpty("name", file.Name);
+            WriteElementIfNotEmpty("path", file.Path);
+            WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
+
+            _writer.WriteEndElement();
+
+        }
+
+        public void Visit(JavascriptFilesList list)
+        {
+            foreach (var item in list)
+            {
+                item.Accept(this);
+            }
+        }
+
+        public void Visit(JavascriptFileComponent component)
+        {
+            _writer.WriteStartElement("component");
+            _writer.WriteAttributeString("type", "JavaScriptFile");
+
+            _writer.WriteStartElement("jsfiles");
+
+            WriteElementIfNotEmpty("libraryFolderName", component.LibraryFolderName);
 
             component.Files.Accept(this);
 
