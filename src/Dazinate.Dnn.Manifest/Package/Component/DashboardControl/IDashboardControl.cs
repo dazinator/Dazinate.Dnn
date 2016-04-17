@@ -1,10 +1,9 @@
 ﻿using Csla;
 using Dazinate.Dnn.Manifest.Base;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl
 {
-    public interface IDashboardControl : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface IDashboardControl : IBusinessBase, IVisitable<IManifestVisitor>
     {
         string Key { get; set; }
         string Source { get; set; }

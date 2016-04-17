@@ -6,7 +6,6 @@ using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Package.Component;
 using Dazinate.Dnn.Manifest.Package.Dependency;
 using Dazinate.Dnn.Manifest.Package.ObjectFactory;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package
 {
@@ -213,7 +212,7 @@ namespace Dazinate.Dnn.Manifest.Package
 
         }
 
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }

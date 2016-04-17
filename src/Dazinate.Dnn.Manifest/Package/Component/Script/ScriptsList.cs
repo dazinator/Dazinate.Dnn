@@ -1,8 +1,8 @@
 using System;
 using Csla;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Package.Component.Script.ObjectFactory;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Script
 {
@@ -16,7 +16,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script
         {
         }
 
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }

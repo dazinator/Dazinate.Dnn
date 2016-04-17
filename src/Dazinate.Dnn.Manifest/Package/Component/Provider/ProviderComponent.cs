@@ -1,8 +1,8 @@
 using System;
 using Csla;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Package.Component.ObjectFactory;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Provider
 {
@@ -11,7 +11,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Provider
     public class ProviderComponent : BusinessBase<ProviderComponent>, IProviderComponent
     {
 
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }

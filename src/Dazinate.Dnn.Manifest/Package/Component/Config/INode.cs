@@ -1,10 +1,9 @@
 using Csla;
 using Dazinate.Dnn.Manifest.Base;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Config
 {
-    public interface INode : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface INode : IBusinessBase, IVisitable<IManifestVisitor>
     {
         string Path { get; set; }
         NodeAction? Action { get; set; }

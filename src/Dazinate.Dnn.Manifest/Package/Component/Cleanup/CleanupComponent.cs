@@ -1,9 +1,9 @@
 using System;
 using Csla;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Package.Component.ObjectFactory;
 using Dazinate.Dnn.Manifest.Package.Component.Shared.File;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Cleanup
 {
@@ -33,7 +33,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Cleanup
             set { SetProperty(FilesListProperty, value); }
         }
 
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }

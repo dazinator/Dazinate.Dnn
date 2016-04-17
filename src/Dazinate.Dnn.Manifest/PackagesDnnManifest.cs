@@ -5,9 +5,9 @@ using System.Xml;
 using Csla;
 using Csla.Core;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.ObjectFactory;
 using Dazinate.Dnn.Manifest.Package;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest
 {
@@ -104,12 +104,12 @@ namespace Dazinate.Dnn.Manifest
             base.PropertyHasChanged(property);
         }
         
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }
 
-        public object SaveToXml(XmlWriter writer)
+        public IDnnManifest SaveToXml(XmlWriter writer)
         {
             var result = Csla.DataPortal.Update(new SaveToXmlCommand(this));
             writer.WriteRaw(result.Xml);

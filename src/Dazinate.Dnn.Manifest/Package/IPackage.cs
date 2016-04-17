@@ -2,11 +2,10 @@ using Csla;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Package.Component;
 using Dazinate.Dnn.Manifest.Package.Dependency;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package
 {
-    public interface IPackage : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface IPackage : IBusinessBase, IVisitable<IManifestVisitor>
     {
 
         //IDnnManifest Manifest { get; set; }

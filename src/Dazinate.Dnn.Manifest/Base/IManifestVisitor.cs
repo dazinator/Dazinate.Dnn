@@ -22,9 +22,9 @@ using Dazinate.Dnn.Manifest.Package.Component.SkinObject;
 using Dazinate.Dnn.Manifest.Package.Component.UrlProvider;
 using Dazinate.Dnn.Manifest.Package.Dependency;
 
-namespace Dazinate.Dnn.Manifest.Writer
+namespace Dazinate.Dnn.Manifest.Base
 {
-    public interface IManifestXmlWriterVisitor
+    public interface IManifestVisitor
     {
         void Visit(IPackagesDnnManifest packagesManifest);
         void Visit(ILicense license);
@@ -32,12 +32,17 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(IPackage package);
         void Visit(IPackagesList list);
         void Visit(IReleaseNotes releaseNotes);
+
+        #region Dependencies
         void Visit(IDependenciesList list);
         void Visit(CoreVersionDependency dependency);
         void Visit(ManagedPackageDependency dependency);
         void Visit(PackageDependency dependency);
         void Visit(TypeDependency dependency);
         void Visit(CustomDependency dependency);
+        #endregion
+
+        #region components
         void Visit(IAssemblyComponent component);
         void Visit(IAssembliesList list);
         void Visit(IAssembly assembly);
@@ -88,5 +93,6 @@ namespace Dazinate.Dnn.Manifest.Writer
         void Visit(JavascriptFilesList list);
         void Visit(JavascriptFileComponent component);
         void Visit(JavascriptLibraryComponent component);
+        #endregion
     }
 }

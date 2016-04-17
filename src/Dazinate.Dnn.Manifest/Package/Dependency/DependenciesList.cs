@@ -1,9 +1,9 @@
 using System;
 using Csla;
 using Csla.Server;
+using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Package.Dependency.ObjectFactory;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Dependency
 {
@@ -22,7 +22,7 @@ namespace Dazinate.Dnn.Manifest.Package.Dependency
             _factory = factory;
         }
 
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }

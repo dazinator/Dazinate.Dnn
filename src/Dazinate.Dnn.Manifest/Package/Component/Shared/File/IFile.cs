@@ -1,10 +1,9 @@
 using Csla;
 using Dazinate.Dnn.Manifest.Base;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File
 {
-    public interface IFile : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface IFile : IBusinessBase, IVisitable<IManifestVisitor>
     {
         string Path { get; set; }
         string Name { get; set; }

@@ -45,5 +45,6 @@ namespace Dazinate.Dnn.Manifest.Package.ObjectFactory
             packagesList.Add(package);
         }
 
+       
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using Csla;
-using Dazinate.Dnn.Manifest.Writer;
+using Dazinate.Dnn.Manifest.Base;
 
 namespace Dazinate.Dnn.Manifest.Package
 {
@@ -55,7 +55,7 @@ namespace Dazinate.Dnn.Manifest.Package
 
         }
 
-        public void Accept(IManifestXmlWriterVisitor visitor)
+        public void Accept(IManifestVisitor visitor)
         {
             visitor.Visit(this);
         }

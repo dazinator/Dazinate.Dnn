@@ -1,4 +1,5 @@
 ﻿using System;
+using Csla;
 using Dazinate.Dnn.Manifest.Ioc;
 
 namespace Dazinate.Dnn.Manifest.Base
@@ -30,6 +31,15 @@ namespace Dazinate.Dnn.Manifest.Base
             return instance;
         }
 
-        
+        protected void MarkListSaved<T>(IBusinessListBase<T> list)
+        {
+            var deletedItems = GetDeletedList<T>(list);
+            deletedItems.Clear();
+            MarkOld(list);
+        }
+
+        public IObjectActivator Activator { get { return _activator; } }
+
+
     }
 }

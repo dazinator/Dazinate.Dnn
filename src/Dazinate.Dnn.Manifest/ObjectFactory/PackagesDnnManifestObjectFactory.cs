@@ -9,7 +9,6 @@ using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Package;
 using Dazinate.Dnn.Manifest.Package.ObjectFactory;
 using Dazinate.Dnn.Manifest.Utils;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.ObjectFactory
 {
@@ -142,36 +141,16 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true }))
             {
-                var manifestWriter = new PackagesDnnManifestXmlWriter(xmlWriter);
+                var manifestWriter = new SaveToNewXmlFileVisitor(this.Activator, xmlWriter);
                 manifest.Accept(manifestWriter);
                 xmlWriter.Flush();
                 command.Xml = xmlStringBuilder.ToString();
             }
 
-            MarkSaved(manifest);
+           // MarkSaved(manifest);
             return command;
 
         }
 
-        private void MarkSaved(IPackagesDnnManifest manifest)
-        {
-            // mark the business object as saved
-            foreach (var i in manifest.Packages)
-            {
-                MarkOld(i);
-                MarkOld(i.License);
-                MarkOld(i.Owner);
-                if (i.ReleaseNotes != null)
-                {
-                    MarkOld(i.ReleaseNotes);
-                }
-            }
-
-            var deletedList = GetDeletedList<IPackage>(manifest.Packages);
-            deletedList.Clear();
-
-            MarkOld(manifest.Packages);
-            MarkOld(manifest);
-        }
     }
 }

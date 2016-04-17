@@ -272,7 +272,7 @@
     <Compile Include="Package\Dependency\DependenciesList.cs" />
     <Compile Include="Package\Component\Config\Node.cs" />
     <Compile Include="Package\ILicense.cs" />
-    <Compile Include="Writer\IManifestXmlWriterVisitor.cs" />
+    <Compile Include="Base\IManifestVisitor.cs" />
     <Compile Include="Exceptions\InvalidManifestFormatException.cs" />
     <Compile Include="Ioc\TinyIocObjectActivator.cs" />
     <Compile Include="Ioc\TinyIocObjectFactoryLoader.cs" />
@@ -309,7 +309,7 @@
     <Compile Include="Package\Dependency\PackageDependency.cs" />
     <Compile Include="PackagesDnnManifest.cs" />
     <Compile Include="Package\PackagesList.cs" />
-    <Compile Include="Writer\PackagesManifestXmlWriter.cs" />
+    <Compile Include="ObjectFactory\SaveToNewXmlFileVisitor.cs" />
     <Compile Include="Package\PackageType.cs" />
     <Compile Include="Package\PackageTypeList.cs" />
     <Compile Include="Package\ReleaseNotes.cs" />

@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Xml;
+using Dazinate.Dnn.Manifest.Base;
+using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Package;
 using Dazinate.Dnn.Manifest.Package.Component;
 using Dazinate.Dnn.Manifest.Package.Component.Assembly;
@@ -25,14 +27,14 @@ using Dazinate.Dnn.Manifest.Package.Component.UrlProvider;
 using Dazinate.Dnn.Manifest.Package.Dependency;
 using Dazinate.Dnn.Manifest.Utils;
 
-namespace Dazinate.Dnn.Manifest.Writer
+namespace Dazinate.Dnn.Manifest.ObjectFactory
 {
-    public class PackagesDnnManifestXmlWriter : IManifestXmlWriterVisitor
+    public class SaveToNewXmlFileVisitor : BaseObjectFactory, IManifestVisitor
     {
 
         private XmlWriter _writer;
 
-        public PackagesDnnManifestXmlWriter(XmlWriter writer)
+        public SaveToNewXmlFileVisitor(IObjectActivator activator, XmlWriter writer) : base(activator)
         {
             _writer = writer;
         }
@@ -48,67 +50,20 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(packagesManifest);
+
         }
 
-        public void Visit(IPackagesList packagesList)
+        public void Visit(IPackagesList list)
         {
             _writer.WriteStartElement("packages");
-            foreach (var package in packagesList)
+            foreach (var package in list)
             {
                 package.Accept(this);
             }
             _writer.WriteEndElement();
-        }
 
-        public void Visit(IDependenciesList dependenciesList)
-        {
-            _writer.WriteStartElement("dependencies");
-            foreach (var dep in dependenciesList)
-            {
-                dep.Accept(this);
-            }
-            _writer.WriteEndElement();
-        }
-
-        public void Visit(CoreVersionDependency dependency)
-        {
-            _writer.WriteStartElement("dependency");
-            _writer.WriteAttributeString("type", "coreVersion");
-            _writer.WriteString(dependency.Version);
-            _writer.WriteEndElement();
-        }
-
-        public void Visit(ManagedPackageDependency managedPackageDependency)
-        {
-            _writer.WriteStartElement("dependency");
-            _writer.WriteAttributeString("type", "managedPackage");
-            _writer.WriteAttributeString("version", managedPackageDependency.Version);
-            _writer.WriteString(managedPackageDependency.PackageName);
-            _writer.WriteEndElement();
-        }
-
-        public void Visit(PackageDependency packageDependency)
-        {
-            _writer.WriteStartElement("dependency");
-            _writer.WriteAttributeString("type", "package");
-            _writer.WriteString(packageDependency.PackageName);
-            _writer.WriteEndElement();
-        }
-
-        public void Visit(TypeDependency typeDependency)
-        {
-            _writer.WriteStartElement("dependency");
-            _writer.WriteAttributeString("type", "type");
-            _writer.WriteString(typeDependency.TypeName);
-            _writer.WriteEndElement();
-        }
-
-        public void Visit(CustomDependency managedPackageDependency)
-        {
-            _writer.WriteStartElement("dependency");
-            _writer.WriteAttributeString("type", managedPackageDependency.Type);
-            _writer.WriteString(managedPackageDependency.Value);
-            _writer.WriteEndElement();
+            MarkListSaved<IPackage>(list);
         }
 
         public void Visit(IPackage package)
@@ -137,6 +92,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             package.Components.Accept(this);
 
             _writer.WriteEndElement();
+
+            MarkOld(package);
         }
 
         public void Visit(IOwner owner)
@@ -147,6 +104,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteElementString("url", owner.Url);
             _writer.WriteElementString("email", owner.Email);
             _writer.WriteEndElement();
+
+            MarkOld(owner);
         }
 
         public void Visit(ILicense licence)
@@ -166,6 +125,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             _writer.WriteEndElement();
+
+            MarkOld(licence);
         }
 
         public void Visit(IReleaseNotes releaseNotes)
@@ -186,8 +147,77 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(releaseNotes);
+
         }
 
+        #region Dependencies
+
+        public void Visit(IDependenciesList dependenciesList)
+        {
+            _writer.WriteStartElement("dependencies");
+            foreach (var dep in dependenciesList)
+            {
+                dep.Accept(this);
+            }
+            _writer.WriteEndElement();
+
+            MarkListSaved<IDependency>(dependenciesList);
+        }
+
+        public void Visit(CoreVersionDependency dependency)
+        {
+            _writer.WriteStartElement("dependency");
+            _writer.WriteAttributeString("type", "coreVersion");
+            _writer.WriteString(dependency.Version);
+            _writer.WriteEndElement();
+
+            MarkOld(dependency);
+        }
+
+        public void Visit(ManagedPackageDependency dependency)
+        {
+            _writer.WriteStartElement("dependency");
+            _writer.WriteAttributeString("type", "managedPackage");
+            _writer.WriteAttributeString("version", dependency.Version);
+            _writer.WriteString(dependency.PackageName);
+            _writer.WriteEndElement();
+
+            MarkOld(dependency);
+        }
+
+        public void Visit(PackageDependency dependency)
+        {
+            _writer.WriteStartElement("dependency");
+            _writer.WriteAttributeString("type", "package");
+            _writer.WriteString(dependency.PackageName);
+            _writer.WriteEndElement();
+
+            MarkOld(dependency);
+        }
+
+        public void Visit(TypeDependency dependency)
+        {
+            _writer.WriteStartElement("dependency");
+            _writer.WriteAttributeString("type", "type");
+            _writer.WriteString(dependency.TypeName);
+            _writer.WriteEndElement();
+
+            MarkOld(dependency);
+        }
+
+        public void Visit(CustomDependency dependency)
+        {
+            _writer.WriteStartElement("dependency");
+            _writer.WriteAttributeString("type", dependency.Type);
+            _writer.WriteString(dependency.Value);
+            _writer.WriteEndElement();
+
+            MarkOld(dependency);
+        }
+
+        #endregion
+        
         #region components
 
         public void Visit(IComponentsList list)
@@ -203,6 +233,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
                 _writer.WriteEndElement();
             }
+
+            MarkListSaved<IComponent>(list);
 
         }
 
@@ -222,6 +254,7 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
+            MarkOld(component);
 
         }
 
@@ -235,6 +268,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
 
             _writer.WriteEndElement();
+
+            MarkOld(file);
         }
 
         public void Visit(IFilesList list)
@@ -246,6 +281,8 @@ namespace Dazinate.Dnn.Manifest.Writer
                     item.Accept(this);
                 }
             }
+
+            MarkListSaved<IFile>(list);
         }
 
         public void Visit(ICleanupComponent component)
@@ -266,6 +303,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(INode node)
@@ -304,6 +343,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteRaw(node.InnerXml);
 
             _writer.WriteEndElement();
+
+            MarkOld(node);
         }
 
         public void Visit(INodesList list)
@@ -314,6 +355,8 @@ namespace Dazinate.Dnn.Manifest.Writer
                 node.Accept(this);
             }
             _writer.WriteEndElement();
+
+            MarkListSaved<INode>(list);
         }
 
         public void Visit(IConfigComponent component)
@@ -346,6 +389,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(IContainerFilesList list)
@@ -354,6 +399,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 file.Accept(this);
             }
+
+            MarkListSaved<IContainerFile>(list);
         }
 
         public void Visit(IContainerComponent component)
@@ -371,6 +418,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
+            MarkOld(component);
+
         }
 
         public void Visit(ContainerFile file)
@@ -381,6 +430,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteElementString("name", file.Name);
 
             _writer.WriteEndElement();
+
+            MarkOld(file);
 
         }
 
@@ -393,6 +444,7 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(component);
 
         }
 
@@ -402,6 +454,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 item.Accept(this);
             }
+
+            MarkListSaved<IDashboardControl>(list);
         }
 
         public void Visit(DashboardControl dashboardControl)
@@ -418,6 +472,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
 
             _writer.WriteEndElement();
+
+            MarkOld(dashboardControl);
         }
 
         public void Visit(FileComponent component)
@@ -439,6 +495,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(component);
+
         }
 
         public void Visit(LanguageFilesList list)
@@ -447,6 +505,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 file.Accept(this);
             }
+
+            MarkListSaved<ILanguageFile>(list);
         }
 
         public void Visit(LanguageFile file)
@@ -457,6 +517,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteElementString("name", file.Name);
 
             _writer.WriteEndElement();
+
+            MarkOld(file);
         }
 
         public void Visit(CoreLanguageComponent component)
@@ -479,6 +541,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
 
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(ExtensionLanguageComponent component)
@@ -501,6 +565,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
 
             _writer.WriteEndElement();
+
+            MarkOld(component);
 
         }
 
@@ -540,6 +606,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
+            MarkOld(component);
+
         }
 
         public void Visit(EventMessage eventMessage)
@@ -556,11 +624,15 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(eventMessage);
+
         }
 
         public void Visit(EventAttribute eventAttribute)
         {
             _writer.WriteElementString(eventAttribute.Name, eventAttribute.Value);
+
+            MarkOld(eventAttribute);
         }
 
         public void Visit(EventAttributesList list)
@@ -573,6 +645,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             _writer.WriteEndElement();
+
+            MarkListSaved<IEventAttribute>(list);
         }
 
         public void Visit(SupportedFeaturesList list)
@@ -586,6 +660,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkListSaved<ISupportedFeature>(list);
+
         }
 
         public void Visit(SupportedFeature supportedFeature)
@@ -593,6 +669,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteStartElement("supportedFeature");
             _writer.WriteAttributeString("type", supportedFeature.FeatureType.ToString());
             _writer.WriteEndElement();
+
+            MarkOld(supportedFeature);
         }
 
         public void Visit(ModuleDefinitionsList list)
@@ -603,6 +681,8 @@ namespace Dazinate.Dnn.Manifest.Writer
                 item.Accept(this);
             }
             _writer.WriteEndElement();
+
+            MarkListSaved<IModuleDefinition>(list);
         }
 
         public void Visit(ProviderComponent component)
@@ -610,6 +690,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteStartElement("component");
             _writer.WriteAttributeString("type", "Provider");
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(ResourceFileComponent component)
@@ -625,6 +707,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(ResourceFilesList list)
@@ -633,6 +717,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 item.Accept(this);
             }
+
+            MarkListSaved<IResourceFile>(list);
         }
 
         public void Visit(ResourceFile file)
@@ -644,6 +730,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
 
             _writer.WriteEndElement();
+
+            MarkOld(file);
         }
 
         public void Visit(Script script)
@@ -660,6 +748,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(script);
+
         }
 
         public void Visit(ScriptsList list)
@@ -668,6 +758,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 item.Accept(this);
             }
+
+            MarkListSaved<IScript>(list);
         }
 
         public void Visit(ScriptComponent component)
@@ -683,6 +775,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(UrlProviderComponent component)
@@ -699,9 +793,11 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("replaceAllUrls", component.ReplaceAllUrls.ToString());
             WriteElementIfNotEmpty("rewriteAllUrls", component.RewriteAllUrls.ToString());
             _writer.WriteElementString("desktopModule", component.DesktopModule);
-            
+
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            MarkOld(component);
 
         }
 
@@ -719,8 +815,10 @@ namespace Dazinate.Dnn.Manifest.Writer
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
+            MarkOld(component);
+
         }
-      
+
         public void Visit(SkinComponent component)
         {
             _writer.WriteStartElement("component");
@@ -735,6 +833,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(JavascriptFile file)
@@ -747,6 +847,8 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
 
+            MarkOld(file);
+
         }
 
         public void Visit(JavascriptFilesList list)
@@ -755,6 +857,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 item.Accept(this);
             }
+
+            MarkListSaved<IJavascriptFile>(list);
         }
 
         public void Visit(JavascriptFileComponent component)
@@ -770,13 +874,15 @@ namespace Dazinate.Dnn.Manifest.Writer
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            MarkOld(component);
         }
 
         public void Visit(JavascriptLibraryComponent component)
         {
             _writer.WriteStartElement("component");
             _writer.WriteAttributeString("type", "JavaScript_Library");
-            
+
             WriteElementIfNotEmpty("libraryName", component.LibraryName);
             WriteElementIfNotEmpty("fileName", component.FileName);
             WriteElementIfNotEmpty("preferredScriptLocation", component.PreferredScriptLocation);
@@ -784,7 +890,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("objectName", component.ObjectName);
 
             _writer.WriteEndElement();
-          
+
+            MarkOld(component);
         }
 
         public void Visit(SkinFilesList list)
@@ -793,6 +900,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             {
                 file.Accept(this);
             }
+
+            MarkListSaved<ISkinFile>(list);
         }
 
         public void Visit(SkinFile file)
@@ -805,6 +914,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
 
             _writer.WriteEndElement();
+
+            MarkOld(file);
         }
 
         public void Visit(ModuleDefinition moduleDefinition)
@@ -819,6 +930,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             moduleDefinition.ModulePermissions.Accept(this);
 
             _writer.WriteEndElement();
+
+            MarkOld(moduleDefinition);
         }
 
         public void Visit(ModuleControlsList list)
@@ -831,6 +944,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             _writer.WriteEndElement();
+
+            MarkListSaved<IModuleControl>(list);
         }
 
         public void Visit(ModuleControl moduleControl)
@@ -849,6 +964,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotNull("viewOrder", moduleControl.ViewOrder);
 
             _writer.WriteEndElement();
+
+            MarkOld(moduleControl);
         }
 
         public void Visit(ModulePermissionsList list)
@@ -861,6 +978,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             }
 
             _writer.WriteEndElement();
+
+            MarkListSaved<IModulePermission>(list);
         }
 
         public void Visit(ModulePermission modulePermission)
@@ -873,6 +992,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteAttributeIfNotEmpty("name", modulePermission.Name);
 
             _writer.WriteEndElement();
+
+            MarkOld(modulePermission);
 
         }
 
@@ -887,18 +1008,22 @@ namespace Dazinate.Dnn.Manifest.Writer
 
                 _writer.WriteEndElement();
             }
+
+            MarkOld(component);
         }
 
-        public void Visit(IAssembliesList assembliesList)
+        public void Visit(IAssembliesList list)
         {
             _writer.WriteStartElement("assemblies");
 
-            foreach (var assy in assembliesList)
+            foreach (var assy in list)
             {
                 assy.Accept(this);
             }
 
             _writer.WriteEndElement();
+
+            MarkListSaved<IAssembly>(list);
 
         }
 
@@ -915,6 +1040,8 @@ namespace Dazinate.Dnn.Manifest.Writer
             WriteElementIfNotEmpty("version", assembly.Version);
 
             _writer.WriteEndElement();
+
+            MarkOld(assembly);
 
         }
 

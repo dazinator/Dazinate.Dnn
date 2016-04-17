@@ -1,10 +1,9 @@
 using Csla;
 using Dazinate.Dnn.Manifest.Base;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Module
 {
-    public interface IModuleControl : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface IModuleControl : IBusinessBase, IVisitable<IManifestVisitor>
     {
         string ControlKey { get; set; }
 

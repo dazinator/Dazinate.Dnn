@@ -1,13 +1,12 @@
 using System.Xml;
 using Csla;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Base
 {
-    public interface IDnnManifest : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface IDnnManifest : IBusinessBase, IVisitable<IManifestVisitor>
     {
         ManifestType Type { get; set; }
         string Version { get; set; }
-        object SaveToXml(XmlWriter writer);
+        IDnnManifest SaveToXml(XmlWriter writer);
     }
 }

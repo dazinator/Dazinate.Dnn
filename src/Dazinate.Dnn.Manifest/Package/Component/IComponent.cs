@@ -1,10 +1,9 @@
 using Csla;
 using Dazinate.Dnn.Manifest.Base;
-using Dazinate.Dnn.Manifest.Writer;
 
 namespace Dazinate.Dnn.Manifest.Package.Component
 {
-    public interface IComponent : IBusinessBase, IVisitable<IManifestXmlWriterVisitor>
+    public interface IComponent : IBusinessBase, IVisitable<IManifestVisitor>
     {
         /// <summary>
         /// The component returns whether it is compatible with the particular package.
