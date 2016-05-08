@@ -420,6 +420,25 @@ namespace Dazinate.Dnn.Manifest.Tests
         }
 
 
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Can_Add_Dependency_To_Package(string manifestFile)
+        {
+
+            var xmlContents = LoadManifestXml(manifestFile);
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+
+            // Act           
+            var dnnManifest = factory.Get(xmlContents);
+            var package = dnnManifest.Packages[0];
+            var dep = package.Dependencies.AddNewCoreVersionDependency();
+          //  Assert.True(package.IsNew);
+            Assert.True(package.Dependencies.Contains(dep));
+
+
+        }
+
+
     }
 
 

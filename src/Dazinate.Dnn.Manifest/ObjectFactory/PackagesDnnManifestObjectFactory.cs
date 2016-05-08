@@ -152,5 +152,14 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         }
 
+        public PackagesDnnManifest Create()
+        {
+            var obj = CreateInstance<PackagesDnnManifest>();
+            obj.Packages = _packagesListFactory.Create();
+            MarkNew(obj);
+            CheckRules(obj);
+            return obj;
+        }
+
     }
 }

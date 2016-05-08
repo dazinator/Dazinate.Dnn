@@ -8,8 +8,9 @@ namespace Dazinate.Dnn.Manifest.Factory
         public abstract IDnnManifest Get(string xmlContents);
 
         public abstract IDnnManifest Get(XmlReader reader);
-
-
-    
+        public IDnnManifest CreateNewManifest()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

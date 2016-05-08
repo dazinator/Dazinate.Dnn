@@ -1,0 +1,21 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <owner>
+        <name />
+        <organization />
+        <url />
+        <email />
+      </owner>
+      <dependencies>
+        <dependency type="coreVersion">5.0</dependency>
+        <dependency type="Custom">SpecialValue</dependency>
+        <dependency type="managedPackage" version="1.0.0">SomeOtherPackage</dependency>
+        <dependency type="package">AndAnotherPackage</dependency>
+        <dependency type="type">System.Version</dependency>
+      </dependencies>
+    </package>
+  </packages>
+</dotnetnuke>

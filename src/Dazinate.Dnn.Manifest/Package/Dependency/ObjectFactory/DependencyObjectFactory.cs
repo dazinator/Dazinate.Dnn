@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -92,5 +93,51 @@ namespace Dazinate.Dnn.Manifest.Package.Dependency.ObjectFactory
             // var version = XmlUtils.ReadElement(nav, "dependency").ToLowerInvariant();
 
         }
+
+        public IDependency Create(DependencyType depType)
+        {
+            IDependency dep = null;
+            switch (depType)
+            {
+                case DependencyType.CoreVersion:
+                    dep = CreateInstance<CoreVersionDependency>();
+                    break;
+
+                case DependencyType.Custom:
+                    dep = CreateInstance<CustomDependency>();
+                    break;
+
+                case DependencyType.Package:
+                    dep = CreateInstance<PackageDependency>();
+                    break;
+
+                case DependencyType.ManagedPackage:
+                    dep = CreateInstance<ManagedPackageDependency>();
+                    break;
+
+                case DependencyType.Type:
+                    dep = CreateInstance<TypeDependency>();
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            MarkAsChild(dep);
+            MarkNew(dep);
+            CheckRules(dep);
+            return dep;
+        }
+
+
+    }
+
+    public enum DependencyType
+    {
+        CoreVersion,
+        Custom,
+        ManagedPackage,
+        Package,
+        Type
     }
 }

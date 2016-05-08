@@ -71,6 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\DependencyFactory.cs" />
+    <Compile Include="Factory\IDependencyFactory.cs" />
     <Compile Include="Package\Component\Assembly\AssembliesList.cs" />
     <Compile Include="Package\Component\CoreLanguage\CoreLanguageComponent.cs" />
     <Compile Include="Package\Component\DashboardControl\DashboardControlComponent.cs" />

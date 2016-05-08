@@ -38,6 +38,14 @@ namespace Dazinate.Dnn.Manifest.Package.ObjectFactory
             return packagesList;
         }
 
+        public IPackagesList Create()
+        {
+            var list = CreateInstance<PackagesList>();
+            MarkAsChild(list);
+            CheckRules(list);
+            return list;
+        }
+
 
         private void LoadPackage(XPathNavigator packageNav, PackagesList packagesList)
         {

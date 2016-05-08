@@ -8,6 +8,7 @@ using ApprovalTests.Reporters;
 using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
+using Dazinate.Dnn.Manifest.Package.Dependency;
 using Xunit;
 
 namespace Dazinate.Dnn.Manifest.Tests
@@ -46,13 +47,61 @@ namespace Dazinate.Dnn.Manifest.Tests
             // Act           
             var dnnManifest = factory.Get(xmlContents);
             dnnManifest.Packages[0].Description = "changed";
-           
+
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
+
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Create_Manifest()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+          
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
             
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // The auth system package has some dependencies.
+            var dependency = (CoreVersionDependency)authSystemPackage.Dependencies.AddNewCoreVersionDependency();
+            dependency.Version = "5.0";
+
+            var customDependency = (CustomDependency)authSystemPackage.Dependencies.AddNewCustomDependency();
+            customDependency.Type = "Custom";
+            customDependency.Value = "SpecialValue";
+
+            var managedPackagedDependency = (ManagedPackageDependency)authSystemPackage.Dependencies.AddNewManagedPackageDependency();
+            managedPackagedDependency.PackageName = "SomeOtherPackage";
+            managedPackagedDependency.Version = "1.0.0";
+
+            var packagedDependency = (PackageDependency)authSystemPackage.Dependencies.AddNewPackageDependency();
+            packagedDependency.PackageName = "AndAnotherPackage";
+
+            var typeDependency = (TypeDependency)authSystemPackage.Dependencies.AddNewTypeDependency();
+            typeDependency.TypeName = "System.Version";
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+
             // Now verify the xml looks good.
             Approvals.VerifyXml(xmlStringBuilder.ToString());
         }

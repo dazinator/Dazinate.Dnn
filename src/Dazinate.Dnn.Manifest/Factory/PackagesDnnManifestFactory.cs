@@ -35,5 +35,10 @@ namespace Dazinate.Dnn.Manifest.Factory
             var crit = new SingleCriteria<string>(xmlContents);
             return Csla.DataPortal.Fetch<PackagesDnnManifest>(crit);
         }
+
+        public IPackagesDnnManifest CreateNewManifest()
+        {
+            return Csla.DataPortal.Create<PackagesDnnManifest>();
+        }
     }
 }

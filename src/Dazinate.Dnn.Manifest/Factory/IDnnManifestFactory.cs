@@ -7,5 +7,7 @@ namespace Dazinate.Dnn.Manifest.Factory
     {
         TModel Get(string xmlContents);
         TModel Get(XmlReader reader);
+
+        TModel CreateNewManifest();
     }
 }
