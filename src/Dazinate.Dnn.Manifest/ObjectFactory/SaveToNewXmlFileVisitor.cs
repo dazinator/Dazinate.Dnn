@@ -56,12 +56,15 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(IPackagesList list)
         {
-            _writer.WriteStartElement("packages");
-            foreach (var package in list)
+            if (list.Any())
             {
-                package.Accept(this);
+                _writer.WriteStartElement("packages");
+                foreach (var package in list)
+                {
+                    package.Accept(this);
+                }
+                _writer.WriteEndElement();
             }
-            _writer.WriteEndElement();
 
             MarkListSaved<IPackage>(list);
         }
@@ -98,12 +101,16 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(IOwner owner)
         {
-            _writer.WriteStartElement("owner");
-            _writer.WriteElementString("name", owner.Name);
-            _writer.WriteElementString("organization", owner.Organisation);
-            _writer.WriteElementString("url", owner.Url);
-            _writer.WriteElementString("email", owner.Email);
-            _writer.WriteEndElement();
+
+            if (!owner.IsEmpty())
+            {
+                _writer.WriteStartElement("owner");
+                _writer.WriteElementString("name", owner.Name);
+                _writer.WriteElementString("organization", owner.Organisation);
+                _writer.WriteElementString("url", owner.Url);
+                _writer.WriteElementString("email", owner.Email);
+                _writer.WriteEndElement();
+            }
 
             MarkOld(owner);
         }
@@ -153,12 +160,16 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(IDependenciesList dependenciesList)
         {
-            _writer.WriteStartElement("dependencies");
-            foreach (var dep in dependenciesList)
+            if (dependenciesList.Any())
             {
-                dep.Accept(this);
+                _writer.WriteStartElement("dependencies");
+                foreach (var dep in dependenciesList)
+                {
+                    dep.Accept(this);
+                }
+                _writer.WriteEndElement();
             }
-            _writer.WriteEndElement();
+           
 
             MarkListSaved<IDependency>(dependenciesList);
         }
@@ -347,12 +358,15 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(INodesList list)
         {
-            _writer.WriteStartElement("nodes");
-            foreach (var node in list)
+            if (list.Any())
             {
-                node.Accept(this);
+                _writer.WriteStartElement("nodes");
+                foreach (var node in list)
+                {
+                    node.Accept(this);
+                }
+                _writer.WriteEndElement();
             }
-            _writer.WriteEndElement();
 
             MarkListSaved<INode>(list);
         }
@@ -411,7 +425,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             _writer.WriteElementString("basePath", component.BasePath);
             _writer.WriteElementString("containerName", component.ContainerName);
 
-            component.Files.Accept(this);
+            component.Files?.Accept(this);
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -438,7 +452,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             _writer.WriteStartElement("component");
             _writer.WriteAttributeString("type", "DashboardControl");
 
-            component.Controls.Accept(this);
+            component.Controls?.Accept(this);
 
             _writer.WriteEndElement();
 
@@ -635,28 +649,35 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(EventAttributesList list)
         {
-            _writer.WriteStartElement("attributes");
-
-            foreach (var att in list)
+            if (list.Any())
             {
-                att.Accept(this);
-            }
+                _writer.WriteStartElement("attributes");
 
-            _writer.WriteEndElement();
+                foreach (var att in list)
+                {
+                    att.Accept(this);
+                }
+
+                _writer.WriteEndElement();
+            }
 
             MarkListSaved<IEventAttribute>(list);
         }
 
         public void Visit(SupportedFeaturesList list)
         {
-            _writer.WriteStartElement("supportedFeatures");
-
-            foreach (var item in list)
+            if (list.Any())
             {
-                item.Accept(this);
-            }
+                _writer.WriteStartElement("supportedFeatures");
 
-            _writer.WriteEndElement();
+                foreach (var item in list)
+                {
+                    item.Accept(this);
+                }
+
+                _writer.WriteEndElement();
+            }
+            
 
             MarkListSaved<ISupportedFeature>(list);
 
@@ -673,12 +694,15 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(ModuleDefinitionsList list)
         {
-            _writer.WriteStartElement("moduleDefinitions");
-            foreach (var item in list)
+            if (list.Any())
             {
-                item.Accept(this);
+                _writer.WriteStartElement("moduleDefinitions");
+                foreach (var item in list)
+                {
+                    item.Accept(this);
+                }
+                _writer.WriteEndElement();
             }
-            _writer.WriteEndElement();
 
             MarkListSaved<IModuleDefinition>(list);
         }
@@ -701,7 +725,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
             WriteElementIfNotEmpty("basePath", component.BasePath);
 
-            component.Files.Accept(this);
+            component.Files?.Accept(this);
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -769,7 +793,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
             WriteElementIfNotEmpty("basePath", component.BasePath);
 
-            component.Scripts.Accept(this);
+            component.Scripts?.Accept(this);
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -827,7 +851,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             WriteElementIfNotEmpty("skinName", component.SkinName);
             WriteElementIfNotEmpty("basePath", component.BasePath);
 
-            component.Files.Accept(this);
+            component.Files?.Accept(this);
 
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -923,9 +947,9 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             WriteElementIfNotEmpty("friendlyName", moduleDefinition.FriendlyName);
             WriteElementIfNotNull("defaultCacheTime", moduleDefinition.DefaultCacheTime);
 
-            moduleDefinition.ModuleControls.Accept(this);
+            moduleDefinition.ModuleControls?.Accept(this);
 
-            moduleDefinition.ModulePermissions.Accept(this);
+            moduleDefinition.ModulePermissions?.Accept(this);
 
             _writer.WriteEndElement();
 
@@ -934,14 +958,17 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(ModuleControlsList list)
         {
-            _writer.WriteStartElement("moduleControls");
-
-            foreach (var item in list)
+            if (list.Any())
             {
-                item.Accept(this);
-            }
+                _writer.WriteStartElement("moduleControls");
 
-            _writer.WriteEndElement();
+                foreach (var item in list)
+                {
+                    item.Accept(this);
+                }
+
+                _writer.WriteEndElement();
+            }
 
             MarkListSaved<IModuleControl>(list);
         }
@@ -968,14 +995,17 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(ModulePermissionsList list)
         {
-            _writer.WriteStartElement("permissions");
-
-            foreach (var item in list)
+            if (list.Any())
             {
-                item.Accept(this);
-            }
+                _writer.WriteStartElement("permissions");
 
-            _writer.WriteEndElement();
+                foreach (var item in list)
+                {
+                    item.Accept(this);
+                }
+
+                _writer.WriteEndElement();
+            }
 
             MarkListSaved<IModulePermission>(list);
         }
@@ -1012,16 +1042,20 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(IAssembliesList list)
         {
-            _writer.WriteStartElement("assemblies");
-
-            foreach (var assy in list)
+            if (list.Any())
             {
-                assy.Accept(this);
+                _writer.WriteStartElement("assemblies");
+
+                foreach (var assy in list)
+                {
+                    assy.Accept(this);
+                }
+
+                _writer.WriteEndElement();
             }
 
-            _writer.WriteEndElement();
-
             MarkListSaved<IAssembly>(list);
+
 
         }
 

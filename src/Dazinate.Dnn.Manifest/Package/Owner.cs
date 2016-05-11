@@ -83,12 +83,22 @@ namespace Dazinate.Dnn.Manifest.Package
             BusinessRules.AddRule(new Csla.Rules.CommonRules.Lambda(OrganisationProperty, (c) =>
             {
                 Owner target = (Owner)c.Target;
-                if (string.IsNullOrWhiteSpace(target.Name))
+                if (string.IsNullOrWhiteSpace(target.Organisation))
                 {
                     c.AddWarningResult("You should specify an organization name for this package.");
                 }
             }));
 
+        }
+
+        public bool IsEmpty()
+        {
+            var empty = string.IsNullOrWhiteSpace(Name)
+                && string.IsNullOrWhiteSpace(Organisation)
+                && string.IsNullOrWhiteSpace(Url)
+                && string.IsNullOrWhiteSpace(Email);
+
+            return empty;
         }
 
         public void Accept(IManifestVisitor visitor)
