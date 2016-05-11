@@ -19,10 +19,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             var list = CreateInstance<ModuleControlsList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator itemNav in xpathNavigator.Select("moduleControl"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(itemNav, list);
+                foreach (XPathNavigator itemNav in xpathNavigator.Select("moduleControl"))
+                {
+                    LoadFileItem(itemNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

@@ -20,10 +20,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             var list = CreateInstance<SupportedFeaturesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator itemNav in xpathNavigator.Select("supportedFeature"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(itemNav, list);
+                // loop through packages.
+                foreach (XPathNavigator itemNav in xpathNavigator.Select("supportedFeature"))
+                {
+                    LoadFileItem(itemNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

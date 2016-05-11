@@ -20,10 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File.ObjectFactory
             var list = CreateInstance<FilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator item in xpathNavigator.Select("files/file"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(item, list);
+                foreach (XPathNavigator item in xpathNavigator.Select("files/file"))
+                {
+                    LoadFileItem(item, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

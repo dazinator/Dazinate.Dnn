@@ -479,6 +479,19 @@ namespace Dazinate.Dnn.Manifest.Tests
         }
 
 
+        [Theory]
+        [InlineData("partialmanifest.xml")]
+        public void Can_Load_From_Partial_Manifest_Xml(string manifestFile)
+        {
+
+            var xmlContents = LoadManifestXml(manifestFile);
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+
+            // Act           
+            var dnnManifest = factory.Get(xmlContents);
+           
+        }
+
 
     }
 

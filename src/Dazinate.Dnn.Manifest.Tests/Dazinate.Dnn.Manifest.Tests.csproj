@@ -109,6 +109,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="partialmanifest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="languagepackmanifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

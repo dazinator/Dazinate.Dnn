@@ -20,10 +20,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly.ObjectFactory
             var list = CreateInstance<AssembliesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("assemblies/assembly"))
+            if (xpathNavigator != null)
             {
-                LoadAssemblyItem(dependencyNav, list);
+                // loop through packages.
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("assemblies/assembly"))
+                {
+                    LoadAssemblyItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

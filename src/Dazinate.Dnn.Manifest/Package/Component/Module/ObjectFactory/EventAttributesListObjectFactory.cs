@@ -20,10 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             var list = CreateInstance<EventAttributesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.SelectChildren(XPathNodeType.Element))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                foreach (XPathNavigator dependencyNav in xpathNavigator.SelectChildren(XPathNodeType.Element))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

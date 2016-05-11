@@ -131,7 +131,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(IReleaseNotes releaseNotes)
         {
-            if (releaseNotes.IsEmpty())
+            if (!releaseNotes.IsEmpty())
             {
                 _writer.WriteStartElement("releaseNotes");
 

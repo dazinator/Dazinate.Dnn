@@ -18,10 +18,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile.ObjectFactory
 
             var list = CreateInstance<JavascriptFilesList>();
             list.RaiseListChangedEvents = false;
-          
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("jsfiles/jsfile"))
+
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("jsfiles/jsfile"))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

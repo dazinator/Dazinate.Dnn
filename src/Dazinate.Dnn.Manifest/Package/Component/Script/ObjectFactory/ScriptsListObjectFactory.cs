@@ -20,10 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script.ObjectFactory
             var list = CreateInstance<ScriptsList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator item in xpathNavigator.Select("scripts/script"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(item, list);
+                foreach (XPathNavigator item in xpathNavigator.Select("scripts/script"))
+                {
+                    LoadFileItem(item, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

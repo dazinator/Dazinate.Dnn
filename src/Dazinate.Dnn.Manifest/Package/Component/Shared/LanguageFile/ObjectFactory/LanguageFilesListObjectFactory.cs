@@ -20,10 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile.ObjectFact
             var list = CreateInstance<LanguageFilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("languageFile"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("languageFile"))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

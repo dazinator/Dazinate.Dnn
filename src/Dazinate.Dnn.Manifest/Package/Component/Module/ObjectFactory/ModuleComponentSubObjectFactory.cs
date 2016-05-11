@@ -80,7 +80,8 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             LoadProperty(component, ModuleComponent.IsPremiumProperty, isPremiumNullable);
 
             var supportedFeaturesNode = desktopModuleNode.SelectSingleNode("supportedFeatures");
-            var supportedFeaturesList = _supporedFeaturesListFactory.Fetch(supportedFeaturesNode);
+           //   supportedFeaturesNode may be null as its not mandatory.
+             var supportedFeaturesList = _supporedFeaturesListFactory.Fetch(supportedFeaturesNode);
             LoadProperty(component, ModuleComponent.SupportedFeaturesProperty, supportedFeaturesList);
 
             var moduleDefinitionsNode = desktopModuleNode.SelectSingleNode("moduleDefinitions"); 

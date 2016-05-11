@@ -20,10 +20,13 @@ namespace Dazinate.Dnn.Manifest.Package.Dependency.ObjectFactory
             var list = CreateInstance<DependenciesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("dependencies/dependency"))
+            if (xpathNavigator != null)
             {
-                LoadPackageDependency(dependencyNav, list);
+                // loop through packages.
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("dependencies/dependency"))
+                {
+                    LoadPackageDependency(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

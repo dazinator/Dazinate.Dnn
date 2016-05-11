@@ -9,6 +9,7 @@
         <url />
         <email />
       </owner>
+      <releaseNotes />
       <dependencies>
         <dependency type="coreVersion">5.0</dependency>
         <dependency type="Custom">SpecialValue</dependency>

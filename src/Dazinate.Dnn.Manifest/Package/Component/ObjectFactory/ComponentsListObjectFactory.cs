@@ -20,10 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ObjectFactory
             var list = CreateInstance<ComponentsList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator nav in xpathNavigator.Select("components/component"))
+            if (xpathNavigator != null)
             {
-                LoadComponent(nav, list);
+                foreach (XPathNavigator nav in xpathNavigator.Select("components/component"))
+                {
+                    LoadComponent(nav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

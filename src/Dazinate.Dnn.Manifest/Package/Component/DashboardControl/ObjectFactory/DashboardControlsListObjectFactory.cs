@@ -20,10 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl.ObjectFactory
             var list = CreateInstance<DashboardControlsList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator itemNav in xpathNavigator.Select("dashboardControl"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(itemNav, list);
+                foreach (XPathNavigator itemNav in xpathNavigator.Select("dashboardControl"))
+                {
+                    LoadFileItem(itemNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

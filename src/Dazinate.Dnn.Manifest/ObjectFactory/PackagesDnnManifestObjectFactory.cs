@@ -97,40 +97,9 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.TypeProperty, ManifestType.Package);
             var version = XmlUtils.ReadRequiredAttribute(rootNav, "version");
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.VersionProperty, version);
-
-
-
+            
             var packagesList = _packagesListFactory.Fetch(rootNav);
-
-
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.PackagesListProperty, packagesList);
-            //   throw new NotImplementedException();
-        }
-
-        public PackagesDnnManifest Update(PackagesDnnManifest businessObject)
-        {
-
-            // nothing really to do
-            foreach (var i in businessObject.Packages)
-            {
-                MarkOld(i);
-                MarkOld(i.License);
-                MarkOld(i.Owner);
-                if (i.ReleaseNotes != null)
-                {
-                    MarkOld(i.ReleaseNotes);
-                }
-            }
-
-            businessObject.Packages.GetDeletedList();
-            // var deletedList = businessObject.Packages.GetDeletedList();
-            var deletedList = GetDeletedList<IPackage>(businessObject.Packages);
-            deletedList.Clear();
-
-            MarkOld(businessObject.Packages);
-            MarkOld(businessObject);
-            return businessObject;
-
         }
 
         public PackagesDnnManifest.SaveToXmlCommand Execute(PackagesDnnManifest.SaveToXmlCommand command)
