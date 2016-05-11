@@ -110,21 +110,21 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public void Visit(ILicense licence)
         {
-            if (licence.IsEmpty())
+            if (!licence.IsEmpty())
             {
-                return;
+
+                _writer.WriteStartElement("license");
+
+                WriteAttributeIfNotEmpty("src", licence.SourceFile);
+
+                if (!string.IsNullOrWhiteSpace(licence.Contents))
+                {
+                    _writer.WriteInsideCDataIfNecessary(licence.Contents);
+                }
+
+                _writer.WriteEndElement();
+
             }
-
-            _writer.WriteStartElement("license");
-
-            WriteAttributeIfNotEmpty("src", licence.SourceFile);
-
-            if (!string.IsNullOrWhiteSpace(licence.Contents))
-            {
-                _writer.WriteInsideCDataIfNecessary(licence.Contents);
-            }
-
-            _writer.WriteEndElement();
 
             MarkOld(licence);
         }
@@ -133,19 +133,17 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
         {
             if (releaseNotes.IsEmpty())
             {
-                return;
+                _writer.WriteStartElement("releaseNotes");
+
+                WriteAttributeIfNotEmpty("src", releaseNotes.SourceFile);
+
+                if (!string.IsNullOrWhiteSpace(releaseNotes.Contents))
+                {
+                    _writer.WriteInsideCDataIfNecessary(releaseNotes.Contents);
+                }
+
+                _writer.WriteEndElement();
             }
-
-            _writer.WriteStartElement("releaseNotes");
-
-            WriteAttributeIfNotEmpty("src", releaseNotes.SourceFile);
-
-            if (!string.IsNullOrWhiteSpace(releaseNotes.Contents))
-            {
-                _writer.WriteInsideCDataIfNecessary(releaseNotes.Contents);
-            }
-
-            _writer.WriteEndElement();
 
             MarkOld(releaseNotes);
 
@@ -217,7 +215,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
         }
 
         #endregion
-        
+
         #region components
 
         public void Visit(IComponentsList list)
