@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dazinate.Dnn.Manifest", "Dazinate.Dnn.Manifest\Dazinate.Dnn.Manifest.csproj", "{B7876903-11D3-455A-A27C-3E860D0F01D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dazinate.Dnn.Manifest.Tests", "Dazinate.Dnn.Manifest.Tests\Dazinate.Dnn.Manifest.Tests.csproj", "{624DA476-1BE3-4DEC-B70D-AFA8531826DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{00BD9AAC-CBD9-4497-8C36-389EAE53E33E}"
+	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
+		build.cake = build.cake
+		build.cmd = build.cmd
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
