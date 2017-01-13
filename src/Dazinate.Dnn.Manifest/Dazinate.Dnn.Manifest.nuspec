@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Dazinate.Dnn.Manifest</id>
-    <version>$version$</version>
+    
     <title>DotNetNuke Manifest</title>
     <authors>Darrell Tunnell</authors>
     <owners>Darrell Tunnell</owners>
