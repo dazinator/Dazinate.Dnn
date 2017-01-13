@@ -3,7 +3,7 @@
   <metadata>
     <id>Dazinate.Dnn.Manifest</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <title>DotNetNuke Manifest</title>
     <authors>Darrell Tunnell</authors>
     <owners>Darrell Tunnell</owners>
     <projectUrl>https://github.com/dazinator/Dazinate.Dnn</projectUrl>
