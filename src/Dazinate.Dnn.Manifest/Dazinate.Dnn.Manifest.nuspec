@@ -17,6 +17,6 @@
 
   </metadata>
   <files>
-    <file src="bin\$configuration$\Dazinate.Dnn.Manifest.dll" target="lib\net45\" />
+    <file src="bin\Release\Dazinate.Dnn.Manifest.dll" target="lib\net45\" />
   </files>
 </package>
