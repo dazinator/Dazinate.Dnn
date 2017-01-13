@@ -209,7 +209,7 @@ Task("__PublishNuGetPackages")
                         //if(!nugetPackageToPublish.FullPath.Contains(excludeProjectFromPublish))
                         //{
                          // Push the package. NOTE: this also pushes the symbols package alongside.
-                        NuGetPush(nugetPackageToPublish, new NuGetPushSettings {
+                        NuGetPush($"{nugetPackageToPublish.FullPath}", new NuGetPushSettings {
                         Source = feed.Source,
                         ApiKey = apiKey
                         });                     
