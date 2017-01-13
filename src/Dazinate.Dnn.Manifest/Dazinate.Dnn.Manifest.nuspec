@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Darrell Tunnell</authors>
+    <owners>Darrell Tunnell</owners>
+    <projectUrl>https://github.com/dazinator/Dazinate.Dnn</projectUrl>
+     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for manipulating Dnn manifest files.</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Dnn DotNetNuke</tags>
+  </metadata>
+</package>
