@@ -186,26 +186,24 @@ Task("__PublishNuGetPackages")
     .Does(() =>
 {              
 
-            if(isContinuousIntegrationBuild)
-            {
+           if(isContinuousIntegrationBuild)
+           {
 
                 var feed = new
                 {
-                    Name = "NuGetOrg",
+                    Name = "NuGetOrgFeed",
                     Source = EnvironmentVariable("PUBLIC_NUGET_FEED_SOURCE")
                 };
             
-                NuGetAddSource(
-                    name:feed.Name,
-                    source:feed.Source
-                );
+              
 
                 var apiKey = EnvironmentVariable("NuGetOrgApiKey");
 
-                 GetFiles("{artifactsDir}/*.{nugetVersion}.nupkg")
+                 GetFiles($"{artifactsDir}/*.{nugetVersion}.nupkg")
                 .ToList()
                 .ForEach(nugetPackageToPublish => 
-                     {           
+                     {        
+                       Information("Pushing {0}",nugetPackageToPublish.FullPath);   
                         //if(!nugetPackageToPublish.FullPath.Contains(excludeProjectFromPublish))
                         //{
                          // Push the package. NOTE: this also pushes the symbols package alongside.
@@ -215,7 +213,9 @@ Task("__PublishNuGetPackages")
                         });                     
                      //}
                      });                     
-            }});
+            }
+
+            });
 
 
           
