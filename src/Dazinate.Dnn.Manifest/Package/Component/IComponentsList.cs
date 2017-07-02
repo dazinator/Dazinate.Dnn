@@ -6,6 +6,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component
 {
     public interface IComponentsList : IBusinessListBase<IComponent>, IVisitable<IManifestVisitor>
     {
-        IAssemblyComponent AddNewAssemblyComponent();
+        //IAssemblyComponent AddNewAssemblyComponent();
+
+        TComponent AddNewComponent<TComponent>()
+          where TComponent : class, IComponent;
+      
     }
 }

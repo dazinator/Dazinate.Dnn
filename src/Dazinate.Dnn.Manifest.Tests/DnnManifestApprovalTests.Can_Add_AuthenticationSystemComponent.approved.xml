@@ -1,0 +1,18 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="AuthenticationSystem">
+          <authenticationService>
+            <type>foo</type>
+            <settingsControlSrc>/some/settings.ascx</settingsControlSrc>
+            <loginControlSrc>/some/login.ascx</loginControlSrc>
+            <logoffControlSrc>/some/logoff.ascx</logoffControlSrc>
+          </authenticationService>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

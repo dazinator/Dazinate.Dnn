@@ -18,7 +18,7 @@
         Provider,
         ResourceFile,
         Script,
-        Shared,
+        //Shared,
         Skin,
         SkinObject,
         UrlProvider,
