@@ -28,6 +28,7 @@ using Dazinate.Dnn.Manifest.Package.Component.ResourceFile;
 using Dazinate.Dnn.Manifest.Package.Component.Script;
 using Dazinate.Dnn.Manifest.Package.Component.Skin;
 using Dazinate.Dnn.Manifest.Package.Component.SkinObject;
+using Dazinate.Dnn.Manifest.Package.Component.UrlProvider;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -630,14 +631,14 @@ namespace Dazinate.Dnn.Manifest.Tests
             var permission = (IModulePermission)moduleDefinition.ModulePermissions.AddNew();
             permission.Code = "My_Module";
             permission.Key = "MYMODREAD";
-            permission.Name = "My Module - Read stuff";            
+            permission.Name = "My Module - Read stuff";
 
             var feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
             feature.FeatureType = SupportedFeatureType.Portable;
             feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
             feature.FeatureType = SupportedFeatureType.Searchable;
             feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
-            feature.FeatureType = SupportedFeatureType.Upgradeable;           
+            feature.FeatureType = SupportedFeatureType.Upgradeable;
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
@@ -669,7 +670,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             authSystemPackage.Type = "Auth_System";
 
             // Add an assembly component with some assemblies listed.
-            var component = authSystemPackage.Components.AddNewComponent<IProviderComponent>();           
+            var component = authSystemPackage.Components.AddNewComponent<IProviderComponent>();
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
@@ -744,14 +745,14 @@ namespace Dazinate.Dnn.Manifest.Tests
             // Add an assembly component with some assemblies listed.
             var component = authSystemPackage.Components.AddNewComponent<IScriptComponent>();
             component.BasePath = "foo";
-          
+
 
             var file = (IScript)component.Scripts.AddNew();
             file.Type = ScriptType.Install;
-            file.Version = "03.01.00";           
+            file.Version = "03.01.00";
             file.Name = "03.01.00.sqldataprovider";
             file.Path = "providers\\dataproviders\\sqldataprovider";
-            
+
 
             file = (IScript)component.Scripts.AddNew();
             file.Type = ScriptType.UnInstall;
@@ -793,10 +794,10 @@ namespace Dazinate.Dnn.Manifest.Tests
             var component = authSystemPackage.Components.AddNewComponent<ISkinComponent>();
             component.BasePath = "Portals\\_default\\Skins\\MinimalExtropy";
             component.SkinName = "foo skin";
-            
-            var file = (IFile)component.Files.AddNew();         
+
+            var file = (IFile)component.Files.AddNew();
             file.Name = "index 1024.ascx.resx";
-            file.Path = "app_localresources";            
+            file.Path = "app_localresources";
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
@@ -832,7 +833,47 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.ControlKey = "TellFriend";
             component.ControlSource = "DesktopModules/YourCompanyNameSkinObjects/TellFriend.ascx";
             component.SupportsPartialRendering = false;
-           
+
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_UrlProviderComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<IUrlProviderComponent>();
+            component.DesktopModule = "Social Groups";
+            component.Name = "DNN Social Url Extension Provider";
+            component.RedirectAllUrls = true;
+            component.ReplaceAllUrls = true;
+            component.RewriteAllUrls = true;
+            component.SettingsControlSource = "DesktopModules/DNN_SocialUrlProvider/Settings.ascx";
+            component.Type = "DotNetNuke.Modules.SocialUrlProvider.SocialUrlProvider";
+            
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

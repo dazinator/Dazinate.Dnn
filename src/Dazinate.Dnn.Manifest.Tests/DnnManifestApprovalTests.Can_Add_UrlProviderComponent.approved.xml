@@ -1,0 +1,21 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="UrlProvider">
+          <urlProvider>
+            <name>DNN Social Url Extension Provider</name>
+            <type>DotNetNuke.Modules.SocialUrlProvider.SocialUrlProvider</type>
+            <settingsControlSrc>DesktopModules/DNN_SocialUrlProvider/Settings.ascx</settingsControlSrc>
+            <redirectAllUrls>True</redirectAllUrls>
+            <replaceAllUrls>True</replaceAllUrls>
+            <rewriteAllUrls>True</rewriteAllUrls>
+            <desktopModule>Social Groups</desktopModule>
+          </urlProvider>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
