@@ -21,5 +21,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Config
             visitor.Visit(this);
         }
 
+        protected override INode AddNewCore()
+        {
+            var node = Csla.DataPortal.Create<Node>();
+            this.Add(node);
+            return node;
+          
+        }
+
     }
 }

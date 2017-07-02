@@ -28,8 +28,10 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Config.ObjectFactory
 
         public IComponent Create(ComponentType componentType)
         {
-            var component = CreateInstance<ConfigComponent>();
+            var component = CreateInstance<ConfigComponent>();            
             MarkAsChild(component);
+            component.InstallNodes = CreateInstance<NodesList>();
+            component.UninstallNodes = CreateInstance<NodesList>();
             MarkNew(component);
             return component;
         }
