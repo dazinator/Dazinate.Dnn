@@ -13,6 +13,15 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IResourceFile Create()
+        {
+            var businessObject = CreateInstance<ResourceFile>();           
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
+
         public IResourceFile Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

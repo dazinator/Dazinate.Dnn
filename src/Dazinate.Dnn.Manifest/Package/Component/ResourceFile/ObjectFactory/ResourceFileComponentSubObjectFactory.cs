@@ -29,6 +29,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<ResourceFileComponent>();
+            component.Files = _filesListObjectFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;

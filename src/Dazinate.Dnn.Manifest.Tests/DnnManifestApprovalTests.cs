@@ -24,6 +24,7 @@ using Dazinate.Dnn.Manifest.Package.Component.JavascriptFile;
 using Dazinate.Dnn.Manifest.Package.Component.JavascriptLibrary;
 using Dazinate.Dnn.Manifest.Package.Component.Module;
 using Dazinate.Dnn.Manifest.Package.Component.Provider;
+using Dazinate.Dnn.Manifest.Package.Component.ResourceFile;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -666,6 +667,47 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Add an assembly component with some assemblies listed.
             var component = authSystemPackage.Components.AddNewComponent<IProviderComponent>();           
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_ResourceFileComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<IResourceFileComponent>();
+            component.BasePath = "foo";
+
+            var file = (IFile)component.Files.AddNew();
+            file.Name = "foo.ascx.resx";
+            file.Path = "resources";
+
+            file = (IFile)component.Files.AddNew();
+            file.Name = "bar.resx";
+            // file.Path = "scripts";          
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

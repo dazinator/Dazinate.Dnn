@@ -21,5 +21,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile
             visitor.Visit(this);
         }
 
+        protected override IResourceFile AddNewCore()
+        {
+            var item = Csla.DataPortal.Create<ResourceFile>();
+            this.Add(item);
+            return item;
+        }
+
     }
 }
