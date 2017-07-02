@@ -28,6 +28,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<DashboardControlComponent>();
+            component.Controls = _controlsListFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;

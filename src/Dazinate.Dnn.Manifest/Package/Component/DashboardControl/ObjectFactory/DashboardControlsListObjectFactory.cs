@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -11,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl.ObjectFactory
         public DashboardControlsListObjectFactory(IObjectActivator activator, IDashboardControlObjectFactory fileObjectFactory) : base(activator)
         {
             _fileObjectFactory = fileObjectFactory;
+        }
+
+        public IDashboardControlsList Create()
+        {
+            var list = CreateInstance<DashboardControlsList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
         }
 
         public IDashboardControlsList Fetch(XPathNavigator xpathNavigator)

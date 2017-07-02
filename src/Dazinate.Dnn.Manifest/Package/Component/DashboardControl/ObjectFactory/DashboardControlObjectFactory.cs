@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IDashboardControl Create()
+        {
+            var businessObject = CreateInstance<DashboardControl>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IDashboardControl Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

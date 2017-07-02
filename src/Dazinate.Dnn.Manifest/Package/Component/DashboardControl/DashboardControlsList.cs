@@ -21,5 +21,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl
             visitor.Visit(this);
         }
 
+        protected override IDashboardControl AddNewCore()
+        {
+            var item = Csla.DataPortal.Create<DashboardControl>();
+            this.Add(item);
+            return item;            
+        }
+
     }
 }
