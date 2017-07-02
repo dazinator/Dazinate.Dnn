@@ -441,6 +441,8 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             _writer.WriteElementString("path", file.Path);
             _writer.WriteElementString("name", file.Name);
 
+            WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
+
             _writer.WriteEndElement();
 
             MarkOld(file);

@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public IContainerFilesList Create()
+        {
+            var list = CreateInstance<ContainerFilesList>();
+            MarkAsChild(list);
+            MarkNew(list);
+            return list;
+        }
+
         public IContainerFilesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");

@@ -1,0 +1,25 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="Container">
+          <containerFiles>
+            <basePath>somefoleder/path</basePath>
+            <containerName>geewhiz</containerName>
+            <containerFile>
+              <path>files</path>
+              <name>foo.txt</name>
+              <sourceFileName>bar.txt</sourceFileName>
+            </containerFile>
+            <containerFile>
+              <path>files</path>
+              <name>bar.png</name>
+            </containerFile>
+          </containerFiles>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
