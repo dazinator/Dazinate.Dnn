@@ -5,6 +5,7 @@ using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Package.Component.ObjectFactory;
 using Dazinate.Dnn.Manifest.Package.Component.Shared.File.ObjectFactory;
 using Dazinate.Dnn.Manifest.Utils;
+using Dazinate.Dnn.Manifest.Package.Component.Shared.File;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.Cleanup.ObjectFactory
 {
@@ -30,6 +31,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Cleanup.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<CleanupComponent>();
+            component.Files = CreateInstance<FilesList>();
             MarkAsChild(component);
             MarkNew(component);
             return component;

@@ -12,6 +12,8 @@ using Dazinate.Dnn.Manifest.Package.Dependency;
 using Xunit;
 using Dazinate.Dnn.Manifest.Package.Component.Assembly;
 using Dazinate.Dnn.Manifest.Package.Component.AuthenticationSystem;
+using Dazinate.Dnn.Manifest.Package.Component.Cleanup;
+using Dazinate.Dnn.Manifest.Package.Component.Shared.File;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -32,7 +34,7 @@ namespace Dazinate.Dnn.Manifest.Tests
         {
             var dir = System.IO.Directory.GetCurrentDirectory();
             var filePath = Path.Combine(dir, localFileName);
-            var xmlContents = File.ReadAllText(filePath);
+            var xmlContents = System.IO.File.ReadAllText(filePath);
             return xmlContents;
         }
 
@@ -158,7 +160,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
-            }          
+            }
             // Now verify the xml looks good.
             Approvals.VerifyXml(xmlStringBuilder.ToString());
         }
@@ -189,7 +191,44 @@ namespace Dazinate.Dnn.Manifest.Tests
             authComponent.LoginControlSource = "/some/login.ascx";
             authComponent.LogoffControlSource = "/some/logoff.ascx";
             authComponent.SettingsControlSource = "/some/settings.ascx";
-                        
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_CleanupComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<ICleanupComponent>();
+
+            var file = (IFile)component.Files.AddNew();
+            file.Name = "foo.txt";
+            file.Path = "files";
+            file.SourceFileName = "bar.txt";
+
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
             {
