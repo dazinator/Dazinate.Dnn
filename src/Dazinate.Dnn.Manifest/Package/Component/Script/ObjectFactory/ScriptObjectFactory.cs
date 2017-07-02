@@ -15,6 +15,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IScript Create()
+        {
+            var businessObject = CreateInstance<Script>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IScript Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

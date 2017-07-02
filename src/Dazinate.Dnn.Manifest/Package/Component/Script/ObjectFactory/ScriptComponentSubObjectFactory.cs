@@ -29,6 +29,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<ScriptComponent>();
+            component.Scripts = _scriptsListObjectFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;

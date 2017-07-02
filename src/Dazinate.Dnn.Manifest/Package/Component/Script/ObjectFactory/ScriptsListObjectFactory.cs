@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script.ObjectFactory
             _scriptObjectFactory = scriptObjectFactory;
         }
 
+        public IScriptsList Create()
+        {
+            var list = CreateInstance<ScriptsList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public IScriptsList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");

@@ -25,6 +25,7 @@ using Dazinate.Dnn.Manifest.Package.Component.JavascriptLibrary;
 using Dazinate.Dnn.Manifest.Package.Component.Module;
 using Dazinate.Dnn.Manifest.Package.Component.Provider;
 using Dazinate.Dnn.Manifest.Package.Component.ResourceFile;
+using Dazinate.Dnn.Manifest.Package.Component.Script;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -708,6 +709,53 @@ namespace Dazinate.Dnn.Manifest.Tests
             file = (IFile)component.Files.AddNew();
             file.Name = "bar.resx";
             // file.Path = "scripts";          
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_ScriptComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<IScriptComponent>();
+            component.BasePath = "foo";
+          
+
+            var file = (IScript)component.Scripts.AddNew();
+            file.Type = ScriptType.Install;
+            file.Version = "03.01.00";           
+            file.Name = "03.01.00.sqldataprovider";
+            file.Path = "providers\\dataproviders\\sqldataprovider";
+            
+
+            file = (IScript)component.Scripts.AddNew();
+            file.Type = ScriptType.UnInstall;
+            file.Version = "05.01.01";
+            file.Name = "uninstall.sqldataprovider";
+            file.Path = "providers\\dataproviders\\sqldataprovider";
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

@@ -21,5 +21,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script
             visitor.Visit(this);
         }
 
+        protected override IScript AddNewCore()
+        {
+            var item = Csla.DataPortal.Create<Script>();
+            this.Add(item);
+            return item;
+        }
+
     }
 }

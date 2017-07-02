@@ -1,0 +1,25 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="Script">
+          <scripts>
+            <basePath>foo</basePath>
+            <script type="Install">
+              <path>providers\dataproviders\sqldataprovider</path>
+              <name>03.01.00.sqldataprovider</name>
+              <version>03.01.00</version>
+            </script>
+            <script type="UnInstall">
+              <path>providers\dataproviders\sqldataprovider</path>
+              <name>uninstall.sqldataprovider</name>
+              <version>05.01.01</version>
+            </script>
+          </scripts>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
