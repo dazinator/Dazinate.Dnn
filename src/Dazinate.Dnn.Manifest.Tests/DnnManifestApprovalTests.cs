@@ -27,6 +27,7 @@ using Dazinate.Dnn.Manifest.Package.Component.Provider;
 using Dazinate.Dnn.Manifest.Package.Component.ResourceFile;
 using Dazinate.Dnn.Manifest.Package.Component.Script;
 using Dazinate.Dnn.Manifest.Package.Component.Skin;
+using Dazinate.Dnn.Manifest.Package.Component.SkinObject;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -796,6 +797,42 @@ namespace Dazinate.Dnn.Manifest.Tests
             var file = (IFile)component.Files.AddNew();         
             file.Name = "index 1024.ascx.resx";
             file.Path = "app_localresources";            
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_SkinObjectComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<ISkinObjectComponent>();
+            component.ControlKey = "TellFriend";
+            component.ControlSource = "DesktopModules/YourCompanyNameSkinObjects/TellFriend.ascx";
+            component.SupportsPartialRendering = false;
+           
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

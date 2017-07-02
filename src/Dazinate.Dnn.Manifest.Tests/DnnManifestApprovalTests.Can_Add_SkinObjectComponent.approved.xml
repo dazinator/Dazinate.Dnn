@@ -4,15 +4,12 @@
       <friendlyName>My Amazing Auth System</friendlyName>
       <description>An amazing auth system.</description>
       <components>
-        <component type="Skin">
-          <skinFiles>
-            <skinName>foo skin</skinName>
-            <basePath>Portals\_default\Skins\MinimalExtropy</basePath>
-            <skinFile>
-              <path>app_localresources</path>
-              <name>index 1024.ascx.resx</name>
-            </skinFile>
-          </skinFiles>
+        <component type="SkinObject">
+          <moduleControl>
+            <controlKey>TellFriend</controlKey>
+            <controlSrc>DesktopModules/YourCompanyNameSkinObjects/TellFriend.ascx</controlSrc>
+            <supportsPartialRendering>False</supportsPartialRendering>
+          </moduleControl>
         </component>
       </components>
     </package>
