@@ -30,6 +30,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ExtensionLanguage.ObjectFactor
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<ExtensionLanguageComponent>();
+            component.Files = _filesListObjectFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;
