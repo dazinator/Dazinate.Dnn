@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -11,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin.ObjectFactory
         public SkinFilesListObjectFactory(IObjectActivator activator, ISkinFileObjectFactory fileObjectFactory) : base(activator)
         {
             _fileObjectFactory = fileObjectFactory;
+        }
+
+        public ISkinFilesList Create()
+        {
+            var list = CreateInstance<SkinFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
         }
 
         public ISkinFilesList Fetch(XPathNavigator xpathNavigator)

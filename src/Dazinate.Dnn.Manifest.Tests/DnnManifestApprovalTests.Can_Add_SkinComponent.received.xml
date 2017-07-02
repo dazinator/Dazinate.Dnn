@@ -1,0 +1,20 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="Skin">
+          <skinFiles>
+            <skinName>foo skin</skinName>
+            <basePath>Portals\_default\Skins\MinimalExtropy</basePath>
+            <skinFile>
+              <path>app_localresources</path>
+              <name>index 1024.ascx.resx</name>
+            </skinFile>
+          </skinFiles>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

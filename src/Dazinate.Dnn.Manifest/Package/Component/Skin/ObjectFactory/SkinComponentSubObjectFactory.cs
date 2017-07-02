@@ -28,6 +28,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<SkinComponent>();
+            component.Files = _skinFilesListFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;
