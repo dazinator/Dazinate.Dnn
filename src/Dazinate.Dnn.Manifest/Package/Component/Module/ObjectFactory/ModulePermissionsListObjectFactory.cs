@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -11,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
         public ModulePermissionsListObjectFactory(IObjectActivator activator, IModulePermissionObjectFactory permissionObjectFactory) : base(activator)
         {
             _permissionObjectFactory = permissionObjectFactory;
+        }
+
+        public IModulePermissionsList Create()
+        {
+            var list = CreateInstance<ModulePermissionsList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
         }
 
         public IModulePermissionsList Fetch(XPathNavigator xpathNavigator)

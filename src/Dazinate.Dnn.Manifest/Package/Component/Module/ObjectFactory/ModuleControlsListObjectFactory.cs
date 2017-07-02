@@ -12,7 +12,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
         {
             _controlFactory = controlFactory;
         }
-
+        public IModuleControlsList Create()
+        {
+            var list = CreateInstance<ModuleControlsList>();            
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
         public IModuleControlsList Fetch(XPathNavigator xpathNavigator)
         {
           

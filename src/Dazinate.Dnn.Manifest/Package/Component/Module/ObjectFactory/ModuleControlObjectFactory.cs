@@ -14,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
 
         }
 
+        public IModuleControl Create()
+        {
+            var businessObject = CreateInstance<ModuleControl>();           
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IModuleControl Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

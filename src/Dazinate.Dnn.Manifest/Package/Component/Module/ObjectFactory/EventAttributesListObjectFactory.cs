@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             _attributeObjectFactory = attributeObjectFactory;
         }
 
+        public IEventAttributesList Create()
+        {
+            var businessObject = CreateInstance<EventAttributesList>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IEventAttributesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");

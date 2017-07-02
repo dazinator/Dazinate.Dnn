@@ -18,6 +18,16 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             _permissionsListObjectFactory = permissionsListObjectFactory;
         }
 
+        public IModuleDefinition Create()
+        {
+            var businessObject = CreateInstance<ModuleDefinition>();
+            businessObject.ModuleControls = _moduleControlsFactory.Create();
+            businessObject.ModulePermissions = _permissionsListObjectFactory.Create();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IModuleDefinition Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

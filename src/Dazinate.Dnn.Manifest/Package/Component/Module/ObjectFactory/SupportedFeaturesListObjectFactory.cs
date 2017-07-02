@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             _featureObjectFactory = featureObjectFactory;
         }
 
+        public ISupportedFeaturesList Create()
+        {
+            var businessObject = CreateInstance<SupportedFeaturesList>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public ISupportedFeaturesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");

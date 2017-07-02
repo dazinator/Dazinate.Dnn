@@ -21,5 +21,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module
             visitor.Visit(this);
         }
 
+        protected override ISupportedFeature AddNewCore()
+        {
+            var item = Csla.DataPortal.Create<SupportedFeature>();
+            this.Add(item);
+            return item;
+
+        }
+
     }
 }

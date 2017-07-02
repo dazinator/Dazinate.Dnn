@@ -20,6 +20,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module
         {
             visitor.Visit(this);
         }
+        protected override IModuleControl AddNewCore()
+        {
+            var item = Csla.DataPortal.Create<ModuleControl>();
+            this.Add(item);
+            return item;
+        }
 
     }
 }

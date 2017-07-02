@@ -38,6 +38,8 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<ModuleComponent>();
+            component.ModuleDefinitions = _moduleDefinitionListFactory.Create();
+            component.SupportedFeatures = _supporedFeaturesListFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;

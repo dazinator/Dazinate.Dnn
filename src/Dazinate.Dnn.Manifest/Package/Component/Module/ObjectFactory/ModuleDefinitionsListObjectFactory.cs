@@ -12,6 +12,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
         {
             _definitionObjectFactory = definitionObjectFactory;
         }
+        public IModuleDefinitionsList Create()
+        {
+            var list = CreateInstance<ModuleDefinitionsList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
 
         public IModuleDefinitionsList Fetch(XPathNavigator xpathNavigator)
         {
