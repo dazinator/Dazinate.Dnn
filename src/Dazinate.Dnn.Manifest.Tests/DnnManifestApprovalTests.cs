@@ -21,6 +21,7 @@ using Dazinate.Dnn.Manifest.Package.Component.DashboardControl;
 using Dazinate.Dnn.Manifest.Package.Component.ExtensionLanguage;
 using Dazinate.Dnn.Manifest.Package.Component.File;
 using Dazinate.Dnn.Manifest.Package.Component.JavascriptFile;
+using Dazinate.Dnn.Manifest.Package.Component.JavascriptLibrary;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -537,6 +538,43 @@ namespace Dazinate.Dnn.Manifest.Tests
             file = (IFile)component.Files.AddNew();
             file.Name = "mylib.dependency.js";
            // file.Path = "scripts";
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_JavascriptLibraryComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<IJavascriptLibraryComponent>();
+            component.CdnPath = "https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js";
+            component.FileName = "jQuery.cookie.js";
+            component.LibraryName = "jQuery.cookie";
+            component.ObjectName = "jQuery.cookie";
+            component.PreferredScriptLocation = "BodyBottom";           
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

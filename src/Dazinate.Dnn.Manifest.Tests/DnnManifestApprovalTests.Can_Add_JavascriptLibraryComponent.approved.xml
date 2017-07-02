@@ -1,0 +1,17 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="JavaScript_Library">
+          <libraryName>jQuery.cookie</libraryName>
+          <fileName>jQuery.cookie.js</fileName>
+          <preferredScriptLocation>BodyBottom</preferredScriptLocation>
+          <CDNPath>https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js</CDNPath>
+          <objectName>jQuery.cookie</objectName>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
