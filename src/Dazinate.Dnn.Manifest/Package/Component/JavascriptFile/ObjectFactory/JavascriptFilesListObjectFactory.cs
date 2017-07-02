@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -11,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile.ObjectFactory
         public JavascriptFilesListObjectFactory(IObjectActivator activator, IJavascriptFileObjectFactory fileObjectFactory) : base(activator)
         {
             _fileObjectFactory = fileObjectFactory;
+        }
+
+        public IJavascriptFilesList Create()
+        {
+            var list = CreateInstance<JavascriptFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
         }
 
         public IJavascriptFilesList Fetch(XPathNavigator xpathNavigator)

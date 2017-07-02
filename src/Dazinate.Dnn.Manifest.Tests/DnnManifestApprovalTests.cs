@@ -20,6 +20,7 @@ using Dazinate.Dnn.Manifest.Package.Component.CoreLanguage;
 using Dazinate.Dnn.Manifest.Package.Component.DashboardControl;
 using Dazinate.Dnn.Manifest.Package.Component.ExtensionLanguage;
 using Dazinate.Dnn.Manifest.Package.Component.File;
+using Dazinate.Dnn.Manifest.Package.Component.JavascriptFile;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -495,6 +496,47 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             file = (IFile)component.Files.AddNew();
             file.Name = "MyModule.ascx.resx";
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_JavascriptFileComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<IJavascriptFileComponent>();
+            component.LibraryFolderName = "foo";
+            
+             var file = (IFile)component.Files.AddNew();
+            file.Name = "mylib.js";
+            file.Path = "scripts";
+
+            file = (IFile)component.Files.AddNew();
+            file.Name = "mylib.dependency.js";
+           // file.Path = "scripts";
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

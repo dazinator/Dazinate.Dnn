@@ -29,6 +29,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<JavascriptFileComponent>();
+            component.Files = _filesListObjectFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;
