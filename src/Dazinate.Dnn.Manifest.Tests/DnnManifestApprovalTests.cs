@@ -23,6 +23,7 @@ using Dazinate.Dnn.Manifest.Package.Component.File;
 using Dazinate.Dnn.Manifest.Package.Component.JavascriptFile;
 using Dazinate.Dnn.Manifest.Package.Component.JavascriptLibrary;
 using Dazinate.Dnn.Manifest.Package.Component.Module;
+using Dazinate.Dnn.Manifest.Package.Component.Provider;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -633,6 +634,38 @@ namespace Dazinate.Dnn.Manifest.Tests
             feature.FeatureType = SupportedFeatureType.Searchable;
             feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
             feature.FeatureType = SupportedFeatureType.Upgradeable;           
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_ProviderComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var component = authSystemPackage.Components.AddNewComponent<IProviderComponent>();           
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
