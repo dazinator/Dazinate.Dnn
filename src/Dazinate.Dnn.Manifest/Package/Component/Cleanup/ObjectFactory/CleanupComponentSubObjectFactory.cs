@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -17,7 +18,23 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Cleanup.ObjectFactory
             _filesListObjectFactory = filesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "Cleanup"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.Cleanup;
+            }
+        }
+
+      
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<CleanupComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+         
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

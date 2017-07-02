@@ -10,6 +10,7 @@ using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Package.Dependency;
 using Xunit;
+using Dazinate.Dnn.Manifest.Package.Component.Assembly;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -63,13 +64,13 @@ namespace Dazinate.Dnn.Manifest.Tests
         {
 
             var factory = new PackagesDnnManifestFactory();
-          
+
             // Act   
             // Create a fully populated package manifest, demonstrating all possible manifest features.        
             var dnnManifest = factory.CreateNewManifest();
             dnnManifest.Version = "5.0";
             dnnManifest.Type = ManifestType.Package;
-            
+
             // Add an Auth_System package.
             var authSystemPackage = dnnManifest.Packages.AddNewPackage();
             authSystemPackage.Name = "MyAuthSystemPackage";
@@ -102,6 +103,61 @@ namespace Dazinate.Dnn.Manifest.Tests
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
 
+            // Add an assembly component with some assemblies listed.
+            var assyComponent = authSystemPackage.Components.AddNewAssemblyComponent();
+            IAssembly assy = (IAssembly)assyComponent.Assemblies.AddNew();
+            assy.Name = "test.dll";
+            assy.Path = "bin";
+            //  assyComponent.Assemblies.ad
+
+            // Now verify the xml looks good.
+            Approvals.VerifyXml(xmlStringBuilder.ToString());
+        }
+
+        [Fact]
+        public void Can_Add_AssemblyComponent()
+        {
+
+            var factory = new PackagesDnnManifestFactory();
+
+            // Act   
+            // Create a fully populated package manifest, demonstrating all possible manifest features.        
+            var dnnManifest = factory.CreateNewManifest();
+            dnnManifest.Version = "5.0";
+            dnnManifest.Type = ManifestType.Package;
+
+            // Add an Auth_System package.
+            var authSystemPackage = dnnManifest.Packages.AddNewPackage();
+            authSystemPackage.Name = "MyAuthSystemPackage";
+            authSystemPackage.Description = "An amazing auth system.";
+            authSystemPackage.FriendlyName = "My Amazing Auth System";
+            authSystemPackage.Version = "1.0.0";
+            authSystemPackage.Type = "Auth_System";
+
+            // Add an assembly component with some assemblies listed.
+            var assyComponent = authSystemPackage.Components.AddNewAssemblyComponent();
+            IAssembly assy = (IAssembly)assyComponent.Assemblies.AddNew();
+            assy.Name = "foo.dll";
+            assy.Path = "bin";
+
+            IAssembly anotherAssy = (IAssembly)assyComponent.Assemblies.AddNew();
+            anotherAssy.Name = "bar.dll";
+            anotherAssy.Path = "bin";
+            anotherAssy.Version = "1.0.0";
+            anotherAssy.Action = AssemblyAction.Install;
+
+            IAssembly anotherAssyUnregister = (IAssembly)assyComponent.Assemblies.AddNew();
+            anotherAssyUnregister.Name = "baz.dll";
+            anotherAssyUnregister.Path = "bin";
+            anotherAssyUnregister.Version = "1.0.0.1";
+            anotherAssyUnregister.Action = AssemblyAction.Unregister;
+
+
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+            }          
             // Now verify the xml looks good.
             Approvals.VerifyXml(xmlStringBuilder.ToString());
         }

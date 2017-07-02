@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Exceptions;
@@ -15,7 +16,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptLibrary.ObjectFactor
         {
         }
 
-        public string ComponentTypeName { get { return "JavaScript_Library"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.JavaScript_Library;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<JavascriptLibraryComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

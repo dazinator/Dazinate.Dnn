@@ -82,6 +82,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
             container.Register<IDependencyFactory, DependencyFactory>();
 
+            container.Register<IComponentFactory, ComponentFactory>();
             container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
             container.Register<IComponentObjectFactory, ComponentObjectFactory>();
 

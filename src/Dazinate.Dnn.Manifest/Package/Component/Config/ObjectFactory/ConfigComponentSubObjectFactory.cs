@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Exceptions;
@@ -17,7 +18,21 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Config.ObjectFactory
             _nodesListObjectFactory = nodesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "Config"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.Config;
+            }
+        }      
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<ConfigComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

@@ -4,8 +4,9 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ObjectFactory
 {
     public interface IComponentSubObjectFactory
     {
-        string ComponentTypeName { get; }
+        ComponentType ComponentType { get; }
 
         IComponent Fetch(XPathNavigator xpathNavigator);
+        IComponent Create(ComponentType componentType);
     }
 }

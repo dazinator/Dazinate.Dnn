@@ -12,7 +12,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Provider.ObjectFactory
             
         }
 
-        public string ComponentTypeName { get { return "Provider"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.Provider;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<ProviderComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -14,7 +15,23 @@ namespace Dazinate.Dnn.Manifest.Package.Component.AuthenticationSystem.ObjectFac
             //_packagesListFactory = packagesListFactory;
         }
 
-        public string ComponentTypeName { get { return "AuthenticationSystem"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.AuthenticationSystem;
+            }
+        }
+
+     
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<AuthenticationSystemComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

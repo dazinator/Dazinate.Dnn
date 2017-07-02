@@ -17,7 +17,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script.ObjectFactory
             _scriptsListObjectFactory = scriptsListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "Script"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.Script;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<ScriptComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

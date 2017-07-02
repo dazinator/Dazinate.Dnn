@@ -14,7 +14,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.UrlProvider.ObjectFactory
 
         }
 
-        public string ComponentTypeName { get { return "UrlProvider"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.UrlProvider;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<UrlProviderComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

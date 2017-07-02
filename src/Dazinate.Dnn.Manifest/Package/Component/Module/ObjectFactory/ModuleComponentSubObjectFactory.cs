@@ -26,7 +26,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             _moduleDefinitionListFactory = moduleDefinitionListFactory;
         }
 
-        public string ComponentTypeName { get { return "Module"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.Module;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<ModuleComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

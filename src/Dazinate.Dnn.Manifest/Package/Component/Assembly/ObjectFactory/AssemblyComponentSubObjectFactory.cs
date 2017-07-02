@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -15,7 +16,16 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly.ObjectFactory
             _assembliesListObjectFactory = assembliesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "Assembly"; } }
+        public ComponentType ComponentType { get { return ComponentType.Assembly; } }
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<AssemblyComponent>();
+            component.Assemblies = CreateInstance<AssembliesList>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {
@@ -32,6 +42,8 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly.ObjectFactory
             //LoadProperty(dep, CustomDependency.ValueProperty, value);
             //return dep;
         }
+
+        
 
 
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Exceptions;
@@ -18,7 +19,21 @@ namespace Dazinate.Dnn.Manifest.Package.Component.File.ObjectFactory
             _filesListObjectFactory = filesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "File"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.File;
+            }
+        }
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<FileComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

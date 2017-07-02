@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Exceptions;
@@ -17,7 +18,21 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile.ObjectFactory
             _filesListObjectFactory = filesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "JavaScriptFile"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.JavaScriptFile;
+            }
+        }
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<JavascriptFileComponent>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

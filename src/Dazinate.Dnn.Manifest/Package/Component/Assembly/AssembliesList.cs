@@ -21,5 +21,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly
             visitor.Visit(this);
         }
 
+        protected override IAssembly AddNewCore()
+        {
+            var assy = (Assembly)Csla.DataPortal.Create<Assembly>();
+            this.Add(assy);
+            return assy;
+
+        }
+
     }
 }
