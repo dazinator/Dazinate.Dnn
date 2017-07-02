@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -11,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile.ObjectFact
         public LanguageFilesListObjectFactory(IObjectActivator activator, ILanguageFileObjectFactory fileObjectFactory) : base(activator)
         {
             _fileObjectFactory = fileObjectFactory;
+        }
+
+        public ILanguageFilesList Create()
+        {
+            var list = CreateInstance<LanguageFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);          
+            return list;
         }
 
         public ILanguageFilesList Fetch(XPathNavigator xpathNavigator)

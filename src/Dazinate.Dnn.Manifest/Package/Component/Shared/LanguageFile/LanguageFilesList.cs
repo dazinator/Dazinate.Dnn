@@ -21,5 +21,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile
             visitor.Visit(this);
         }
 
+        protected override ILanguageFile AddNewCore()
+        {
+            var item = Csla.DataPortal.Create<LanguageFile>();
+            this.Add(item);
+            return item;
+        }
+
     }
 }

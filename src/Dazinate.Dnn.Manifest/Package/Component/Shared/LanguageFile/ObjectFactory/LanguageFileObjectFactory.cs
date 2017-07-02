@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile.ObjectFact
             //_packagesListFactory = packagesListFactory;
         }
 
+        public ILanguageFile Create()
+        {
+            var businessObject = CreateInstance<LanguageFile>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public ILanguageFile Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.
@@ -23,7 +31,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile.ObjectFact
 
             var name = XmlUtils.ReadElement(nav, "name");
             LoadProperty(businessObject, LanguageFile.NameProperty, name);
-         
+
             MarkAsChild(businessObject);
             MarkOld(businessObject);
             CheckRules(businessObject);
