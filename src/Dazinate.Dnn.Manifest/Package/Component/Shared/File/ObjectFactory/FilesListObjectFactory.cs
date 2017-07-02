@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -11,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File.ObjectFactory
         public FilesListObjectFactory(IObjectActivator activator, IFileObjectFactory fileObjectFactory) : base(activator)
         {
             _fileObjectFactory = fileObjectFactory;
+        }
+
+        public IFilesList Create()
+        {
+            var list = CreateInstance<FilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
         }
 
         public IFilesList Fetch(XPathNavigator xpathNavigator)

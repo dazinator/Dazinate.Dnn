@@ -31,7 +31,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Cleanup.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<CleanupComponent>();
-            component.Files = CreateInstance<FilesList>();
+            component.Files = _filesListObjectFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;

@@ -169,7 +169,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
                 }
                 _writer.WriteEndElement();
             }
-           
+
 
             MarkListSaved<IDependency>(dependenciesList);
         }
@@ -271,7 +271,9 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
         {
             _writer.WriteStartElement("file");
 
-            _writer.WriteElementString("path", file.Path);
+            WriteElementIfNotEmpty("path", file.Path);
+
+            //_writer.WriteElementString("path", file.Path);
             _writer.WriteElementString("name", file.Name);
 
             WriteElementIfNotEmpty("sourceFileName", file.SourceFileName);
@@ -679,7 +681,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
                 _writer.WriteEndElement();
             }
-            
+
 
             MarkListSaved<ISupportedFeature>(list);
 

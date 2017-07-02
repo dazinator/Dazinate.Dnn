@@ -103,7 +103,6 @@
               <name>MyModule.ascx.resx</name>
             </file>
             <file>
-              <path />
               <name>MyModule.ascx</name>
               <sourceFileName>some/path/in/zip/mymodule.ascx</sourceFileName>
             </file>

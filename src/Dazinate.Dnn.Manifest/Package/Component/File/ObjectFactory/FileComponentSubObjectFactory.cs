@@ -30,6 +30,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.File.ObjectFactory
         public IComponent Create(ComponentType componentType)
         {
             var component = CreateInstance<FileComponent>();
+            component.Files = _filesListObjectFactory.Create();
             MarkAsChild(component);
             MarkNew(component);
             return component;
