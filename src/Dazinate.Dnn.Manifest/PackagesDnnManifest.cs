@@ -111,7 +111,7 @@ namespace Dazinate.Dnn.Manifest
 
         public IDnnManifest SaveToXml(XmlWriter writer)
         {
-            var result = Csla.DataPortal.Update(new SaveToXmlCommand(this));
+            var result = Csla.DataPortal.Execute(new SaveToXmlCommand(this));
             writer.WriteRaw(result.Xml);
             writer.Flush();
             return result.PackagesDnnManifest;

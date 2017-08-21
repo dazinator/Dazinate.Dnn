@@ -147,17 +147,20 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Add an assembly component with some assemblies listed.
             var assyComponent = authSystemPackage.Components.AddNewComponent<IAssemblyComponent>();
-            IAssembly assy = (IAssembly)assyComponent.Assemblies.AddNew();
+            assyComponent.Assemblies.AddNew();
+            IAssembly assy = (IAssembly)assyComponent.Assemblies.Last();
             assy.Name = "foo.dll";
             assy.Path = "bin";
 
-            IAssembly anotherAssy = (IAssembly)assyComponent.Assemblies.AddNew();
+            assyComponent.Assemblies.AddNew();
+            IAssembly anotherAssy = (IAssembly)assyComponent.Assemblies.Last();
             anotherAssy.Name = "bar.dll";
             anotherAssy.Path = "bin";
             anotherAssy.Version = "1.0.0";
             anotherAssy.Action = AssemblyAction.Install;
 
-            IAssembly anotherAssyUnregister = (IAssembly)assyComponent.Assemblies.AddNew();
+            assyComponent.Assemblies.AddNew();
+            IAssembly anotherAssyUnregister = (IAssembly)assyComponent.Assemblies.Last();
             anotherAssyUnregister.Name = "baz.dll";
             anotherAssyUnregister.Path = "bin";
             anotherAssyUnregister.Version = "1.0.0.1";
@@ -232,7 +235,8 @@ namespace Dazinate.Dnn.Manifest.Tests
             // Add an assembly component with some assemblies listed.
             var component = authSystemPackage.Components.AddNewComponent<ICleanupComponent>();
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "foo.txt";
             file.Path = "files";
             file.SourceFileName = "bar.txt";
@@ -268,14 +272,16 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Add an assembly component with some assemblies listed.
             var component = authSystemPackage.Components.AddNewComponent<IConfigComponent>();
-            var installNode = (INode)component.InstallNodes.AddNew();
+            component.InstallNodes.AddNew();
+            var installNode = (INode)component.InstallNodes.Last();
             installNode.Action = NodeAction.Add;
             installNode.Collision = NodeCollision.Overwrite;
             installNode.InnerXml = @"<some key=""foo"">bar</some>";
             installNode.Key = "key";
             installNode.Path = "config/some";
 
-            var uninstallNode = (INode)component.UninstallNodes.AddNew();
+            component.UninstallNodes.AddNew();
+            var uninstallNode = (INode)component.UninstallNodes.Last();
             uninstallNode.Action = NodeAction.Remove;
             uninstallNode.Collision = NodeCollision.Ignore;
             uninstallNode.InnerXml = @"<some key=""foo"">bar</some>";
@@ -320,12 +326,14 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.ContainerName = "geewhiz";
 
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "foo.txt";
             file.Path = "files";
             file.SourceFileName = "bar.txt";
 
-            file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            file = (IFile)component.Files.Last();
             file.Name = "bar.png";
             file.Path = "files";
 
@@ -366,12 +374,14 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.Fallback = "en-US";
 
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "classic.ascx.ca-es.resx";
             file.Path = "admin\\ControlPanel\\App_LocalResources";
 
 
-            file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            file = (IFile)component.Files.Last();
             file.Name = "iconbar.ascx.ca-es.resx";
             file.Path = "admin\\ControlPanel\\App_LocalResources";
 
@@ -406,7 +416,8 @@ namespace Dazinate.Dnn.Manifest.Tests
 
             // Add an assembly component with some assemblies listed.
             var component = authSystemPackage.Components.AddNewComponent<IDashboardControlComponent>();
-            var control = (IDashboardControl)component.Controls.AddNew();
+            component.Controls.AddNew();
+            var control = (IDashboardControl)component.Controls.Last();
             control.ControllerClass = "DotNetNuke.Modules.Dashboard.Components.Server.ServerController";
             control.Key = "Server";
             control.LocalResourcesFile = "/some/foo.resx";
@@ -450,11 +461,13 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.Code = "en-US";
             component.Package = "DefaultAuthentication";
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "Login.ascx.resx";
             file.Path = "app_localresources";
 
-            file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            file = (IFile)component.Files.Last();
             file.Name = "Settings.ascx.resx";
             file.Path = "app_localresources";
 
@@ -491,11 +504,14 @@ namespace Dazinate.Dnn.Manifest.Tests
             var component = authSystemPackage.Components.AddNewComponent<IFileComponent>();
             component.BasePath = "DesktopModules\\MyModule";
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "MyModule.ascx.resx";
             file.Path = "app_localresources";
 
-            file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            file = (IFile)component.Files.Last();
+
             file.Name = "MyModule.ascx.resx";
 
             var xmlStringBuilder = new StringBuilder();
@@ -531,11 +547,13 @@ namespace Dazinate.Dnn.Manifest.Tests
             var component = authSystemPackage.Components.AddNewComponent<IJavascriptFileComponent>();
             component.LibraryFolderName = "foo";
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "mylib.js";
             file.Path = "scripts";
 
-            file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            file = (IFile)component.Files.Last();
             file.Name = "mylib.dependency.js";
             // file.Path = "scripts";
 
@@ -614,11 +632,13 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.IsPremium = false;
             component.ModuleName = "My Module";
 
-            var moduleDefinition = (IModuleDefinition)component.ModuleDefinitions.AddNew();
+            component.ModuleDefinitions.AddNew();
+            var moduleDefinition = (IModuleDefinition)component.ModuleDefinitions.Last();
             moduleDefinition.DefaultCacheTime = -1;
             moduleDefinition.FriendlyName = "My Module";
 
-            var moduleControl = (IModuleControl)moduleDefinition.ModuleControls.AddNew();
+            moduleDefinition.ModuleControls.AddNew();
+            var moduleControl = (IModuleControl)moduleDefinition.ModuleControls.Last();
             moduleControl.ControlKey = "";
             moduleControl.ControlSource = "DesktopModules/MyModule/Default.ascx";
             moduleControl.ControlTitle = "My module";
@@ -628,16 +648,21 @@ namespace Dazinate.Dnn.Manifest.Tests
             moduleControl.HelpUrl = "";
             moduleControl.ViewOrder = 0;
 
-            var permission = (IModulePermission)moduleDefinition.ModulePermissions.AddNew();
+            moduleDefinition.ModulePermissions.AddNew();
+            var permission = (IModulePermission)moduleDefinition.ModulePermissions.Last();
+
             permission.Code = "My_Module";
             permission.Key = "MYMODREAD";
             permission.Name = "My Module - Read stuff";
 
-            var feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
+            component.SupportedFeatures.AddNew();
+            var feature = (ISupportedFeature)component.SupportedFeatures.Last();
             feature.FeatureType = SupportedFeatureType.Portable;
-            feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
+            component.SupportedFeatures.AddNew();
+            feature = (ISupportedFeature)component.SupportedFeatures.Last();
             feature.FeatureType = SupportedFeatureType.Searchable;
-            feature = (ISupportedFeature)component.SupportedFeatures.AddNew();
+            component.SupportedFeatures.AddNew();
+            feature = (ISupportedFeature)component.SupportedFeatures.Last();
             feature.FeatureType = SupportedFeatureType.Upgradeable;
 
             var xmlStringBuilder = new StringBuilder();
@@ -705,11 +730,13 @@ namespace Dazinate.Dnn.Manifest.Tests
             var component = authSystemPackage.Components.AddNewComponent<IResourceFileComponent>();
             component.BasePath = "foo";
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "foo.ascx.resx";
             file.Path = "resources";
 
-            file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            file = (IFile)component.Files.Last();
             file.Name = "bar.resx";
             // file.Path = "scripts";          
 
@@ -747,14 +774,17 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.BasePath = "foo";
 
 
-            var file = (IScript)component.Scripts.AddNew();
+            component.Scripts.AddNew();
+            var file = (IScript)component.Scripts.Last();
+
             file.Type = ScriptType.Install;
             file.Version = "03.01.00";
             file.Name = "03.01.00.sqldataprovider";
             file.Path = "providers\\dataproviders\\sqldataprovider";
 
 
-            file = (IScript)component.Scripts.AddNew();
+            component.Scripts.AddNew();
+            file = (IScript)component.Scripts.Last();
             file.Type = ScriptType.UnInstall;
             file.Version = "05.01.01";
             file.Name = "uninstall.sqldataprovider";
@@ -795,7 +825,8 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.BasePath = "Portals\\_default\\Skins\\MinimalExtropy";
             component.SkinName = "foo skin";
 
-            var file = (IFile)component.Files.AddNew();
+            component.Files.AddNew();
+            var file = (IFile)component.Files.Last();
             file.Name = "index 1024.ascx.resx";
             file.Path = "app_localresources";
 
@@ -873,7 +904,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.RewriteAllUrls = true;
             component.SettingsControlSource = "DesktopModules/DNN_SocialUrlProvider/Settings.ascx";
             component.Type = "DotNetNuke.Modules.SocialUrlProvider.SocialUrlProvider";
-            
+
 
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))

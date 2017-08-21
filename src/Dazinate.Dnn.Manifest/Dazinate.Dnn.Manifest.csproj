@@ -62,10 +62,7 @@
     <PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
-    
-
-
-
+    <PackageReference Include="System.AppDomain" Version="1.1.0" />
 
   </ItemGroup>
   <ItemGroup>

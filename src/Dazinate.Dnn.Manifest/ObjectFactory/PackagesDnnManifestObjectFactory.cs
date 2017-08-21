@@ -106,9 +106,15 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
 
         public PackagesDnnManifest.SaveToXmlCommand Execute(PackagesDnnManifest.SaveToXmlCommand command)
         {
-
+            if(command == null)
+            {
+                throw new System.Exception("command null");
+            }
             var manifest = command.PackagesDnnManifest;
-
+            if (manifest == null)
+            {
+                throw new System.Exception("manifest null");
+            }
             var xmlStringBuilder = new StringBuilder();
             using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true }))
             {

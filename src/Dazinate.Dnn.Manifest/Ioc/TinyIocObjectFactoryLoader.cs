@@ -38,9 +38,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
         static TinyIocObjectFactoryLoader()
         {
-#if NETDESKTOP
+
             SerializationWorkaround();
-#endif
+
         }
 
         private readonly TinyIoCContainer _container;
@@ -208,7 +208,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
             _cachedTypes.Clear();
         }
 
-#if NETDESKTOP
+
 
         #region Serialization bug workaround
 
@@ -218,16 +218,24 @@ namespace Dazinate.Dnn.Manifest.Ioc
             // event so deep serialization works properly
             // this is a workaround for a bug in the .NET runtime
 
+
             AppDomain currentDomain = AppDomain.CurrentDomain;
 
             currentDomain.AssemblyResolve +=
               new ResolveEventHandler(ResolveEventHandler);
+#if NETDESKTOP
+#else
+          //  DependencyContext.Default.RuntimeLibraries.
+         //  AssemblyLoadContext.
+#endif
 
         }
+
 
         private static Assembly ResolveEventHandler(
           object sender, ResolveEventArgs args)
         {
+
             // get a list of all the assemblies loaded in our appdomain
             Assembly[] list = AppDomain.CurrentDomain.GetAssemblies();
 
@@ -238,14 +246,19 @@ namespace Dazinate.Dnn.Manifest.Ioc
                 if (asm.FullName == args.Name)
                     return asm;
 
+
+            //    var assies = AssemblyLoadContext.Default.Assemblies;
+
             // if the assembly wasn't already in the appdomain, then try to load it.
             //  return Assembly.Load(args.Name);
             return null;
         }
-
+#if NETDESKTOP
+#endif
         #endregion
 
-#endif
+
+
 
 
     }
