@@ -21,12 +21,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin
             visitor.Visit(this);
         }
 
+#if NETDESKTOP
         protected override ISkinFile AddNewCore()
         {
+            //base.AddNewCore();
             var item = Csla.DataPortal.Create<SkinFile>();
-            this.Add(item);
+            Add(item);
             return item;
         }
-
+#else
+        protected override void AddNewCore()
+        {
+            //base.AddNewCore();
+             var item = Csla.DataPortal.Create<SkinFile>();
+            Add(item);           
+        }
+#endif
+      
     }
 }

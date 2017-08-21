@@ -61,7 +61,7 @@ namespace Dazinate.Dnn.Manifest.Package
                 {
                     Uri uriResult;
                     bool result = Uri.TryCreate(target.Url, UriKind.Absolute, out uriResult)
-                                  && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                                  && (uriResult.Scheme == "http" || uriResult.Scheme == "https");
 
                     if (!result)
                     {

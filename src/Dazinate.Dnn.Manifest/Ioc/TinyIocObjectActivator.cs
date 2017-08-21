@@ -1,4 +1,5 @@
 ﻿using System;
+using TinyIoC;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
@@ -23,7 +24,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
                 return CreateInstance<T>();
 
             }
-            catch (global::Dazinate.Dnn.Manifest.Ioc.TinyIoCResolutionException)
+            catch (Exception ex)
             {
                 // fallback to creating an instance using actviator directly. 
                 return CreateInstance<T>();

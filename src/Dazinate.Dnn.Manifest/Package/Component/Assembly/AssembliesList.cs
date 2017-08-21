@@ -21,13 +21,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly
             visitor.Visit(this);
         }
 
+#if NETDESKTOP
         protected override IAssembly AddNewCore()
         {
-            var assy = (Assembly)Csla.DataPortal.Create<Assembly>();
-            this.Add(assy);
-            return assy;
-
+            //base.AddNewCore();
+            var item = Csla.DataPortal.Create<Assembly>();
+            Add(item);
+            return item;
         }
+#else
+        protected override void AddNewCore()
+        {
+            //base.AddNewCore();
+             var item = Csla.DataPortal.Create<Assembly>();
+            Add(item);           
+        }
+#endif
 
     }
 }

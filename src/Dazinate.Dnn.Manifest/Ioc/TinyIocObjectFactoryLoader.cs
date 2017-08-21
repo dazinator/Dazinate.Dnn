@@ -29,6 +29,7 @@ using Dazinate.Dnn.Manifest.Package.Dependency;
 using Dazinate.Dnn.Manifest.Package.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Package.ObjectFactory;
 using Assembly = System.Reflection.Assembly;
+using TinyIoC;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
@@ -37,7 +38,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
         static TinyIocObjectFactoryLoader()
         {
+#if NETDESKTOP
             SerializationWorkaround();
+#endif
         }
 
         private readonly TinyIoCContainer _container;
@@ -205,6 +208,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
             _cachedTypes.Clear();
         }
 
+#if NETDESKTOP
+
         #region Serialization bug workaround
 
         private static void SerializationWorkaround()
@@ -212,10 +217,12 @@ namespace Dazinate.Dnn.Manifest.Ioc
             // hook up the AssemblyResolve
             // event so deep serialization works properly
             // this is a workaround for a bug in the .NET runtime
+
             AppDomain currentDomain = AppDomain.CurrentDomain;
 
             currentDomain.AssemblyResolve +=
               new ResolveEventHandler(ResolveEventHandler);
+
         }
 
         private static Assembly ResolveEventHandler(
@@ -237,6 +244,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
         }
 
         #endregion
+
+#endif
 
 
     }

@@ -26,7 +26,9 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
         {
             string xml = xmlContents.Value;
 
-            using (var manifestFileStream = new XmlTextReader(new StringReader(xml)))
+
+
+            using (var manifestFileStream = XmlReader.Create(new StringReader(xml)))
             {
                 var instance = Load(manifestFileStream);
                 MarkOld(instance);
@@ -35,7 +37,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             }
         }
 
-        private PackagesDnnManifest Load(XmlTextReader manifestFileStream)
+        private PackagesDnnManifest Load(XmlReader manifestFileStream)
         {
 
             var dnnManifest = CreateInstance<PackagesDnnManifest>();

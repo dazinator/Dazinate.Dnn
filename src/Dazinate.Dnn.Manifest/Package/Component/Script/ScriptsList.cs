@@ -21,12 +21,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Script
             visitor.Visit(this);
         }
 
+#if NETDESKTOP
         protected override IScript AddNewCore()
         {
+            //base.AddNewCore();
             var item = Csla.DataPortal.Create<Script>();
-            this.Add(item);
+            Add(item);
             return item;
         }
+#else
+        protected override void AddNewCore()
+        {
+            //base.AddNewCore();
+             var item = Csla.DataPortal.Create<Script>();
+            Add(item);           
+        }
+#endif
 
     }
 }
