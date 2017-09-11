@@ -5,7 +5,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Dazinate.Dnn.Manifest</RootNamespace>
     <AssemblyName>Dazinate.Dnn.Manifest</AssemblyName>
-    <TargetFrameworks>net45;netstandard1.5</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <Description>A library for producing and consuming Dnn Manifests.</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,7 +51,7 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.28" />
 
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
 
 
     <!--<PackageReference Include="ReflectionBridge" Version="0.0.12" />-->
@@ -62,13 +62,19 @@
     <PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
-    <PackageReference Include="System.AppDomain" Version="2.0.11" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+
+    <!--<PackageReference Include="System.AppDomain" Version="2.0.11" />-->
 
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Ioc\TinyIoC.cs" />
+    <Compile Remove="Ioc\TinyIocObjectActivator.cs" />
+    <Compile Remove="Ioc\TinyIocObjectFactoryLoader.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="CSLA-Core" Version="4.6.603" />
-
-
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

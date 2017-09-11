@@ -3,6 +3,8 @@ using TinyIoC;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
+
+
     public class TinyIocObjectActivator : IObjectActivator
     {
         private TinyIoCContainer _container;

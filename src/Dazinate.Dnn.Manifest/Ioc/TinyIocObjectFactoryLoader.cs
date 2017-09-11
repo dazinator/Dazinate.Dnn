@@ -30,6 +30,7 @@ using Dazinate.Dnn.Manifest.Package.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Package.ObjectFactory;
 using Assembly = System.Reflection.Assembly;
 using TinyIoC;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
@@ -88,6 +89,29 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IComponentFactory, ComponentFactory>();
             container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
             container.Register<IComponentObjectFactory, ComponentObjectFactory>();
+
+
+            container.Register<IComponentSubObjectFactory, AssemblyComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, AuthenticationSystemSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, CleanupComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ConfigComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ContainerComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, DashboardControlComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, FileComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, CoreLanguageComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ExtensionLanguageComponentSubObjectFactory>();
+
+            container.Register<IComponentSubObjectFactory, ModuleComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ProviderComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ResourceFileComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ScriptComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, UrlProviderComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, SkinObjectComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, SkinComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, JavascriptFileComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, JavascriptLibraryComponentSubObjectFactory>();
+
+
 
             container.RegisterMultiple(typeof(IComponentSubObjectFactory),
                 new[] { typeof(AssemblyComponentSubObjectFactory),
@@ -223,6 +247,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
             currentDomain.AssemblyResolve +=
               new ResolveEventHandler(ResolveEventHandler);
+
+
 #if NETDESKTOP
 #else
           //  DependencyContext.Default.RuntimeLibraries.
