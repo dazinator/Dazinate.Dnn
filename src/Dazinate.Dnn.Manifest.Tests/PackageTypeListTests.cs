@@ -8,6 +8,7 @@ using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Package;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -63,7 +64,7 @@ namespace Dazinate.Dnn.Manifest.Tests
                 if (_init)
                 {
                     _init = false;
-                    Csla.Server.FactoryDataPortal.FactoryLoader = new TinyIocObjectFactoryLoader();
+                    Csla.Server.FactoryDataPortal.FactoryLoader = new ServiceProviderObjectFactoryLoader(new ServiceCollection());
                 }
                 //if (_refCount == 1)
                 //{

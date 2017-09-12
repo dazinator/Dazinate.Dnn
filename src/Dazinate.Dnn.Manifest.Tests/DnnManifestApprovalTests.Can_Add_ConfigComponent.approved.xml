@@ -9,18 +9,14 @@
             <install>
               <configuration>
                 <nodes>
-                  <node path="config/some" action="add" key="key" collision="overwrite">
-                    <some key="foo">bar</some>
-                  </node>
+                  <node path="config/some" action="add" key="key" collision="overwrite"><some key="foo">bar</some></node>
                 </nodes>
               </configuration>
             </install>
             <uninstall>
               <configuration>
                 <nodes>
-                  <node path="config/some" action="remove" key="key" collision="ignore">
-                    <some key="foo">bar</some>
-                  </node>
+                  <node path="config/some" action="remove" key="key" collision="ignore"><some key="foo">bar</some></node>
                 </nodes>
               </configuration>
             </uninstall>

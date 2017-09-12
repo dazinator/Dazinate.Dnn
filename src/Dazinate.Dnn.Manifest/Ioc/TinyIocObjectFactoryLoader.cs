@@ -29,6 +29,8 @@ using Dazinate.Dnn.Manifest.Package.Dependency;
 using Dazinate.Dnn.Manifest.Package.Dependency.ObjectFactory;
 using Dazinate.Dnn.Manifest.Package.ObjectFactory;
 using Assembly = System.Reflection.Assembly;
+using TinyIoC;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dazinate.Dnn.Manifest.Ioc
 {
@@ -37,7 +39,9 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
         static TinyIocObjectFactoryLoader()
         {
+
             SerializationWorkaround();
+
         }
 
         private readonly TinyIoCContainer _container;
@@ -85,6 +89,29 @@ namespace Dazinate.Dnn.Manifest.Ioc
             container.Register<IComponentFactory, ComponentFactory>();
             container.Register<IComponentsListObjectFactory, ComponentsListObjectFactory>();
             container.Register<IComponentObjectFactory, ComponentObjectFactory>();
+
+
+            container.Register<IComponentSubObjectFactory, AssemblyComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, AuthenticationSystemSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, CleanupComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ConfigComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ContainerComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, DashboardControlComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, FileComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, CoreLanguageComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ExtensionLanguageComponentSubObjectFactory>();
+
+            container.Register<IComponentSubObjectFactory, ModuleComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ProviderComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ResourceFileComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, ScriptComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, UrlProviderComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, SkinObjectComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, SkinComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, JavascriptFileComponentSubObjectFactory>();
+            container.Register<IComponentSubObjectFactory, JavascriptLibraryComponentSubObjectFactory>();
+
+
 
             container.RegisterMultiple(typeof(IComponentSubObjectFactory),
                 new[] { typeof(AssemblyComponentSubObjectFactory),
@@ -205,6 +232,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
             _cachedTypes.Clear();
         }
 
+
+
         #region Serialization bug workaround
 
         private static void SerializationWorkaround()
@@ -212,15 +241,27 @@ namespace Dazinate.Dnn.Manifest.Ioc
             // hook up the AssemblyResolve
             // event so deep serialization works properly
             // this is a workaround for a bug in the .NET runtime
+
+
             AppDomain currentDomain = AppDomain.CurrentDomain;
 
             currentDomain.AssemblyResolve +=
               new ResolveEventHandler(ResolveEventHandler);
+
+
+#if NETDESKTOP
+#else
+          //  DependencyContext.Default.RuntimeLibraries.
+         //  AssemblyLoadContext.
+#endif
+
         }
+
 
         private static Assembly ResolveEventHandler(
           object sender, ResolveEventArgs args)
         {
+
             // get a list of all the assemblies loaded in our appdomain
             Assembly[] list = AppDomain.CurrentDomain.GetAssemblies();
 
@@ -231,12 +272,19 @@ namespace Dazinate.Dnn.Manifest.Ioc
                 if (asm.FullName == args.Name)
                     return asm;
 
+
+            //    var assies = AssemblyLoadContext.Default.Assemblies;
+
             // if the assembly wasn't already in the appdomain, then try to load it.
             //  return Assembly.Load(args.Name);
             return null;
         }
-
+#if NETDESKTOP
+#endif
         #endregion
+
+
+
 
 
     }
