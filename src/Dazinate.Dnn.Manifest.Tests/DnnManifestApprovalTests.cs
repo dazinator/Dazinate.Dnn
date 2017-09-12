@@ -3,11 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using ApprovalTests;
-using ApprovalTests.Reporters;
-using Autofac;
 using Dazinate.Dnn.Manifest.Factory;
-using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Package.Dependency;
 using Xunit;
 using Dazinate.Dnn.Manifest.Package.Component.Assembly;
@@ -34,7 +30,7 @@ using Assent.Reporters.DiffPrograms;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
-    [UseReporter(typeof(DiffReporter))]
+    //[UseReporter(typeof(DiffReporter))]
     [Collection("Csla")]
     public class DnnManifestApprovalTests : BaseBusinessTest, IDisposable
     {

@@ -5,7 +5,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Dazinate.Dnn.Manifest</RootNamespace>
     <AssemblyName>Dazinate.Dnn.Manifest</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard1.5;netcoreapp2.0</TargetFrameworks>
     <Description>A library for producing and consuming Dnn Manifests.</Description>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
@@ -30,12 +30,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
-    <DefineConstants>NETDESKTOP</DefineConstants>
+    <DefineConstants>NETDESKTOP;ASSEMBLYRESOLVE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
+    <DefineConstants>NETCOREAPP;ASSEMBLYRESOLVE</DefineConstants>
+  </PropertyGroup>
+  <!--<PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
     <DefineConstants>NETSTANDARD1_5</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
+  <ItemGroup>
+    <PackageReference Include="CSLA-Core" Version="4.6.603" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System" />
@@ -52,7 +59,7 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.28" />
 
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
+  <ItemGroup Condition="'$(TargetFramework)'!='net45'">
 
 
     <!--<PackageReference Include="ReflectionBridge" Version="0.0.12" />-->
@@ -64,20 +71,17 @@
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-
+    <!--<PackageReference Include="System.Xml.XPath" Version="4.3.0" />-->
     <!--<PackageReference Include="System.AppDomain" Version="2.0.11" />-->
 
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Ioc\GluonApplicationLibraryManager.cs" />
     <Compile Remove="Ioc\TinyIoC.cs" />
     <Compile Remove="Ioc\TinyIocObjectActivator.cs" />
     <Compile Remove="Ioc\TinyIocObjectFactoryLoader.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CSLA-Core" Version="4.6.603" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0" />   
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Dazinate.Dnn.Manifest.nuspec" />

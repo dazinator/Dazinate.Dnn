@@ -253,26 +253,26 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
 #else
 
-            var libManager = new GluonApplicationLibraryManager("Dazinate.Dnn.Manifest", new string[] { });
-            System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += new Func<AssemblyLoadContext, AssemblyName, Assembly>((a, b) =>
-            {
+            //var libManager = new GluonApplicationLibraryManager("Dazinate.Dnn.Manifest", new string[] { });
+            //System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += new Func<AssemblyLoadContext, AssemblyName, Assembly>((a, b) =>
+            //{
 
-                try
-                {
+            //    try
+            //    {
                     
-                    var assy = libManager.LoadAssembly(b);
-                    //var assy = a.LoadFromAssemblyName(b);
-                    return assy;
-                }
-                catch (global::System.Exception ex)
-                {
-                    return null;
-                    //throw;
-                }
+            //        var assy = libManager.LoadAssembly(b);
+            //        //var assy = a.LoadFromAssemblyName(b);
+            //        return assy;
+            //    }
+            //    catch (global::System.Exception ex)
+            //    {
+            //        return null;
+            //        //throw;
+            //    }
 
 
 
-            });
+            //});
             //    var loader = System.Runtime.Loader.AssemblyLoadContext.Default.Resolving.AssemblyResolve += new System.ResolveEventHandler(ResolveEventHandler);
             //     var myAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(@"C:\MyDirectory\bin\Custom.Thing.dll");
             //   var myType = myAssembly.GetType("Custom.Thing.SampleClass");
@@ -284,8 +284,8 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
         }
 
-#if NETDESKTOP
-#endif
+#if ASSEMBLYRESOLVE
+
         private static Assembly ResolveEventHandler(
           object sender, ResolveEventArgs args)
         {
@@ -308,7 +308,7 @@ namespace Dazinate.Dnn.Manifest.Ioc
             return null;
         }
 
-
+#endif
 
         #endregion
     }
