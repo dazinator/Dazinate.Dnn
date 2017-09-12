@@ -32,6 +32,7 @@ using Assembly = System.Reflection.Assembly;
 using Microsoft.Extensions.DependencyInjection;
 
 using System.Reflection;
+using System.Collections.Generic;
 #if !NETDESKTOP
 using System.Runtime.Loader;
 #endif
@@ -251,30 +252,34 @@ namespace Dazinate.Dnn.Manifest.Ioc
 
 
 #else
-           
-           System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += new Func<AssemblyLoadContext, AssemblyName, Assembly>((a,b)=>{
-            
-            try 
-	{	        
-		  var assy = a.LoadFromAssemblyName(b);
-            return assy;
-	}
-	catch (global::System.Exception ex)
-	{
-return null;
-		//throw;
-	}
-          
-            
-            
-            });
-         //    var loader = System.Runtime.Loader.AssemblyLoadContext.Default.Resolving.AssemblyResolve += new System.ResolveEventHandler(ResolveEventHandler);
-        //     var myAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(@"C:\MyDirectory\bin\Custom.Thing.dll");
-         //   var myType = myAssembly.GetType("Custom.Thing.SampleClass");
-         //   var myInstance = Activator.CreateInstance(myType);
 
-          //  DependencyContext.Default.RuntimeLibraries.
-         //  AssemblyLoadContext.
+            var libManager = new GluonApplicationLibraryManager("Dazinate.Dnn.Manifest", new string[] { });
+            System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += new Func<AssemblyLoadContext, AssemblyName, Assembly>((a, b) =>
+            {
+
+                try
+                {
+                    
+                    var assy = libManager.LoadAssembly(b);
+                    //var assy = a.LoadFromAssemblyName(b);
+                    return assy;
+                }
+                catch (global::System.Exception ex)
+                {
+                    return null;
+                    //throw;
+                }
+
+
+
+            });
+            //    var loader = System.Runtime.Loader.AssemblyLoadContext.Default.Resolving.AssemblyResolve += new System.ResolveEventHandler(ResolveEventHandler);
+            //     var myAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(@"C:\MyDirectory\bin\Custom.Thing.dll");
+            //   var myType = myAssembly.GetType("Custom.Thing.SampleClass");
+            //   var myInstance = Activator.CreateInstance(myType);
+
+            //  DependencyContext.Default.RuntimeLibraries.
+            //  AssemblyLoadContext.
 #endif
 
         }
@@ -307,4 +312,6 @@ return null;
 
         #endregion
     }
+
+
 }

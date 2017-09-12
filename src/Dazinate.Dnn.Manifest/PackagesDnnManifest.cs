@@ -139,9 +139,21 @@ namespace Dazinate.Dnn.Manifest
                 PackagesDnnManifest = manifest;
             }
 
-            public IPackagesDnnManifest PackagesDnnManifest { get; set; }
+            public static readonly PropertyInfo<IPackagesDnnManifest> PackagesDnnManifestProperty = RegisterProperty<IPackagesDnnManifest>(c => c.PackagesDnnManifest);
+            public IPackagesDnnManifest PackagesDnnManifest
+            {
+                get { return ReadProperty(PackagesDnnManifestProperty); }
+                set { LoadProperty(PackagesDnnManifestProperty, value); }
+            }
 
-            public string Xml { get; set; }
+            public static readonly PropertyInfo<string> XmlProperty = RegisterProperty<string>(c => c.Xml);
+            public string Xml
+            {
+                get { return ReadProperty(XmlProperty); }
+                set { LoadProperty(XmlProperty, value); }
+            }
+
+          
         }
 
     }

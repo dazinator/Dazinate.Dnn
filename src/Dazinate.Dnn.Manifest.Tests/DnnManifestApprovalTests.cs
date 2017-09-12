@@ -29,6 +29,7 @@ using Dazinate.Dnn.Manifest.Package.Component.Script;
 using Dazinate.Dnn.Manifest.Package.Component.Skin;
 using Dazinate.Dnn.Manifest.Package.Component.SkinObject;
 using Dazinate.Dnn.Manifest.Package.Component.UrlProvider;
+using Assent;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -74,7 +75,9 @@ namespace Dazinate.Dnn.Manifest.Tests
             }
 
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            var configuration = new Configuration().UsingExtension(".xml");
+            this.Assent(xmlStringBuilder.ToString(), configuration);
+           // Approvals.VerifyXml(xmlStringBuilder.ToString());
         }
 
         [Fact]

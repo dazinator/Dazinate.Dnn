@@ -5,8 +5,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Dazinate.Dnn.Manifest</RootNamespace>
     <AssemblyName>Dazinate.Dnn.Manifest</AssemblyName>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <Description>A library for producing and consuming Dnn Manifests.</Description>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +52,7 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.28" />
 
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
 
 
     <!--<PackageReference Include="ReflectionBridge" Version="0.0.12" />-->
@@ -75,6 +76,7 @@
   <ItemGroup>
     <PackageReference Include="CSLA-Core" Version="4.6.603" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0" />   
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
