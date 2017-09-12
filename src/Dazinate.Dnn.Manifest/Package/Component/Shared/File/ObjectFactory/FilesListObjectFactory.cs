@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -13,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public IFilesList Create()
+        {
+            var list = CreateInstance<FilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public IFilesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +29,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File.ObjectFactory
             var list = CreateInstance<FilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator item in xpathNavigator.Select("files/file"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(item, list);
+                foreach (XPathNavigator item in xpathNavigator.Select("files/file"))
+                {
+                    LoadFileItem(item, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

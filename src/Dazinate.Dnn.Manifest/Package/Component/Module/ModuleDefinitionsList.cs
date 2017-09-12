@@ -21,5 +21,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module
             visitor.Visit(this);
         }
 
+#if NETDESKTOP
+        protected override IModuleDefinition AddNewCore()
+        {
+            //base.AddNewCore();
+            var item = Csla.DataPortal.Create<ModuleDefinition>();
+            Add(item);
+            return item;
+        }
+#else
+        protected override void AddNewCore()
+        {
+            //base.AddNewCore();
+             var item = Csla.DataPortal.Create<ModuleDefinition>();
+            Add(item);           
+        }
+#endif
+
     }
 }

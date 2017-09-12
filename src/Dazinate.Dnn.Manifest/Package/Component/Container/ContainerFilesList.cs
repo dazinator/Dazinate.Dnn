@@ -21,5 +21,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container
             visitor.Visit(this);
         }
 
+#if NETDESKTOP
+        protected override IContainerFile AddNewCore()
+        {
+            //base.AddNewCore();
+            var item = Csla.DataPortal.Create<ContainerFile>();
+            Add(item);
+            return item;
+        }
+#else
+        protected override void AddNewCore()
+        {
+            //base.AddNewCore();
+             var item = Csla.DataPortal.Create<ContainerFile>();
+            Add(item);           
+        }
+#endif
+
     }
 }

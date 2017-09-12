@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -13,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public ISkinFilesList Create()
+        {
+            var list = CreateInstance<SkinFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public ISkinFilesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +29,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin.ObjectFactory
             var list = CreateInstance<SkinFilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator item in xpathNavigator.Select("skinFiles/skinFile"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(item, list);
+                foreach (XPathNavigator item in xpathNavigator.Select("skinFiles/skinFile"))
+                {
+                    LoadFileItem(item, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

@@ -16,7 +16,23 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin.ObjectFactory
             _skinFilesListFactory = skinFilesListFactory;
         }
 
-        public string ComponentTypeName { get { return "Skin"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.Skin;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<SkinComponent>();
+            component.Files = _skinFilesListFactory.Create();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

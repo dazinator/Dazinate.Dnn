@@ -12,6 +12,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
         {
             //_packagesListFactory = packagesListFactory;
         }
+        public IModulePermission Create()
+        {
+            var businessObject = CreateInstance<ModulePermission>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
 
         public IModulePermission Fetch(XPathNavigator nav)
         {

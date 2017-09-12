@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public IContainerFilesList Create()
+        {
+            var list = CreateInstance<ContainerFilesList>();
+            MarkAsChild(list);
+            MarkNew(list);
+            return list;
+        }
+
         public IContainerFilesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +28,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container.ObjectFactory
             var list = CreateInstance<ContainerFilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("containerFile"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                // loop through packages.
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("containerFile"))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

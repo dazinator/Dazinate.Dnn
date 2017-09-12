@@ -1,0 +1,25 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="CoreLanguage">
+          <languageFiles>
+            <code>ca-ES</code>
+            <displayName>Catala (España)</displayName>
+            <fallback>en-US</fallback>
+            <languageFile>
+              <path>admin\ControlPanel\App_LocalResources</path>
+              <name>classic.ascx.ca-es.resx</name>
+            </languageFile>
+            <languageFile>
+              <path>admin\ControlPanel\App_LocalResources</path>
+              <name>iconbar.ascx.ca-es.resx</name>
+            </languageFile>
+          </languageFiles>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

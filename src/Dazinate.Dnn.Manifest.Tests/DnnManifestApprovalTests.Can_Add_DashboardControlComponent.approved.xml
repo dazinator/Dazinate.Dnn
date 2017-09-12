@@ -1,0 +1,20 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="DashboardControl">
+          <dashboardControl>
+            <key>Server</key>
+            <src>DesktopModules/Admin/Dashboard/Modules/Server.ascx</src>
+            <localResources>/some/foo.resx</localResources>
+            <controllerClass>DotNetNuke.Modules.Dashboard.Components.Server.ServerController</controllerClass>
+            <isEnabled>true</isEnabled>
+            <viewOrder>2</viewOrder>
+          </dashboardControl>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

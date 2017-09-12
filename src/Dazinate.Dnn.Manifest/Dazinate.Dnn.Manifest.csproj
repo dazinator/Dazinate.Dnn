@@ -1,17 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7876903-11D3-455A-A27C-3E860D0F01D1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dazinate.Dnn.Manifest</RootNamespace>
     <AssemblyName>Dazinate.Dnn.Manifest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net45;netstandard1.5;netcoreapp2.0</TargetFrameworks>
+    <Description>A library for producing and consuming Dnn Manifests.</Description>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,18 +15,12 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -38,303 +28,72 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <DefineConstants>NETDESKTOP;ASSEMBLYRESOLVE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
+    <DefineConstants>NETCOREAPP;ASSEMBLYRESOLVE</DefineConstants>
+  </PropertyGroup>
+  <!--<PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+    <DefineConstants>NETSTANDARD1_5</DefineConstants>
+  </PropertyGroup>-->
+
   <ItemGroup>
-    <Reference Include="Csla, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-Core.4.6.300\lib\net45\Csla.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\net45\Microsoft.Threading.Tasks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\net45\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <PackageReference Include="CSLA-Core" Version="4.6.603" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.28" />
+
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'!='net45'">
+
+
+    <!--<PackageReference Include="ReflectionBridge" Version="0.0.12" />-->
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XPath" Version="4.3.0" />
+    <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
+    <PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <!--<PackageReference Include="System.Xml.XPath" Version="4.3.0" />-->
+    <!--<PackageReference Include="System.AppDomain" Version="2.0.11" />-->
+
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\DependencyFactory.cs" />
-    <Compile Include="Factory\IDependencyFactory.cs" />
-    <Compile Include="Package\Component\Assembly\AssembliesList.cs" />
-    <Compile Include="Package\Component\CoreLanguage\CoreLanguageComponent.cs" />
-    <Compile Include="Package\Component\DashboardControl\DashboardControlComponent.cs" />
-    <Compile Include="Package\Component\Container\ContainerComponent.cs" />
-    <Compile Include="Package\Component\Config\ConfigComponent.cs" />
-    <Compile Include="Package\Component\Cleanup\CleanupComponent.cs" />
-    <Compile Include="Package\Component\ExtensionLanguage\ExtensionLanguageComponent.cs" />
-    <Compile Include="Package\Component\File\FileComponent.cs" />
-    <Compile Include="Package\Component\Cleanup\ICleanupComponent.cs" />
-    <Compile Include="Package\Component\Container\IContainerComponent.cs" />
-    <Compile Include="Package\Component\CoreLanguage\ICoreLanguageComponent.cs" />
-    <Compile Include="Package\Component\DashboardControl\IDashboardControlComponent.cs" />
-    <Compile Include="Package\Component\JavascriptFile\IJavascriptFileComponent.cs" />
-    <Compile Include="Package\Component\JavascriptLibrary\IJavascriptLibraryComponent.cs" />
-    <Compile Include="Package\Component\Provider\IProviderComponent.cs" />
-    <Compile Include="Package\Component\ResourceFile\IResourceFileComponent.cs" />
-    <Compile Include="Package\Component\Script\IScriptComponent.cs" />
-    <Compile Include="Package\Component\Skin\ISkinComponent.cs" />
-    <Compile Include="Package\Component\JavascriptFile\JavascriptFileComponent.cs" />
-    <Compile Include="Package\Component\JavascriptLibrary\JavascriptLibraryComponent.cs" />
-    <Compile Include="Package\Component\Skin\SkinComponent.cs" />
-    <Compile Include="Package\Component\JavascriptLibrary\ObjectFactory\JavascriptLibraryComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\JavascriptFile\ObjectFactory\JavascriptFileComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Skin\ObjectFactory\SkinComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\JavascriptFile\ObjectFactory\IJavascriptFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\JavascriptFile\JavascriptFilesList.cs" />
-    <Compile Include="Package\Component\JavascriptFile\IJavascriptFilesList.cs" />
-    <Compile Include="Package\Component\JavascriptFile\ObjectFactory\JavascriptFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\JavascriptFile\ObjectFactory\IJavascriptFileObjectFactory.cs" />
-    <Compile Include="Package\Component\JavascriptFile\IJavascriptFile.cs" />
-    <Compile Include="Package\Component\JavascriptFile\JavascriptFile.cs" />
-    <Compile Include="Package\Component\JavascriptFile\ObjectFactory\JavascriptFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Skin\ISkinFilesList.cs" />
-    <Compile Include="Package\Component\Skin\ObjectFactory\ISkinFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Skin\ObjectFactory\SkinFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Skin\SkinFilesList.cs" />
-    <Compile Include="Package\Component\Skin\ISkinFile.cs" />
-    <Compile Include="Package\Component\SkinObject\ISkinObjectComponent.cs" />
-    <Compile Include="Package\Component\UrlProvider\IUrlProviderComponent.cs" />
-    <Compile Include="Package\Component\ResourceFile\ResourceFileComponent.cs" />
-    <Compile Include="Package\Component\Script\ScriptComponent.cs" />
-    <Compile Include="Package\Component\SkinObject\SkinObjectComponent.cs" />
-    <Compile Include="Package\Component\ResourceFile\ObjectFactory\ResourceFileComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Script\ObjectFactory\ScriptComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\SkinObject\ObjectFactory\SkinObjectComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\UrlProvider\ObjectFactory\UrlProviderComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\UrlProvider\UrlProviderComponent.cs" />
-    <Compile Include="Package\Component\ResourceFile\ObjectFactory\IResourceFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\ResourceFile\ObjectFactory\ResourceFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\ResourceFile\ResourceFilesList.cs" />
-    <Compile Include="Package\Component\ResourceFile\IResourceFile.cs" />
-    <Compile Include="Package\Component\ResourceFile\IResourceFilesList.cs" />
-    <Compile Include="Package\Component\Module\ModuleComponent.cs" />
-    <Compile Include="Package\Component\Provider\ProviderComponent.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModuleComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Provider\ObjectFactory\ProviderComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\EventAttributesList.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\EventAttributesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IEventAttributesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\EventAttribute.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\EventAttributeObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IEventAttributeObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\EventMessage.cs" />
-    <Compile Include="Package\Component\Module\IEventMessage.cs" />
-    <Compile Include="Package\Component\Module\IEventAttributesList.cs" />
-    <Compile Include="Package\Component\Module\IEventAttribute.cs" />
-    <Compile Include="Package\Component\ExtensionLanguage\IExtensionLanguageComponent.cs" />
-    <Compile Include="Package\Component\File\IFileComponent.cs" />
-    <Compile Include="Package\Component\Module\IModuleComponent.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\EventMessageObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IEventMessageObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ModuleControlsList.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModuleControlsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\IModuleControl.cs" />
-    <Compile Include="Package\Component\Module\IModuleControlsList.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IModuleControlObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ModuleControl.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModuleControlObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ModuleDefinitionsList.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IModuleDefinitionsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModuleDefinitionsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\IModuleDefinition.cs" />
-    <Compile Include="Package\Component\Module\IModuleDefinitionsList.cs" />
-    <Compile Include="Package\Component\Module\ModuleDefinition.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IModuleControlsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IModuleDefinitionObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModuleDefinitionObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ModulePermissionsList.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModulePermissionsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ModulePermission.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IModulePermissionObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\IModulePermissionsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\IModulePermissionsList.cs" />
-    <Compile Include="Package\Component\Module\IModulePermission.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ModulePermissionObjectFactory.cs" />
-    <Compile Include="Package\Component\ResourceFile\ObjectFactory\IResourceFileObjectFactory.cs" />
-    <Compile Include="Package\Component\ResourceFile\ObjectFactory\ResourceFileObjectFactory.cs" />
-    <Compile Include="Package\Component\ResourceFile\ResourceFile.cs" />
-    <Compile Include="Package\Component\Script\IScriptsList.cs" />
-    <Compile Include="Package\Component\Script\ObjectFactory\IScriptsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Script\ObjectFactory\ScriptsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Script\ScriptsList.cs" />
-    <Compile Include="Package\Component\Script\IScript.cs" />
-    <Compile Include="Package\Component\Script\ObjectFactory\IScriptObjectFactory.cs" />
-    <Compile Include="Package\Component\Script\ObjectFactory\ScriptObjectFactory.cs" />
-    <Compile Include="Package\Component\Script\Script.cs" />
-    <Compile Include="Package\Component\Script\ScriptType.cs" />
-    <Compile Include="Package\Component\Skin\ObjectFactory\ISkinFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Skin\ObjectFactory\SkinFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Skin\SkinFile.cs" />
-    <Compile Include="Package\Component\Module\ISupportedFeaturesList.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ISupportedFeatureObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\ISupportedFeaturesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\SupportedFeaturesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\SupportedFeaturesList.cs" />
-    <Compile Include="Package\Component\Module\ISupportedFeature.cs" />
-    <Compile Include="Package\Component\CoreLanguage\ObjectFactory\CoreLanguageComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\ExtensionLanguage\ObjectFactory\ExtensionLanguageComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\ObjectFactory\SupportedFeatureObjectFactory.cs" />
-    <Compile Include="Package\Component\Module\SupportedFeature.cs" />
-    <Compile Include="Package\Component\Module\SupportedFeatureType.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\LanguageFilesList.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\ObjectFactory\LanguageFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\LanguageFile.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\ObjectFactory\LanguageFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\ObjectFactory\ILanguageFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\ObjectFactory\ILanguageFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\ILanguageFile.cs" />
-    <Compile Include="Package\Component\Shared\LanguageFile\ILanguageFilesList.cs" />
-    <Compile Include="Package\Component\File\ObjectFactory\FileComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\DashboardControl\ObjectFactory\DashboardControlComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Container\ObjectFactory\ContainerComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Config\ObjectFactory\ConfigComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\Cleanup\ObjectFactory\CleanupComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\DashboardControl\DashboardControlsList.cs" />
-    <Compile Include="Package\Component\DashboardControl\DashboardControl.cs" />
-    <Compile Include="Package\Component\DashboardControl\IDashboardControl.cs" />
-    <Compile Include="Package\Component\DashboardControl\ObjectFactory\DashboardControlsListObjectFactory.cs" />
-    <Compile Include="Package\Component\DashboardControl\IDashboardControlsList.cs" />
-    <Compile Include="Package\Component\DashboardControl\ObjectFactory\DashboardControlObjectFactory.cs" />
-    <Compile Include="Package\Component\DashboardControl\ObjectFactory\IDashboardControlObjectFactory.cs" />
-    <Compile Include="Package\Component\DashboardControl\ObjectFactory\IDashboardControlsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Container\ContainerFilesList.cs" />
-    <Compile Include="Package\Component\Container\IContainerFilesList.cs" />
-    <Compile Include="Package\Component\Container\ObjectFactory\ContainerFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Container\ObjectFactory\IContainerFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Container\ContainerFile.cs" />
-    <Compile Include="Package\Component\Container\IContainerFile.cs" />
-    <Compile Include="Package\Component\Container\ObjectFactory\ContainerFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Container\ObjectFactory\IContainerFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Config\ObjectFactory\NodesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Config\ObjectFactory\INodesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Config\NodesList.cs" />
-    <Compile Include="Package\Component\Config\ObjectFactory\NodeObjectFactory.cs" />
-    <Compile Include="Package\Component\Config\ObjectFactory\INodeObjectFactory.cs" />
-    <Compile Include="Package\Component\Config\NodeAction.cs" />
-    <Compile Include="Package\Component\Config\NodeCollision.cs" />
-    <Compile Include="Package\Component\Config\INode.cs" />
-    <Compile Include="Package\Component\Config\INodesList.cs" />
-    <Compile Include="Package\Component\Shared\File\ObjectFactory\FilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\File\ObjectFactory\IFilesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\File\FilesList.cs" />
-    <Compile Include="Package\Component\Shared\File\IFilesList.cs" />
-    <Compile Include="Package\Component\Assembly\ObjectFactory\AssembliesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\File\File.cs" />
-    <Compile Include="Package\Component\Shared\File\ObjectFactory\FileObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\File\ObjectFactory\IFileObjectFactory.cs" />
-    <Compile Include="Package\Component\Shared\File\IFile.cs" />
-    <Compile Include="Package\Component\Assembly\ObjectFactory\IAssemblyObjectFactory.cs" />
-    <Compile Include="Package\Component\Assembly\Assembly.cs" />
-    <Compile Include="Package\Component\Assembly\AssemblyAction.cs" />
-    <Compile Include="Package\Component\Assembly\ObjectFactory\AssemblyObjectFactory.cs" />
-    <Compile Include="Package\Component\AuthenticationSystem\AuthenticationSystemComponent.cs" />
-    <Compile Include="Package\Component\AuthenticationSystem\ObjectFactory\AuthenticationSystemObjectFactory.cs" />
-    <Compile Include="Package\Component\AuthenticationSystem\IAuthenticationSystemComponent.cs" />
-    <Compile Include="Package\Component\ComponentsList.cs" />
-    <Compile Include="Package\Component\IComponentsList.cs" />
-    <Compile Include="Package\Component\ObjectFactory\ComponentsListObjectFactory.cs" />
-    <Compile Include="Package\Component\ObjectFactory\IComponentsListObjectFactory.cs" />
-    <Compile Include="Package\Component\Assembly\AssemblyComponent.cs" />
-    <Compile Include="Package\Component\Assembly\IAssembliesList.cs" />
-    <Compile Include="Package\Component\Assembly\ObjectFactory\IAssembliesListObjectFactory.cs" />
-    <Compile Include="Package\Component\Assembly\IAssembly.cs" />
-    <Compile Include="Package\Component\Assembly\IAssemblyComponent.cs" />
-    <Compile Include="Package\Component\Assembly\ObjectFactory\AssemblyComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\ObjectFactory\ComponentObjectFactory.cs" />
-    <Compile Include="Package\Component\ObjectFactory\IComponentSubObjectFactory.cs" />
-    <Compile Include="Package\Component\ObjectFactory\IComponentObjectFactory.cs" />
-    <Compile Include="Package\Dependency\CoreVersionDependency.cs" />
-    <Compile Include="Package\Dependency\CustomDependency.cs" />
-    <Compile Include="Factory\DnnManifestFactory.cs" />
-    <Compile Include="Factory\IDnnManifestFactory.cs" />
-    <Compile Include="Factory\IPackageFactory.cs" />
-    <Compile Include="Factory\IPackageTypeListFactory.cs" />
-    <Compile Include="Factory\PackageFactory.cs" />
-    <Compile Include="Factory\PackagesDnnManifestFactory.cs" />
-    <Compile Include="Factory\PackageTypeListFactory.cs" />
-    <Compile Include="Base\IDnnManifest.cs" />
-    <Compile Include="Package\Dependency\DependenciesList.cs" />
-    <Compile Include="Package\Component\Config\Node.cs" />
-    <Compile Include="Package\ILicense.cs" />
-    <Compile Include="Base\IManifestVisitor.cs" />
-    <Compile Include="Exceptions\InvalidManifestFormatException.cs" />
-    <Compile Include="Ioc\TinyIocObjectActivator.cs" />
-    <Compile Include="Ioc\TinyIocObjectFactoryLoader.cs" />
-    <Compile Include="Ioc\IObjectActivator.cs" />
-    <Compile Include="Ioc\ObjectFactoryNotRegisteredException.cs" />
-    <Compile Include="Package\IOwner.cs" />
-    <Compile Include="Package\IPackage.cs" />
-    <Compile Include="Package\Component\IComponent.cs" />
-    <Compile Include="Package\Dependency\IDependenciesList.cs" />
-    <Compile Include="Package\Dependency\IDependency.cs" />
-    <Compile Include="IPackagesDnnManifest.cs" />
-    <Compile Include="Package\IPackagesList.cs" />
-    <Compile Include="Package\IReleaseNotes.cs" />
-    <Compile Include="Base\IVisitable.cs" />
-    <Compile Include="Package\License.cs" />
-    <Compile Include="Package\Dependency\ManagedPackageDependency.cs" />
-    <Compile Include="ManifestType.cs" />
-    <Compile Include="Base\BaseObjectFactory.cs" />
-    <Compile Include="Package\Dependency\ObjectFactory\IDependenciesListObjectFactory.cs" />
-    <Compile Include="Package\Dependency\ObjectFactory\IDependencyObjectFactory.cs" />
-    <Compile Include="Package\ObjectFactory\IPackageObjectFactory.cs" />
-    <Compile Include="ObjectFactory\IPackagesDnnManifestObjectFactory.cs" />
-    <Compile Include="Package\ObjectFactory\IPackagesListObjectFactory.cs" />
-    <Compile Include="Package\ObjectFactory\IPackageTypeListObjectFactory.cs" />
-    <Compile Include="Package\Dependency\ObjectFactory\DependencyObjectFactory.cs" />
-    <Compile Include="Package\ObjectFactory\PackageObjectFactory.cs" />
-    <Compile Include="ObjectFactory\PackagesDnnManifestObjectFactory.cs" />
-    <Compile Include="Package\Dependency\ObjectFactory\DependenciesListObjectFactory.cs" />
-    <Compile Include="Package\ObjectFactory\PackagesListObjectFactory.cs" />
-    <Compile Include="Package\ObjectFactory\PackageTypeListObjectFactory.cs" />
-    <Compile Include="Utils\RegexUtilities.cs" />
-    <Compile Include="Package\Owner.cs" />
-    <Compile Include="Package\Package.cs" />
-    <Compile Include="Package\Dependency\PackageDependency.cs" />
-    <Compile Include="PackagesDnnManifest.cs" />
-    <Compile Include="Package\PackagesList.cs" />
-    <Compile Include="ObjectFactory\SaveToNewXmlFileVisitor.cs" />
-    <Compile Include="Package\PackageType.cs" />
-    <Compile Include="Package\PackageTypeList.cs" />
-    <Compile Include="Package\ReleaseNotes.cs" />
-    <Compile Include="Ioc\TinyIoC.cs" />
-    <Compile Include="Package\Dependency\TypeDependency.cs" />
-    <Compile Include="Utils\XmlUtils.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Ioc\GluonApplicationLibraryManager.cs" />
+    <Compile Remove="Ioc\TinyIoC.cs" />
+    <Compile Remove="Ioc\TinyIocObjectActivator.cs" />
+    <Compile Remove="Ioc\TinyIocObjectFactoryLoader.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Dazinate.Dnn.Manifest.nuspec" />
     <None Include="key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
+
+
+
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

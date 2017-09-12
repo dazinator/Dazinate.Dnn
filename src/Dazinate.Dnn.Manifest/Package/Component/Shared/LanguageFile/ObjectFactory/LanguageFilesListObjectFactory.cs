@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -13,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile.ObjectFact
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public ILanguageFilesList Create()
+        {
+            var list = CreateInstance<LanguageFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);          
+            return list;
+        }
+
         public ILanguageFilesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +29,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile.ObjectFact
             var list = CreateInstance<LanguageFilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("languageFile"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("languageFile"))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

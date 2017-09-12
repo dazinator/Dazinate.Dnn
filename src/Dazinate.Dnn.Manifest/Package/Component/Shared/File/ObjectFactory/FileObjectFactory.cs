@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IFile Create()
+        {
+            var component = CreateInstance<File>();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
+
         public IFile Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

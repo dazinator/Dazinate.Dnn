@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -13,15 +14,26 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public IJavascriptFilesList Create()
+        {
+            var list = CreateInstance<JavascriptFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public IJavascriptFilesList Fetch(XPathNavigator xpathNavigator)
         {
 
             var list = CreateInstance<JavascriptFilesList>();
             list.RaiseListChangedEvents = false;
-          
-            foreach (XPathNavigator dependencyNav in xpathNavigator.Select("jsfiles/jsfile"))
+
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                foreach (XPathNavigator dependencyNav in xpathNavigator.Select("jsfiles/jsfile"))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

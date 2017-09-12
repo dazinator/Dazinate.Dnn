@@ -21,10 +21,13 @@ namespace Dazinate.Dnn.Manifest.Package.ObjectFactory
             var packagesList = CreateInstance<PackagesList>();
             packagesList.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator packageNav in xpathNavigator.Select("packages/package"))
+            if (xpathNavigator != null)
             {
-                LoadPackage(packageNav, packagesList);
+                // loop through packages.
+                foreach (XPathNavigator packageNav in xpathNavigator.Select("packages/package"))
+                {
+                    LoadPackage(packageNav, packagesList);
+                }
             }
 
             packagesList.RaiseListChangedEvents = true;

@@ -15,6 +15,15 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Config.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public INode Create()
+        {
+            // Create the correct concrete dependency based on the xml.
+            var businessObject = CreateInstance<Node>();
+            this.MarkAsChild(businessObject);
+            this.MarkNew(businessObject);
+            return businessObject;            
+        }
+
         public INode Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

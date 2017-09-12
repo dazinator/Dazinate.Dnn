@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System;
+using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 
@@ -13,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public IDashboardControlsList Create()
+        {
+            var list = CreateInstance<DashboardControlsList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public IDashboardControlsList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +29,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl.ObjectFactory
             var list = CreateInstance<DashboardControlsList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator itemNav in xpathNavigator.Select("dashboardControl"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(itemNav, list);
+                foreach (XPathNavigator itemNav in xpathNavigator.Select("dashboardControl"))
+                {
+                    LoadFileItem(itemNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

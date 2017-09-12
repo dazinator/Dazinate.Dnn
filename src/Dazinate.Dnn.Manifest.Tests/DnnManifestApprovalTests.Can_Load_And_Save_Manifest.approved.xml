@@ -59,17 +59,13 @@
             <install>
               <configuration>
                 <nodes>
-                  <node path="/configuration/system.webServer/handlers" action="update" key="path" collision="overwrite">
-                    <add name="RadProgressHandler" verb="*" path="Telerik.RadUploadProgressHandler.ashx" type="Telerik.Web.UI.Upload.RadUploadProgressHandler, Telerik.Web.UI" preCondition="integratedMode" />
-                  </node>
+                  <node path="/configuration/system.webServer/handlers" action="update" key="path" collision="overwrite"><add name="RadProgressHandler" verb="*" path="Telerik.RadUploadProgressHandler.ashx" type="Telerik.Web.UI.Upload.RadUploadProgressHandler, Telerik.Web.UI" preCondition="integratedMode" /></node>
                   <node />
                 </nodes>
               </configuration>
             </install>
             <uninstall>
-              <configuration>
-                <nodes />
-              </configuration>
+              <configuration />
             </uninstall>
           </config>
         </component>
@@ -105,7 +101,6 @@
               <name>MyModule.ascx.resx</name>
             </file>
             <file>
-              <path />
               <name>MyModule.ascx</name>
               <sourceFileName>some/path/in/zip/mymodule.ascx</sourceFileName>
             </file>

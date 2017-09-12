@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Dazinate.Dnn.Manifest</id>
+    <title>DotNetNuke Manifest</title>
+    <authors>Darrell Tunnell</authors>
+    <owners>Darrell Tunnell</owners>
+    <projectUrl>https://github.com/dazinator/Dazinate.Dnn</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for manipulating Dnn manifest files.</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Dnn DotNetNuke</tags>
+    <dependencies>
+      <dependency  id="CSLA-Core" version="4.6.300" />
+      <dependency  id="Microsoft.Extensions.DependencyInjection" version="1.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\net45\Dazinate.Dnn.Manifest.dll" target="lib\net45\" />
+    <file src="bin\Release\netcoreapp2.0\Dazinate.Dnn.Manifest.dll" target="lib\netcoreapp2.0\" />
+    <file src="bin\Release\netstandard1.5\Dazinate.Dnn.Manifest.dll" target="lib\netstandard1.5\" />    
+  </files>
+</package>

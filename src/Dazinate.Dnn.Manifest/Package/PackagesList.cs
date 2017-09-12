@@ -4,9 +4,12 @@ using Csla.Server;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Factory;
 using Dazinate.Dnn.Manifest.Package.ObjectFactory;
+using Csla.Core;
 
 namespace Dazinate.Dnn.Manifest.Package
 {
+
+
     [ObjectFactory(typeof(IPackagesListObjectFactory))]
     [Serializable]
     public class PackagesList : BusinessListBase<PackagesList, IPackage>, IPackagesList
@@ -22,14 +25,23 @@ namespace Dazinate.Dnn.Manifest.Package
             _factory = factory;
         }
 
+
+#if NETDESKTOP
         protected override IPackage AddNewCore()
         {
             //base.AddNewCore();
             var child = _factory.CreateNew();
             Add(child);
             return child;
-
         }
+#else
+         protected override void AddNewCore()
+        {
+            //base.AddNewCore();
+            var child = _factory.CreateNew();
+            Add(child);           
+        }
+#endif
 
         public void Accept(IManifestVisitor visitor)
         {
@@ -38,8 +50,23 @@ namespace Dazinate.Dnn.Manifest.Package
 
         public IPackage AddNewPackage()
         {
-            var result = this.AddNew();
-            return (IPackage)result;
+            this.AddNewCore();
+            //var result = this.AddNew();
+            return (IPackage)this.Items[this.Items.Count -1];
         }
     }
 }
+
+//public static class AddNewCoreHelper
+//{
+
+//    public static TItem AddNewCore<TList, TItem>(TList list)
+//        where TList : BusinessListBase<TList, TItem>
+//         where TItem : IEditableBusinessObject
+//    {
+//        var item = Csla.DataPortal.Create<TItem>();
+//        list.Add(item);
+//        return item;
+//    }
+
+//}

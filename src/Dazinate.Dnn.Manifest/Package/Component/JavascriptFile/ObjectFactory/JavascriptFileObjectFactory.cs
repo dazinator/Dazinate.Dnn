@@ -12,6 +12,13 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile.ObjectFactory
         {
             //_packagesListFactory = packagesListFactory;
         }
+        public IJavascriptFile Create()
+        {
+            var businessObject = CreateInstance<JavascriptFile>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
 
         public IJavascriptFile Fetch(XPathNavigator nav)
         {

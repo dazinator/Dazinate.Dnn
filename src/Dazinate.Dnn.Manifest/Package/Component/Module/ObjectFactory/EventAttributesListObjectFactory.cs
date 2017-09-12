@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             _attributeObjectFactory = attributeObjectFactory;
         }
 
+        public IEventAttributesList Create()
+        {
+            var businessObject = CreateInstance<EventAttributesList>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IEventAttributesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +28,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             var list = CreateInstance<EventAttributesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator dependencyNav in xpathNavigator.SelectChildren(XPathNodeType.Element))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(dependencyNav, list);
+                foreach (XPathNavigator dependencyNav in xpathNavigator.SelectChildren(XPathNodeType.Element))
+                {
+                    LoadFileItem(dependencyNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

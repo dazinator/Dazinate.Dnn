@@ -438,6 +438,60 @@ namespace Dazinate.Dnn.Manifest.Tests
 
         }
 
+        [Theory]
+        [InlineData("manifest.xml")]
+        public void Can_Add_Package(string manifestFile)
+        {
+
+            var xmlContents = LoadManifestXml(manifestFile);
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+
+            // Act           
+            var dnnManifest = factory.Get(xmlContents);
+            Assert.False(dnnManifest.IsDirty);
+
+            var package = dnnManifest.Packages.AddNewPackage();
+            package.Name = "something";
+            package.Version = "1.0.0";
+            package.Description = "somehting";
+            package.FriendlyName = "friendlyName of package";
+            package.Type = "Library";
+
+            Assert.True(package.IsValid);
+            Assert.True(dnnManifest.IsDirty);
+
+            // var writer = dnnManifest.GetXmlWriter();
+            var xmlStringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            {
+                // xmlWriter.Settings.OmitXmlDeclaration = true;
+                dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
+                Console.Write(xmlStringBuilder.ToString());
+                Assert.False(dnnManifest.IsDirty);
+            }
+
+
+            //var dep = package.Dependencies.AddNewCoreVersionDependency();
+            //  Assert.True(package.IsNew);
+         
+
+
+        }
+
+
+        [Theory]
+        [InlineData("partialmanifest.xml")]
+        public void Can_Load_From_Partial_Manifest_Xml(string manifestFile)
+        {
+
+            var xmlContents = LoadManifestXml(manifestFile);
+            IDnnManifestFactory<IPackagesDnnManifest> factory = new PackagesDnnManifestFactory();
+
+            // Act           
+            var dnnManifest = factory.Get(xmlContents);
+           
+        }
+
 
     }
 

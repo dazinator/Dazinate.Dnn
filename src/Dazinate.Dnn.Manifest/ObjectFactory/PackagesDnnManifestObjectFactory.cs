@@ -26,7 +26,9 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
         {
             string xml = xmlContents.Value;
 
-            using (var manifestFileStream = new XmlTextReader(new StringReader(xml)))
+
+
+            using (var manifestFileStream = XmlReader.Create(new StringReader(xml)))
             {
                 var instance = Load(manifestFileStream);
                 MarkOld(instance);
@@ -35,7 +37,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             }
         }
 
-        private PackagesDnnManifest Load(XmlTextReader manifestFileStream)
+        private PackagesDnnManifest Load(XmlReader manifestFileStream)
         {
 
             var dnnManifest = CreateInstance<PackagesDnnManifest>();
@@ -98,48 +100,23 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             var version = XmlUtils.ReadRequiredAttribute(rootNav, "version");
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.VersionProperty, version);
 
-
-
             var packagesList = _packagesListFactory.Fetch(rootNav);
-
-
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.PackagesListProperty, packagesList);
-            //   throw new NotImplementedException();
-        }
-
-        public PackagesDnnManifest Update(PackagesDnnManifest businessObject)
-        {
-
-            // nothing really to do
-            foreach (var i in businessObject.Packages)
-            {
-                MarkOld(i);
-                MarkOld(i.License);
-                MarkOld(i.Owner);
-                if (i.ReleaseNotes != null)
-                {
-                    MarkOld(i.ReleaseNotes);
-                }
-            }
-
-            businessObject.Packages.GetDeletedList();
-            // var deletedList = businessObject.Packages.GetDeletedList();
-            var deletedList = GetDeletedList<IPackage>(businessObject.Packages);
-            deletedList.Clear();
-
-            MarkOld(businessObject.Packages);
-            MarkOld(businessObject);
-            return businessObject;
-
         }
 
         public PackagesDnnManifest.SaveToXmlCommand Execute(PackagesDnnManifest.SaveToXmlCommand command)
         {
-
+            if (command == null)
+            {
+                throw new System.Exception("command null");
+            }
             var manifest = command.PackagesDnnManifest;
-
+            if (manifest == null)
+            {
+                throw new System.Exception("manifest null");
+            }
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true }))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true }))
             {
                 var manifestWriter = new SaveToNewXmlFileVisitor(this.Activator, xmlWriter);
                 manifest.Accept(manifestWriter);
@@ -147,7 +124,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
                 command.Xml = xmlStringBuilder.ToString();
             }
 
-           // MarkSaved(manifest);
+            // MarkSaved(manifest);
             return command;
 
         }

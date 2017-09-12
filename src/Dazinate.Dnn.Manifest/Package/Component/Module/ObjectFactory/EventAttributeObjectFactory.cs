@@ -12,6 +12,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IEventAttribute Create()
+        {
+            var businessObject = CreateInstance<EventAttribute>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IEventAttribute Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

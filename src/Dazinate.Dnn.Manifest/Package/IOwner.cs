@@ -10,5 +10,7 @@ namespace Dazinate.Dnn.Manifest.Package
         string Url { get; set; }
         string Email { get; set; }
 
+        bool IsEmpty();
+
     }
 }

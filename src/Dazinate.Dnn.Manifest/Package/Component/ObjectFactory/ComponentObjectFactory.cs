@@ -5,6 +5,7 @@ using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
 using Dazinate.Dnn.Manifest.Utils;
+using Dazinate.Dnn.Manifest.Factory;
 
 namespace Dazinate.Dnn.Manifest.Package.Component.ObjectFactory
 {
@@ -22,7 +23,9 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ObjectFactory
         {
             // Create the correct concrete dependency based on the xml.
 
-            var componentType = XmlUtils.ReadRequiredAttribute(nav, "type");
+            var componentTypeName = XmlUtils.ReadRequiredAttribute(nav, "type");
+            var componentType = (ComponentType)Enum.Parse(typeof(ComponentType), componentTypeName);
+
             IComponentSubObjectFactory subFactory = ResolveSubFactory(componentType);
 
             IComponent component = subFactory.Fetch(nav);
@@ -33,17 +36,33 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ObjectFactory
             return component;
         }
 
-        private IComponentSubObjectFactory ResolveSubFactory(string componentType)
+        private IComponentSubObjectFactory ResolveSubFactory(ComponentType componentType)
         {
             var subFactory =
                 _subFactories.FirstOrDefault(
-                    a => a.ComponentTypeName.ToLowerInvariant() == componentType.ToLowerInvariant());
+                    a => a.ComponentType == componentType);
             if (subFactory == null)
             {
                 throw new Exception("Unsupported component type in manifest: " + componentType);
             }
 
             return subFactory;
+
+        }
+
+        private IComponent Create(ComponentType componentType)
+        {
+            var subFactory =
+                _subFactories.FirstOrDefault(
+                    a => a.ComponentType == componentType);
+            if (subFactory == null)
+            {
+                throw new Exception("Unsupported component type in manifest: " + componentType);
+            }
+
+            IComponent newInstance = (IComponent)subFactory.Create(componentType);
+
+            return newInstance;
 
         }
 

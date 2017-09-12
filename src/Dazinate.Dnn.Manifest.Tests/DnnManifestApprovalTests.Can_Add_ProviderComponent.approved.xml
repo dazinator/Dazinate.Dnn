@@ -1,0 +1,11 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="Provider" />
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

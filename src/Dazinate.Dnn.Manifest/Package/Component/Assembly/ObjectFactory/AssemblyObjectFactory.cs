@@ -14,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Assembly.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IAssembly Create()
+        {
+            var assy = CreateInstance<Assembly>();
+            MarkAsChild(assy);
+            MarkNew(assy);
+            return assy;
+        }
+
         public IAssembly Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

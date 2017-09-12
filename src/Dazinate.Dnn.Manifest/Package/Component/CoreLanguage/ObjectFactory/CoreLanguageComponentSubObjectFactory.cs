@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Exceptions;
@@ -18,7 +19,22 @@ namespace Dazinate.Dnn.Manifest.Package.Component.CoreLanguage.ObjectFactory
             _filesListObjectFactory = filesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "CoreLanguage"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.CoreLanguage;
+            }
+        }
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<CoreLanguageComponent>();
+            component.Files = _filesListObjectFactory.Create();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

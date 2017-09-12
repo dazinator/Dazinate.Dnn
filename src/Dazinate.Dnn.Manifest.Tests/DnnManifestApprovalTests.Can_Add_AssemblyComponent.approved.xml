@@ -1,0 +1,28 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
+      <friendlyName>My Amazing Auth System</friendlyName>
+      <description>An amazing auth system.</description>
+      <components>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>foo.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>bar.dll</name>
+              <version>1.0.0</version>
+            </assembly>
+            <assembly action="Unregister">
+              <path>bin</path>
+              <name>baz.dll</name>
+              <version>1.0.0.1</version>
+            </assembly>
+          </assemblies>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

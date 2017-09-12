@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dotnetnuke type="Package" version="6.0">
+  <packages>
+    <package name="DnnExtension191" type="Module" version="0.0.1">
+      <friendlyName>DnnExtension191</friendlyName>
+      <description />
+      <owner>
+        <name>[OwnerName]</name>
+        <organization />
+        <url>http://www.someurl.com</url>
+        <email>&lt;a href="mailto:support@someorg.com"&gt;support@someorg.com&lt;/a&gt;</email>
+      </owner>
+      <license src="License.lic" />
+      <dependencies>
+        <dependency type="coreVersion">05.04.01</dependency>
+        <dependency type="package">SomeOtherPackage</dependency>
+      </dependencies>
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnExtension191</moduleName>
+            <foldername>DnnExtension191</foldername>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>[Friendly Module Name]</friendlyName>
+                <defaultCacheTime>60</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>[YourControllerOrPathToView]/[YourViewFileName].[YourViewFileExtension]</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>[Default title when added to page]</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>settings</controlKey>
+                    <controlSrc>[YourControllerOrPathToSettings]/[YourSettingsFileName].[YourSettingsFileExtension]</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>[Default settings title]</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+                <permissions />
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>DnnExtension191.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DnnExtension191</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+    <package name="awdawd" type="Library" version="1.0.2">
+      <friendlyName>awdawd</friendlyName>
+      <description />
+      <owner>
+        <name />
+        <organization />
+        <url />
+        <email />
+      </owner>
+      <releaseNotes />
+      <dependencies />
+    </package>
+  </packages>
+</dotnetnuke>

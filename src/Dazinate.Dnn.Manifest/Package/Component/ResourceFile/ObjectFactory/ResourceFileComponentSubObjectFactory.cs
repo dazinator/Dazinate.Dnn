@@ -17,7 +17,23 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile.ObjectFactory
             _filesListObjectFactory = filesListObjectFactory;
         }
 
-        public string ComponentTypeName { get { return "ResourceFile"; } }
+        public ComponentType ComponentType
+        {
+            get
+            {
+                return ComponentType.ResourceFile;
+            }
+        }
+
+
+        public IComponent Create(ComponentType componentType)
+        {
+            var component = CreateInstance<ResourceFileComponent>();
+            component.Files = _filesListObjectFactory.Create();
+            MarkAsChild(component);
+            MarkNew(component);
+            return component;
+        }
 
         public IComponent Fetch(XPathNavigator nav)
         {

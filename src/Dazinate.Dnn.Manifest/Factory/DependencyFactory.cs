@@ -7,7 +7,7 @@ namespace Dazinate.Dnn.Manifest.Factory
     [Serializable]
     internal class DependencyFactory : IDependencyFactory
     {
-    
+
         public IDependency CreateNewCoreVersionDependency()
         {
             return Csla.DataPortal.Create<CoreVersionDependency>(DependencyType.CoreVersion);

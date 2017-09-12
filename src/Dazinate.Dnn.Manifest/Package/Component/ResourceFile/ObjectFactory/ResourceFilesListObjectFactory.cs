@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile.ObjectFactory
             _fileObjectFactory = fileObjectFactory;
         }
 
+        public IResourceFilesList Create()
+        {
+            var list = CreateInstance<ResourceFilesList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public IResourceFilesList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +28,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.ResourceFile.ObjectFactory
             var list = CreateInstance<ResourceFilesList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator item in xpathNavigator.Select("resourceFiles/resourceFile"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(item, list);
+                foreach (XPathNavigator item in xpathNavigator.Select("resourceFiles/resourceFile"))
+                {
+                    LoadFileItem(item, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

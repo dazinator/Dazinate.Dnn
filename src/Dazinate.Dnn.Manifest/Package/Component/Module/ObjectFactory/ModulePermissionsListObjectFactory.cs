@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using Dazinate.Dnn.Manifest.Base;
 using Dazinate.Dnn.Manifest.Ioc;
@@ -13,6 +14,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             _permissionObjectFactory = permissionObjectFactory;
         }
 
+        public IModulePermissionsList Create()
+        {
+            var list = CreateInstance<ModulePermissionsList>();
+            MarkNew(list);
+            MarkAsChild(list);
+            return list;
+        }
+
         public IModulePermissionsList Fetch(XPathNavigator xpathNavigator)
         {
             //  var packagesNav = xpathNavigator.Select("packages/package");
@@ -20,10 +29,12 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Module.ObjectFactory
             var list = CreateInstance<ModulePermissionsList>();
             list.RaiseListChangedEvents = false;
 
-            // loop through packages.
-            foreach (XPathNavigator itemNav in xpathNavigator.Select("permission"))
+            if (xpathNavigator != null)
             {
-                LoadFileItem(itemNav, list);
+                foreach (XPathNavigator itemNav in xpathNavigator.Select("permission"))
+                {
+                    LoadFileItem(itemNav, list);
+                }
             }
 
             list.RaiseListChangedEvents = true;

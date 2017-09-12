@@ -3,12 +3,6 @@
     <package name="MyAuthSystemPackage" type="Auth_System" version="1.0.0">
       <friendlyName>My Amazing Auth System</friendlyName>
       <description>An amazing auth system.</description>
-      <owner>
-        <name />
-        <organization />
-        <url />
-        <email />
-      </owner>
       <dependencies>
         <dependency type="coreVersion">5.0</dependency>
         <dependency type="Custom">SpecialValue</dependency>

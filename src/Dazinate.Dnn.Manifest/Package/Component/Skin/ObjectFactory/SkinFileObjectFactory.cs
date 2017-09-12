@@ -13,6 +13,14 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public ISkinFile Create()
+        {
+            var businessObject = CreateInstance<SkinFile>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public ISkinFile Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.

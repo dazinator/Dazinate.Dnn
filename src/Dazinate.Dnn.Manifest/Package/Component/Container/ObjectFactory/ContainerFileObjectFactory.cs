@@ -13,17 +13,25 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container.ObjectFactory
             //_packagesListFactory = packagesListFactory;
         }
 
+        public IContainerFile Create()
+        {
+            var businessObject = CreateInstance<ContainerFile>();
+            MarkNew(businessObject);
+            MarkAsChild(businessObject);
+            return businessObject;
+        }
+
         public IContainerFile Fetch(XPathNavigator nav)
         {
             // Create the correct concrete dependency based on the xml.
             var businessObject = CreateInstance<ContainerFile>();
-           
+
             var path = XmlUtils.ReadElement(nav, "path");
             LoadProperty(businessObject, Shared.File.File.PathProperty, path);
 
             var name = XmlUtils.ReadElement(nav, "name");
             LoadProperty(businessObject, Shared.File.File.NameProperty, name);
-         
+
             MarkAsChild(businessObject);
             MarkOld(businessObject);
             CheckRules(businessObject);

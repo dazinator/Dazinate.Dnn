@@ -23,7 +23,8 @@ namespace Dazinate.Dnn.Manifest.Package
 
         public bool IsEmpty()
         {
-            return string.IsNullOrWhiteSpace(SourceFile) && string.IsNullOrWhiteSpace(Contents);
+            var empty = string.IsNullOrWhiteSpace(SourceFile) && string.IsNullOrWhiteSpace(Contents);
+            return empty;
         }
 
         protected override void AddBusinessRules()
