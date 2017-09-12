@@ -30,6 +30,7 @@ using Dazinate.Dnn.Manifest.Package.Component.Skin;
 using Dazinate.Dnn.Manifest.Package.Component.SkinObject;
 using Dazinate.Dnn.Manifest.Package.Component.UrlProvider;
 using Assent;
+using Assent.Reporters.DiffPrograms;
 
 namespace Dazinate.Dnn.Manifest.Tests
 {
@@ -37,13 +38,21 @@ namespace Dazinate.Dnn.Manifest.Tests
     [Collection("Csla")]
     public class DnnManifestApprovalTests : BaseBusinessTest, IDisposable
     {
-
+        private Configuration _configuration;
         /// <summary>
         /// Constructor is executed prior to every individual test.
         /// </summary>
         public DnnManifestApprovalTests()
         {
             Console.Write("initialising");
+            var configuration = new Configuration().UsingExtension("xml");
+            var programs = new IDiffProgram[] {
+                    new VsCodeDiffProgram()
+                }
+                .Concat(Assent.Reporters.DiffReporter.DefaultDiffPrograms)
+                .ToArray();
+            var reporter = new Assent.Reporters.DiffReporter(programs);
+            _configuration = configuration.UsingReporter(reporter);
         }
 
         private string LoadManifestXml(string localFileName)
@@ -69,15 +78,16 @@ namespace Dazinate.Dnn.Manifest.Tests
             dnnManifest.Packages[0].Description = "changed";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
 
             // Now verify the xml looks good.
-            var configuration = new Configuration().UsingExtension(".xml");
-            this.Assent(xmlStringBuilder.ToString(), configuration);
-           // Approvals.VerifyXml(xmlStringBuilder.ToString());
+
+
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
+            // Approvals.VerifyXml(xmlStringBuilder.ToString());
         }
 
         [Fact]
@@ -119,13 +129,13 @@ namespace Dazinate.Dnn.Manifest.Tests
             typeDependency.TypeName = "System.Version";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
 
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -171,12 +181,12 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -207,12 +217,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             authComponent.SettingsControlSource = "/some/settings.ascx";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -245,12 +255,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             file.SourceFileName = "bar.txt";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -295,12 +305,12 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -342,12 +352,12 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -389,12 +399,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             file.Path = "admin\\ControlPanel\\App_LocalResources";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -430,12 +440,12 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -475,12 +485,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             file.Path = "app_localresources";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -518,12 +528,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             file.Name = "MyModule.ascx.resx";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -561,12 +571,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             // file.Path = "scripts";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -598,12 +608,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             component.PreferredScriptLocation = "BodyBottom";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -669,12 +679,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             feature.FeatureType = SupportedFeatureType.Upgradeable;
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -701,12 +711,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             var component = authSystemPackage.Components.AddNewComponent<IProviderComponent>();
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -744,12 +754,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             // file.Path = "scripts";          
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -794,12 +804,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             file.Path = "providers\\dataproviders\\sqldataprovider";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
 
@@ -834,12 +844,12 @@ namespace Dazinate.Dnn.Manifest.Tests
             file.Path = "app_localresources";
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -870,12 +880,12 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
         [Fact]
@@ -910,12 +920,12 @@ namespace Dazinate.Dnn.Manifest.Tests
 
 
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder)))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true, NewLineHandling = NewLineHandling.Entitize }))
             {
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
             }
             // Now verify the xml looks good.
-            Approvals.VerifyXml(xmlStringBuilder.ToString());
+            this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
 
 

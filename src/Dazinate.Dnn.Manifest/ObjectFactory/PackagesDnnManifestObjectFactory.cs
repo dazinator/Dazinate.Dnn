@@ -99,14 +99,14 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.TypeProperty, ManifestType.Package);
             var version = XmlUtils.ReadRequiredAttribute(rootNav, "version");
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.VersionProperty, version);
-            
+
             var packagesList = _packagesListFactory.Fetch(rootNav);
             LoadProperty(dnnPackagesManifest, PackagesDnnManifest.PackagesListProperty, packagesList);
         }
 
         public PackagesDnnManifest.SaveToXmlCommand Execute(PackagesDnnManifest.SaveToXmlCommand command)
         {
-            if(command == null)
+            if (command == null)
             {
                 throw new System.Exception("command null");
             }
@@ -116,7 +116,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
                 throw new System.Exception("manifest null");
             }
             var xmlStringBuilder = new StringBuilder();
-            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true }))
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(xmlStringBuilder), new XmlWriterSettings() { OmitXmlDeclaration = true, Encoding = Encoding.UTF8, Indent = true }))
             {
                 var manifestWriter = new SaveToNewXmlFileVisitor(this.Activator, xmlWriter);
                 manifest.Accept(manifestWriter);
@@ -124,7 +124,7 @@ namespace Dazinate.Dnn.Manifest.ObjectFactory
                 command.Xml = xmlStringBuilder.ToString();
             }
 
-           // MarkSaved(manifest);
+            // MarkSaved(manifest);
             return command;
 
         }
