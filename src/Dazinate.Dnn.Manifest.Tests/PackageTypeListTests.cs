@@ -21,7 +21,7 @@ namespace Dazinate.Dnn.Manifest.Tests
         /// </summary>
         public PackageTypeListTests() : base()
         {
-            Console.Write("initialising");
+           // Console.Write("initialising");
             //    Csla.Server.FactoryDataPortal.FactoryLoader = new AutoFacObjectFactoryLoader();
         }
 
@@ -81,14 +81,14 @@ namespace Dazinate.Dnn.Manifest.Tests
             {
                 if (_refCount == 0)
                 {
-                    Console.Write("disposed csla factory loader");
+                   // Console.Write("disposed csla factory loader");
                     //   Csla.Server.FactoryDataPortal.FactoryLoader = null;
                 }
             }
             // _container.Dispose();
             // _mockDataContext = null;
             //  Csla.Server.FactoryDataPortal.FactoryLoader = null;
-            Console.Write("disposed");
+           // Console.Write("disposed");
         }
 
 

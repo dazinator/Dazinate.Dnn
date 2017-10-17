@@ -40,7 +40,7 @@ namespace Dazinate.Dnn.Manifest.Tests
         /// </summary>
         public DnnManifestApprovalTests()
         {
-            Console.Write("initialising");
+          //  Console.WriteLine("initialising");
             var configuration = new Configuration().UsingExtension("xml");
             var programs = new IDiffProgram[] {
                     new VsCodeDiffProgram()
@@ -807,7 +807,6 @@ namespace Dazinate.Dnn.Manifest.Tests
             // Now verify the xml looks good.
             this.Assent(xmlStringBuilder.ToString(), _configuration);
         }
-
 
         [Fact]
         public void Can_Add_SkinComponent()

@@ -222,7 +222,11 @@ namespace Dazinate.Dnn.Manifest.Ioc
                 type = Type.GetType(factoryName);
                 if (type == null)
                 {
-                    throw new TypeLoadException($"Could not load a type with name: {factoryName}");
+                    type = this.GetType().GetTypeInfo().Assembly.GetType(factoryName);
+                    if (type == null)
+                    {                       
+                        throw new TypeLoadException($"Could not load a type with name: {factoryName}");
+                    }                   
                 }
                 _cachedTypes.AddOrUpdate(factoryName, (a) => type, (a, b) => type);
             }
