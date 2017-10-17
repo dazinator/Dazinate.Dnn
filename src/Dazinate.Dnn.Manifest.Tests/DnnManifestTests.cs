@@ -19,7 +19,7 @@ namespace Dazinate.Dnn.Manifest.Tests
         /// </summary>
         public DnnManifestTests()
         {
-            Console.Write("initialising");
+            //Console.WriteLine("initialising");
         }
 
         private string LoadManifestXml(string localFileName)
@@ -107,7 +107,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             {
                 // xmlWriter.Settings.OmitXmlDeclaration = true;
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
-                Console.Write(xmlStringBuilder.ToString());
+                //Console.Write(xmlStringBuilder.ToString());
             }
 
             Assert.False(dnnManifest.IsNew);
@@ -466,7 +466,7 @@ namespace Dazinate.Dnn.Manifest.Tests
             {
                 // xmlWriter.Settings.OmitXmlDeclaration = true;
                 dnnManifest = (IPackagesDnnManifest)dnnManifest.SaveToXml(xmlWriter);
-                Console.Write(xmlStringBuilder.ToString());
+              //  Console.Write(xmlStringBuilder.ToString());
                 Assert.False(dnnManifest.IsDirty);
             }
 
