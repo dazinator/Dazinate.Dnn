@@ -20,7 +20,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.JavascriptFile
         }
 
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override IJavascriptFile AddNewCore()
         {
             //base.AddNewCore();

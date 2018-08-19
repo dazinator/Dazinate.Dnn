@@ -21,7 +21,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Container
             visitor.Visit(this);
         }
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override IContainerFile AddNewCore()
         {
             //base.AddNewCore();

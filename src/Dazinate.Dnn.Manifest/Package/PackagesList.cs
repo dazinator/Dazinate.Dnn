@@ -26,7 +26,7 @@ namespace Dazinate.Dnn.Manifest.Package
         }
 
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override IPackage AddNewCore()
         {
             //base.AddNewCore();

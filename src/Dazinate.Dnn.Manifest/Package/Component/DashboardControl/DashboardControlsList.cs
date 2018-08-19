@@ -21,7 +21,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.DashboardControl
             visitor.Visit(this);
         }
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override IDashboardControl AddNewCore()
         {
             //base.AddNewCore();

@@ -5,7 +5,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Dazinate.Dnn.Manifest</RootNamespace>
     <AssemblyName>Dazinate.Dnn.Manifest</AssemblyName>
-    <TargetFrameworks>net45;netstandard1.5;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard1.5;netstandard2.0;</TargetFrameworks>
     <Description>A library for producing and consuming Dnn Manifests.</Description>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
@@ -35,14 +35,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
     <DefineConstants>NETCOREAPP;ASSEMBLYRESOLVE</DefineConstants>
   </PropertyGroup>
-  <!--<PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
-    <DefineConstants>NETSTANDARD1_5</DefineConstants>
-  </PropertyGroup>-->
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+    <DefineConstants>AddNewCoreReturnVoid</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CSLA-Core" Version="4.6.603" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
   </ItemGroup>
+ 
 
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System" />
@@ -59,7 +60,8 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.28" />
 
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'!='net45'">
+  
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
 
 
     <!--<PackageReference Include="ReflectionBridge" Version="0.0.12" />-->
@@ -75,6 +77,14 @@
     <!--<PackageReference Include="System.AppDomain" Version="2.0.11" />-->
 
   </ItemGroup>
+
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Remove="CSLA-Core" Version="4.6.603" />
+    <PackageReference Include="CSLA-Core-NS" Version="4.7.200" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+  </ItemGroup>
+  
   <ItemGroup>
     <Compile Remove="Ioc\GluonApplicationLibraryManager.cs" />
     <Compile Remove="Ioc\TinyIoC.cs" />

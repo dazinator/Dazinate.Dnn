@@ -21,7 +21,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.File
             visitor.Visit(this);
         }
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override IFile AddNewCore()
         {
             var item = Csla.DataPortal.Create<File>();

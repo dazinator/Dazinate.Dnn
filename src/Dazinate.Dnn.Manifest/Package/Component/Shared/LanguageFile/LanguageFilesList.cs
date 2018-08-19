@@ -21,7 +21,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Shared.LanguageFile
             visitor.Visit(this);
         }
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override ILanguageFile AddNewCore()
         {
             //base.AddNewCore();

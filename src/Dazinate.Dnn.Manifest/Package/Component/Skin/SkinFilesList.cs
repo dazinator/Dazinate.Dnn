@@ -21,7 +21,7 @@ namespace Dazinate.Dnn.Manifest.Package.Component.Skin
             visitor.Visit(this);
         }
 
-#if NETDESKTOP
+#if !AddNewCoreReturnVoid
         protected override ISkinFile AddNewCore()
         {
             //base.AddNewCore();
